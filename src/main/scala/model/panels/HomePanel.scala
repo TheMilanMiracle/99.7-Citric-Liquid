@@ -36,13 +36,13 @@ class HomePanel(next: ArrayBuffer[Panel]) extends abstractPanel {
    */
   def triggerEffect(): Unit = {
     val lastplayer: PlayerCharacter = characters(characters.size - 1)
-    if(lastplayer.currentHP <= lastplayer.maxHp) lastplayer.currentHP += 1
+    if(lastplayer.currentHP <= lastplayer.maxHP) lastplayer.currentHP += 1
 
-    if(lastplayer.norma == 1 && lastplayer.stars >= 10 && lastplayer.victories >= 1) lastplayer.norma += 1
-    if(lastplayer.norma == 2 && lastplayer.stars >= 30 && lastplayer.victories >= 3) lastplayer.norma += 1
-    if(lastplayer.norma == 3 && lastplayer.stars >= 70 && lastplayer.victories >= 6) lastplayer.norma += 1
-    if(lastplayer.norma == 4 && lastplayer.stars >= 120 && lastplayer.victories >= 10) lastplayer.norma += 1
-    if(lastplayer.norma == 5 && lastplayer.stars >= 200 && lastplayer.victories >= 14) lastplayer.norma += 1
+    if(lastplayer.norma == 1 && (lastplayer.stars >= 10 || lastplayer.victories >= 1)) lastplayer.norma += 1
+    if(lastplayer.norma == 2 && (lastplayer.stars >= 30 || lastplayer.victories >= 3)) lastplayer.norma += 1
+    if(lastplayer.norma == 3 && (lastplayer.stars >= 70 || lastplayer.victories >= 6)) lastplayer.norma += 1
+    if(lastplayer.norma == 4 && (lastplayer.stars >= 120 || lastplayer.victories >= 10)) lastplayer.norma += 1
+    if(lastplayer.norma == 5 && (lastplayer.stars >= 200 || lastplayer.victories >= 14)) lastplayer.norma += 1
   }
 
 }

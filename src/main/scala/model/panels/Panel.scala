@@ -33,6 +33,13 @@ trait Panel {
    */
   var nextPanels: ArrayBuffer[Panel]
 
+  /** The position of the panel on the board
+   *
+   *  every panel has its own unique position in the board
+   *
+   */
+  var position: Int
+
   /** Adds a character to the list of characters currently on this panel.
     *
     * This method must be invoked when a player moves to this panel or starts their turn on it.
@@ -55,10 +62,4 @@ trait Panel {
    *
    */
   def triggerEffect(): Unit
-
-  /** Defines the way a panel compares itself with other types
-   *
-   * @param obj an object that will be compared to the panel
-   */
-  def equals(obj: Any): Boolean
 }

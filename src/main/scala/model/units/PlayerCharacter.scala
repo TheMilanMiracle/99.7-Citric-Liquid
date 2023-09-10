@@ -38,11 +38,11 @@ import scala.util.Random
   * @author [[https://github.com/TheMilanMiracle/ Luciano Márquez C.]]
   */
 class PlayerCharacter(val name: String,
-              val maxHp: Int,
+              val maxHP: Int,
               val attack: Int,
               val defense: Int,
               val evasion: Int,
-              val randomNumberGenerator: Random = new Random()) {
+              val randomNumberGenerator: Random = new Random()) extends IUnit {
   /** Current hp of the unit
    *
    * Units health can vary when a combat with another Unit is initiated
@@ -50,7 +50,15 @@ class PlayerCharacter(val name: String,
    * the class
    *
    */
-  var currentHP = maxHp
+  var currentHP: Int = maxHP
+
+  /** The position of the home panel that this player owns
+   *
+   * In the context of the game, each player has a home panel of his own
+   *
+   * This attribute is initialized with an generic panel position to be change when the game starts
+   */
+  var homePanel: Int = 0
 
   /** Stars that the Unit has
    *

@@ -10,7 +10,7 @@ import scala.collection.mutable.ArrayBuffer
  *
  * @param next array containing the panels directly next to this one
  */
-class NeutralPanel() extends abstractPanel {
+class NeutralPanel(next: ArrayBuffer[Panel]) extends abstractPanel {
   /** An array of panels that are directly positioned next to this one
    *
    * In the context of the game, multiple routes or paths may exist, this could represent the

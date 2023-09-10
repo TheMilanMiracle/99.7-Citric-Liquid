@@ -23,6 +23,16 @@ abstract class abstractPanel extends Panel{
    */
   val characters: ArrayBuffer[PlayerCharacter] = ArrayBuffer[PlayerCharacter]()
 
+  /** The position of the panel on the board
+   *
+   * every panel has its own unique position in the board
+   *
+   * this value is initialed with a generic number to be changed
+   * with the beginning of a game
+   *
+   */
+  var position: Int = 0
+
   /** Adds a character to the list of characters currently on this panel.
    *
    * This method must be invoked when a player moves to this panel or starts their turn on it.
@@ -41,17 +51,5 @@ abstract class abstractPanel extends Panel{
    */
   def removeCharacter(player: PlayerCharacter): Unit = {
     this.characters -= player
-  }
-
-  /** Defines the way a panel compares itself with other types
-   *
-   * @param obj an object that will be compared to the panel
-   */
-  override def equals(obj: Any): Boolean = {
-    if(obj.isInstanceOf[Panel]){
-      obj.asInstanceOf[Panel]
-      obj.getClass == this.getClass
-    }
-    else false
   }
 }
