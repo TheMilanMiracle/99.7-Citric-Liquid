@@ -35,7 +35,8 @@ trait Panel {
 
   /** The position of the panel on the board
    *
-   *  every panel has its own unique position in the board
+   *  every panel has its own unique position in the board that has to be defines at
+   *  the beginning of a game
    *
    */
   var position: Int

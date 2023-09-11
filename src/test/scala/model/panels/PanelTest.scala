@@ -7,10 +7,15 @@ import scala.collection.mutable.ArrayBuffer
 
 class PanelTest extends munit.FunSuite{
   val neutralPanel: Panel = new NeutralPanel(ArrayBuffer[Panel]())
+  neutralPanel.position = 1
   val homePanel: Panel = new HomePanel(ArrayBuffer[Panel]())
+  homePanel.position = 2
   val bonusPanel: Panel = new BonusPanel(ArrayBuffer[Panel]())
+  bonusPanel.position = 3
   val dropPanel: Panel = new DropPanel(ArrayBuffer[Panel]())
+  dropPanel.position = 4
   val encounterPanel: Panel = new EncounterPanel(ArrayBuffer[Panel]())
+  encounterPanel.position = 5
 
   override def beforeEach(context: BeforeEach): Unit = {
     val neutralPanel: Panel = new NeutralPanel(ArrayBuffer[Panel]())
@@ -27,11 +32,9 @@ class PanelTest extends munit.FunSuite{
     assertEquals(new DropPanel(ArrayBuffer[Panel]()).getClass.getName, dropPanel.getClass.getName)
     assertEquals(new EncounterPanel(ArrayBuffer[Panel]()).getClass.getName, encounterPanel.getClass.getName)
 
-    assertNotEquals(neutralPanel, homePanel)
-    assertNotEquals(bonusPanel, encounterPanel)
-    assertNotEquals(dropPanel, bonusPanel)
-
-
+    assertNotEquals(neutralPanel.getClass.getName, homePanel.getClass.getName)
+    assertNotEquals(bonusPanel.getClass.getName, encounterPanel.getClass.getName)
+    assertNotEquals(dropPanel.getClass.getName, bonusPanel.getClass.getName)
   }
 
   test("A panel could have one or more player, and they should be able to get in and out of the character list of the panel"){
@@ -66,5 +69,12 @@ class PanelTest extends munit.FunSuite{
     neutralPanel.nextPanels = ArrayBuffer[Panel](p1, p2, p3)
     assertEquals(neutralPanel.nextPanels.size, 3)
     assertNotEquals(neutralPanel.nextPanels.size, 2)
+  }
+
+  test("each panel should have a valid position and different from one another"){
+    assertNotEquals(encounterPanel.position,homePanel.position)
+    assertNotEquals(homePanel.position,bonusPanel.position)
+    assertNotEquals(bonusPanel.position, dropPanel.position)
+    assertNotEquals(dropPanel.position, encounterPanel.position)
   }
 }
