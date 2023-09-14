@@ -20,6 +20,8 @@ import scala.util.Random.between
  * after triggering the effect, the player's turn will end
  *
  * @param next array containing the panels directly next to this one
+ *
+ * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
 class EncounterPanel(next: ArrayBuffer[Panel], pos: Int) extends abstractPanel{
   /** An array of panels that are directly positioned next to this one
@@ -48,13 +50,14 @@ class EncounterPanel(next: ArrayBuffer[Panel], pos: Int) extends abstractPanel{
 
   /** Triggers the effect of the panel
    *
-   * this method
+   * this method will make the player that lands on it engage combat with
+   * a random wild unit
    *
    */
   def triggerEffect(): Unit = {
     val lastplayer: PlayerCharacter = this.characters(characters.size - 1)
 
-    //startFight(lastplayer, wildUnit)
+    //startFight(lastplayer, wildUnit) //combat is not yet implemented
   }
 
   /** Method that will spawn a random wild unit

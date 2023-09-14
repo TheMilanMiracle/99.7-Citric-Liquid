@@ -14,6 +14,8 @@ import scala.collection.mutable.ArrayBuffer
  * after triggering the effect, the player's turn will end
  *
  * @param next array containing the panels directly next to this one
+ *
+ * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
 class BonusPanel(next: ArrayBuffer[Panel], pos: Int) extends abstractPanel {
   /** An array of panels that are directly positioned next to this one

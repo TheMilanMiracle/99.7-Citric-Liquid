@@ -9,6 +9,8 @@ import scala.collection.mutable.ArrayBuffer
  * tur should end afterwards
  *
  * @param next array containing the panels directly next to this one
+ *
+ * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
 class NeutralPanel(next: ArrayBuffer[Panel], pos: Int) extends abstractPanel {
   /** An array of panels that are directly positioned next to this one
@@ -30,7 +32,8 @@ class NeutralPanel(next: ArrayBuffer[Panel], pos: Int) extends abstractPanel {
   /** Triggers the effect of the panel
    *
    * This method will do nothing
-   * In the context of the
+   * In the context of the game, when a player lands in this kind of panle
+   * his turn will end with no changes
    *
    */
   def triggerEffect(): Unit = {}
