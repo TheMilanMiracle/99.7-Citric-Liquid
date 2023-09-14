@@ -20,7 +20,8 @@ trait Panel {
   /** Array of the characters currently positioned on this panel.
     *
     * In the game, multiple characters might be on the same panel at once, e.g., if multiple players
-    * land on the same space.
+    * land on the same spaces
+    *
     */
   val characters: ArrayBuffer[PlayerCharacter]
 
@@ -29,7 +30,6 @@ trait Panel {
    * In the context of the game, multiple routes or paths may exist, this could represent the
    * possible next steps a player might take after being on this panel.
    *
-   * @return a List of Panel instances that are adjacent or connected to this panel.
    */
   var nextPanels: ArrayBuffer[Panel]
 
@@ -46,6 +46,7 @@ trait Panel {
     * This method must be invoked when a player moves to this panel or starts their turn on it.
     *
     * @param player The player character to add to this panel.
+   *
     */
   def addCharacter(player: PlayerCharacter): Unit
 
@@ -54,6 +55,7 @@ trait Panel {
     * This method must be invoked when a player moves off this panel.
     *
     * @param player The player character to remove from this panel.
+   *
     */
   def removeCharacter(player: PlayerCharacter): Unit
 

@@ -6,33 +6,67 @@ import model.units.PlayerCharacter
 import scala.collection.mutable.ArrayBuffer
 
 class BonusPanelTest extends munit.FunSuite{
-  val bonusPanel = new BonusPanel(ArrayBuffer[Panel]())
-  val testPlayer = new PlayerCharacter("test player1",1, 1, 1, 1)
+  val np: ArrayBuffer[Panel] = ArrayBuffer[Panel]()
+  val c: ArrayBuffer[PlayerCharacter] = ArrayBuffer[PlayerCharacter]()
+  val p: Int = 1
+  val bonusPanel = new BonusPanel(np, p)
+  val testPlayer1 = new PlayerCharacter("test player1",1, 1, 1, 1, 1)
+  val testPlayer2 = new PlayerCharacter("test player2",1, 1, 1, 1, 2)
 
   override def beforeEach(context: BeforeEach): Unit = {
-    val bonusPanel = new BonusPanel(ArrayBuffer[Panel]())
-    val testPlayer = new PlayerCharacter("test player1", 1, 1, 1, 1)
+    val np: ArrayBuffer[Panel] = ArrayBuffer[Panel]()
+    val c: ArrayBuffer[PlayerCharacter] = ArrayBuffer[PlayerCharacter]()
+    val p: Int = 1
+    val bonusPanel = new BonusPanel(np, p)
+    val testPlayer1 = new PlayerCharacter("test player1", 1, 1, 1, 1, 1)
+    val testPlayer2 = new PlayerCharacter("test player2", 1, 1, 1, 1, 2)
   }
 
-  test("the panel will give to a player a quantity of stars depending on his norma and roll of the dice"){
-    bonusPanel.addCharacter(testPlayer)
+  test("any kind of panel has to have its attributes well defined") {
+    assertEquals(bonusPanel.characters, c)
+    assertEquals(bonusPanel.nextPanels, np)
+    assertEquals(bonusPanel.position, p)
+  }
+
+  test("any kind of panel should be able to have one or more players in it") {
+    bonusPanel.addCharacter(testPlayer1)
+    assertNotEquals(bonusPanel.characters, c)
+    assertEquals(bonusPanel.characters.size, 1)
+    assertEquals(bonusPanel.characters(0), testPlayer1)
+    bonusPanel.removeCharacter(testPlayer2)
+    assertEquals(bonusPanel.characters.size, 1)
+    assertEquals(bonusPanel.characters(0), testPlayer1)
+    bonusPanel.addCharacter(testPlayer2)
+    assertEquals(bonusPanel.characters.size, 2)
+    assertEquals(bonusPanel.characters(0), testPlayer1)
+    assertEquals(bonusPanel.characters(1), testPlayer2)
+    bonusPanel.removeCharacter(testPlayer1)
+    assertEquals(bonusPanel.characters.size, 1)
+    assertEquals(bonusPanel.characters(0), testPlayer2)
+    bonusPanel.removeCharacter(testPlayer2)
+    assertEquals(bonusPanel.characters.size, 0)
+    assertEquals(bonusPanel.characters, c)
+  }
+
+  test("the bonus panel will give to a player a quantity of stars depending on his norma and roll of the dice"){
+    bonusPanel.addCharacter(testPlayer1)
     bonusPanel.triggerEffect()
 
-    assert(0 < testPlayer.stars)
-    assert(testPlayer.stars <= 6*testPlayer.norma || testPlayer.stars <= 6 * 3)
+    assert(0 < testPlayer1.stars)
+    assert(testPlayer1.stars <= 6*testPlayer1.norma || testPlayer1.stars <= 6 * 3)
 
-    var ref: Int = testPlayer.stars
+    var ref: Int = testPlayer1.stars
     bonusPanel.triggerEffect()
 
-    assert(ref < testPlayer.stars)
-    assert(testPlayer.stars <= ((6 * testPlayer.norma) + ref) || testPlayer.stars <= ((6 * 3) + ref))
+    assert(ref < testPlayer1.stars)
+    assert(testPlayer1.stars <= ((6 * testPlayer1.norma) + ref) || testPlayer1.stars <= ((6 * 3) + ref))
 
-    ref = testPlayer.stars
-    testPlayer.norma = 3
+    ref = testPlayer1.stars
+    testPlayer1.norma = 3
     bonusPanel.triggerEffect()
 
-    assert(ref < testPlayer.stars)
-    assert(testPlayer.stars <= ((6 * testPlayer.norma) + ref) || testPlayer.stars <= ((6 * 3) + ref))
+    assert(ref < testPlayer1.stars)
+    assert(testPlayer1.stars <= ((6 * testPlayer1.norma) + ref) || testPlayer1.stars <= ((6 * 3) + ref))
 
   }
 

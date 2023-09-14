@@ -17,15 +17,22 @@ import scala.collection.mutable.ArrayBuffer
  *
  * @param next array containing the panels directly next to this one
  */
-class HomePanel(next: ArrayBuffer[Panel]) extends abstractPanel {
+class HomePanel(next: ArrayBuffer[Panel], pos: Int) extends abstractPanel {
   /** An array of panels that are directly positioned next to this one
    *
    * In the context of the game, multiple routes or paths may exist, this could represent the
    * possible next steps a player might take after being on this panel.
    *
-   * @return a List of Panel instances that are adjacent or connected to this panel.
    */
   var nextPanels: ArrayBuffer[Panel] = next
+
+  /** The position of the panel on the board
+   *
+   * every panel has its own unique position in the board that has to be defines at
+   * the beginning of a game
+   *
+   */
+  var position: Int = pos
 
   /** Triggers the effect of the panel
    *

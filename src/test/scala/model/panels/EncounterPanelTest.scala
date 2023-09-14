@@ -6,13 +6,13 @@ import model.units.PlayerCharacter
 import scala.collection.mutable.ArrayBuffer
 
 class EncounterPanelTest extends munit.FunSuite {
-  val encounterPanel = new EncounterPanel(ArrayBuffer[Panel]())
-  val testPlayer = new PlayerCharacter("test player1",1,1,1,1)
+  val encounterPanel = new EncounterPanel(ArrayBuffer[Panel](),1)
+  val testPlayer = new PlayerCharacter("test player1",1,1,1,1, 1)
   println(encounterPanel.wildUnit)
 
   override def beforeEach(context: BeforeEach): Unit = {
-    val encounterPanel = new EncounterPanel(ArrayBuffer[Panel]())
-    val testPlayer = new PlayerCharacter("test player1", 1, 1, 1, 1)
+    val encounterPanel = new EncounterPanel(ArrayBuffer[Panel](),1)
+    val testPlayer = new PlayerCharacter("test player1", 1, 1, 1, 1, 1)
   }
 
   test("a panel should be able to initially spawn (and eventually respawn) a new wild unit randomly"){

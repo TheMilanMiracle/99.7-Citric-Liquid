@@ -24,12 +24,13 @@ import scala.util.Random
   * generation behaviors are desired.
   *
   * @param name The name of the player. This is an identifier and should be unique.
-  * @param maxHp The maximum health points a player can have. It represents the player's endurance.
+  * @param maxHP The maximum health points a player can have. It represents the player's endurance.
   * @param attack The player's capability to deal damage to opponents.
   * @param defense The player's capability to resist or mitigate damage from opponents.
   * @param evasion The player's skill to completely avoid certain attacks.
   * @param randomNumberGenerator A utility to generate random numbers. Defaults to a new `Random`
   *                              instance.
+  * @param
   *
   * @author [[https://github.com/danielRamirezL/ Daniel Ramírez L.]]
   * @author [[https://github.com/joelriquelme/ Joel Riquelme P.]]
@@ -38,11 +39,12 @@ import scala.util.Random
   * @author [[https://github.com/TheMilanMiracle/ Luciano Márquez C.]]
   */
 class PlayerCharacter(val name: String,
-              val maxHP: Int,
-              val attack: Int,
-              val defense: Int,
-              val evasion: Int,
-              val randomNumberGenerator: Random = new Random()) extends IUnit {
+                      val maxHP: Int,
+                      val attack: Int,
+                      val defense: Int,
+                      val evasion: Int,
+                      val homePos: Int,
+                      val randomNumberGenerator: Random = new Random()) extends IUnit {
   /** Current hp of the unit
    *
    * Units health can vary when a combat with another Unit is initiated
@@ -56,9 +58,8 @@ class PlayerCharacter(val name: String,
    *
    * In the context of the game, each player has a home panel of his own
    *
-   * This attribute is initialized with an generic panel position to be change when the game starts
    */
-  var homePanel: Int = 0
+  var homePanel: Int = homePos
 
   /** Stars that the Unit has
    *
