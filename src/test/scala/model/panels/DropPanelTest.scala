@@ -9,17 +9,17 @@ class DropPanelTest extends munit.FunSuite {
   val np: ArrayBuffer[Panel] = ArrayBuffer[Panel]()
   val c: ArrayBuffer[PlayerCharacter] = ArrayBuffer[PlayerCharacter]()
   val p: Int = 1
-  val dropPanel = new DropPanel(np, p)
-  val testPlayer1 = new PlayerCharacter("test player1", 1, 1, 1, 1, 1)
-  val testPlayer2 = new PlayerCharacter("test player2", 1, 1, 1, 1, 2)
+  var dropPanel = new DropPanel(np, p)
+  var testPlayer1 = new PlayerCharacter("test player1", 1, 1, 1, 1, 1)
+  var testPlayer2 = new PlayerCharacter("test player2", 1, 1, 1, 1, 2)
 
   override def beforeEach(context: BeforeEach): Unit = {
     val np: ArrayBuffer[Panel] = ArrayBuffer[Panel]()
     val c: ArrayBuffer[PlayerCharacter] = ArrayBuffer[PlayerCharacter]()
     val p: Int = 1
-    val dropPanel = new BonusPanel(np, p)
-    val testPlayer1 = new PlayerCharacter("test player1", 1, 1, 1, 1, 1)
-    val testPlayer2 = new PlayerCharacter("test player2", 1, 1, 1, 1, 2)
+    dropPanel = new DropPanel(np, p)
+    testPlayer1 = new PlayerCharacter("test player1", 1, 1, 1, 1, 1)
+    testPlayer2 = new PlayerCharacter("test player2", 1, 1, 1, 1, 2)
   }
 
   test("any kind of panel has to have its attributes well defined") {

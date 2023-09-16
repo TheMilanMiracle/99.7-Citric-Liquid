@@ -12,6 +12,10 @@ import scala.collection.mutable.ArrayBuffer
   * Panels can also be connected to other panels, allowing for the formation of complex board
   * structures.
   *
+  * A panel should be able to:
+  * - Holds one or more players
+  * - Be able to add and remove a player from the panel
+  *
   * @author [[https://github.com/r8vnhill Ignacio Slater M.]]
   * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
   */

@@ -7,16 +7,10 @@ import scala.util.Random
   * several attributes such as health points, attack strength, defense capability,
   * and evasion skills. Each player has a unique name, and throughout the game,
   * players can collect stars, roll dice, and progress in levels known as 'norma'.
-  * This class not only maintains the state of a player but also provides methods
-  * to modify and interact with these attributes.
   *
   * For instance, players can:
- *
-  * - Increase or decrease their star count.
- *
+  *
   * - Roll a dice, a common action in many board games.
- *
-  * - Advance their norma level.
   *
   * Furthermore, the `Player` class has a utility for generating random numbers,
   * which is primarily used for simulating dice rolls. By default, this utility is
@@ -28,9 +22,9 @@ import scala.util.Random
   * @param attack The player's capability to deal damage to opponents.
   * @param defense The player's capability to resist or mitigate damage from opponents.
   * @param evasion The player's skill to completely avoid certain attacks.
+  * @param homePos The player's home panel position on the board
   * @param randomNumberGenerator A utility to generate random numbers. Defaults to a new `Random`
   *                              instance.
-  * @param
   *
   * @author [[https://github.com/danielRamirezL/ Daniel Ramírez L.]]
   * @author [[https://github.com/joelriquelme/ Joel Riquelme P.]]
@@ -63,11 +57,11 @@ class PlayerCharacter(val name: String,
 
   /** Stars that the Unit has
    *
-   *  Units can holds stars and the number can vary depending on the
-   *  outcome of combats with other Units, the stars start at 0
+   * Units can holds stars and the number can vary depending on the
+   * outcome of combats with other Units, the stars start at 0
    *
    */
-  var stars = 0
+  var stars: Int = 0
 
   /** Victories that the Player has
    *
@@ -75,7 +69,7 @@ class PlayerCharacter(val name: String,
    * combat, the quantity starts at 0
    *
    */
-  var victories = 0
+  var victories: Int = 0
 
   /** Norma level of the player
    *

@@ -9,26 +9,26 @@ class HomePanelTest extends munit.FunSuite{
   val np1: ArrayBuffer[Panel] = ArrayBuffer[Panel]()
   val c1: ArrayBuffer[PlayerCharacter] = ArrayBuffer[PlayerCharacter]()
   val p1: Int = 1
-  val homePanel1 = new HomePanel(np1, p1)
+  var homePanel1 = new HomePanel(np1, p1)
   val np2: ArrayBuffer[Panel] = ArrayBuffer[Panel]()
   val c2: ArrayBuffer[PlayerCharacter] = ArrayBuffer[PlayerCharacter]()
   val p2: Int = 2
-  val homePanel2 = new HomePanel(np2, p2)
-  val testPlayer1: PlayerCharacter = new PlayerCharacter("test player1", 1, 1, 1, 1, 1)
-  val testPlayer2: PlayerCharacter = new PlayerCharacter("test player2", 1, 1, 1, 1, 2)
+  var homePanel2 = new HomePanel(np2, p2)
+  var testPlayer1: PlayerCharacter = new PlayerCharacter("test player1", 1, 1, 1, 1, 1)
+  var testPlayer2: PlayerCharacter = new PlayerCharacter("test player2", 1, 1, 1, 1, 2)
 
 
   override def beforeEach(context: BeforeEach): Unit = {
     val np1: ArrayBuffer[Panel] = ArrayBuffer[Panel]()
     val c1: ArrayBuffer[PlayerCharacter] = ArrayBuffer[PlayerCharacter]()
     val p1: Int = 1
-    val homePanel1 = new HomePanel(np1, p1)
+    homePanel1 = new HomePanel(np1, p1)
     val np2: ArrayBuffer[Panel] = ArrayBuffer[Panel]()
     val c2: ArrayBuffer[PlayerCharacter] = ArrayBuffer[PlayerCharacter]()
     val p2: Int = 2
-    val homePanel2 = new HomePanel(np2, p2)
-    val testPlayer1: PlayerCharacter = new PlayerCharacter("test player1", 1, 1, 1, 1, 1)
-    val testPlayer2: PlayerCharacter = new PlayerCharacter("test player2", 1, 1, 1, 1, 2)
+    homePanel2 = new HomePanel(np2, p2)
+    testPlayer1 = new PlayerCharacter("test player1", 1, 1, 1, 1, 1)
+    testPlayer2 = new PlayerCharacter("test player2", 1, 1, 1, 1, 2)
   }
 
   test("any kind of panel has to have its attributes well defined") {

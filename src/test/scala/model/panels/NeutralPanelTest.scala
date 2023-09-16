@@ -9,17 +9,17 @@ class NeutralPanelTest extends munit.FunSuite{
   val np: ArrayBuffer[Panel] = ArrayBuffer[Panel]()
   val c: ArrayBuffer[PlayerCharacter] = ArrayBuffer[PlayerCharacter]()
   val p: Int = 1
-  val neutralPanel = new NeutralPanel(np, p)
-  val testPlayer1: PlayerCharacter = new PlayerCharacter("test player1",1 ,1,1, 1, 1)
-  val testPlayer2: PlayerCharacter = new PlayerCharacter("test player2",1 ,1,1, 1, 2)
+  var neutralPanel = new NeutralPanel(np, p)
+  var testPlayer1: PlayerCharacter = new PlayerCharacter("test player1",1 ,1,1, 1, 1)
+  var testPlayer2: PlayerCharacter = new PlayerCharacter("test player2",1 ,1,1, 1, 2)
 
   override def beforeEach(context: BeforeEach): Unit = {
     val np: ArrayBuffer[Panel] = ArrayBuffer[Panel]()
     val c: ArrayBuffer[PlayerCharacter] = ArrayBuffer[PlayerCharacter]()
     val p: Int = 1
-    val neutralPanel = new NeutralPanel(np, p)
-    val testPlayer1: PlayerCharacter = new PlayerCharacter("test player1", 1, 1, 1, 1, 1)
-    val testPlayer2: PlayerCharacter = new PlayerCharacter("test player2", 1, 1, 1, 1, 2)
+    neutralPanel = new NeutralPanel(np, p)
+    testPlayer1 = new PlayerCharacter("test player1", 1, 1, 1, 1, 1)
+    testPlayer2 = new PlayerCharacter("test player2", 1, 1, 1, 1, 2)
   }
 
   test("any kind of panel has to have its attributes well defined"){
