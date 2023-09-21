@@ -1,6 +1,8 @@
 package cl.uchile.dcc.citric
 package model.units
 
+import cl.uchile.dcc.citric.model.norma.{Norma, NormaLevel1}
+
 import scala.util.Random
 
 /** The `PlayerCharacter` class represents a character or avatar in the game, encapsulating
@@ -11,7 +13,8 @@ import scala.util.Random
   * For instance, players can:
   *
   * - Roll a dice, a common action in many board games.
-  * - increase their victories
+  * - return and increase their victories
+  * - return their own objective
   *
   * Furthermore, the `Player` class has a utility for generating random numbers,
   * which is primarily used for simulating dice rolls. By default, this utility is
@@ -78,14 +81,31 @@ class PlayerCharacter(val name: String,
    *  it can be upgraded when the player lands on a home panel and it affects
    *  many situations of the game that depend on the norma level
    *
-   *  It starts at 1
+   *  It starts at level 1
    */
-  var norma: Int = 1
+  var norma: Norma = new NormaLevel1
+
+  /** Current Objective of the player
+   *
+   * a player can choose between "stars" and "victories" as objectives,
+   * these are chosen when a player levels up an cannot be changed until
+   * the next level up
+   *
+   * this value is initialized with a meaningless value because the objective is
+   * chosen for the first time at norma level 2
+   */
+   var objective: String = "init"
 
   /** Rolls a dice and returns a value between 1 to 6. */
   def rollDice(): Int = {
     randomNumberGenerator.nextInt(6) + 1
   }
+
+  /** returns the victories that the Player has */
+  def getVictories: Int = this.victories
+
+  /** return the current objective of the player */
+  def getObjective: String = this.objective
 
   /** Increases number of victories after winning a combat against a wild unit
    *

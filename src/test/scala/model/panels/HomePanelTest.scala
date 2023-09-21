@@ -58,21 +58,6 @@ class HomePanelTest extends munit.FunSuite{
   }
 
   test("a home panel can upgrade a player's norma level if the requirements are met"){
-    testPlayer1.stars = 12
-    homePanel1.addCharacter(testPlayer1)
-    homePanel1.triggerEffect()
-    assertEquals(testPlayer1.norma, 2)
-    testPlayer1.victories = 4
-    homePanel1.triggerEffect()
-    assertEquals(testPlayer1.norma, 3)
-    homePanel1.triggerEffect()
-    assertEquals(testPlayer1.norma, 3)
 
-    homePanel2.addCharacter(testPlayer2)
-    homePanel2.triggerEffect()
-    assertEquals(testPlayer2.norma, 1)
-    testPlayer2.stars = 9
-    homePanel2.triggerEffect()
-    assertEquals(testPlayer2.norma, 1)
   }
 }

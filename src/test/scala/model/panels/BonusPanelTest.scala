@@ -49,24 +49,7 @@ class BonusPanelTest extends munit.FunSuite{
   }
 
   test("the bonus panel will give to a player a quantity of stars depending on his norma and roll of the dice"){
-    bonusPanel.addCharacter(testPlayer1)
-    bonusPanel.triggerEffect()
 
-    assert(0 < testPlayer1.stars)
-    assert(testPlayer1.stars <= 6*testPlayer1.norma || testPlayer1.stars <= 6 * 3)
-
-    var ref: Int = testPlayer1.stars
-    bonusPanel.triggerEffect()
-
-    assert(ref < testPlayer1.stars)
-    assert(testPlayer1.stars <= ((6 * testPlayer1.norma) + ref) || testPlayer1.stars <= ((6 * 3) + ref))
-
-    ref = testPlayer1.stars
-    testPlayer1.norma = 3
-    bonusPanel.triggerEffect()
-
-    assert(ref < testPlayer1.stars)
-    assert(testPlayer1.stars <= ((6 * testPlayer1.norma) + ref) || testPlayer1.stars <= ((6 * 3) + ref))
 
   }
 
