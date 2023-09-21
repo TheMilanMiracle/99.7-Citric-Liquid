@@ -46,7 +46,7 @@ class BonusPanel(next: ArrayBuffer[Panel], pos: Int) extends abstractPanel {
     val lastplayer: PlayerCharacter = this.characters(characters.size - 1)
     val roll: Int = lastplayer.rollDice()
 
-    lastplayer.stars += (roll * lastplayer.norma).min(roll * 3)
+    lastplayer.varyStars((roll * lastplayer.norma).min(roll * 3))
 
   }
 

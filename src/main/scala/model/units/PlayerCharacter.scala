@@ -11,6 +11,7 @@ import scala.util.Random
   * For instance, players can:
   *
   * - Roll a dice, a common action in many board games.
+  * - increase their victories
   *
   * Furthermore, the `Player` class has a utility for generating random numbers,
   * which is primarily used for simulating dice rolls. By default, this utility is
@@ -38,7 +39,7 @@ class PlayerCharacter(val name: String,
                       val defense: Int,
                       val evasion: Int,
                       val homePos: Int,
-                      val randomNumberGenerator: Random = new Random()) extends IUnit {
+                      val randomNumberGenerator: Random = new Random()) extends abstractGameUnit {
   /** Current hp of the unit
    *
    * Units health can vary when a combat with another Unit is initiated
@@ -85,4 +86,19 @@ class PlayerCharacter(val name: String,
   def rollDice(): Int = {
     randomNumberGenerator.nextInt(6) + 1
   }
+
+  /** Increases number of victories after winning a combat against a wild unit
+   *
+   * In the context of the game, this value should increase in 1 if
+   * the player defeated a wilds unit
+   */
+  def increaseVictories(wildUnit: WildUnit): Unit = {this.victories += 1}
+
+  /** Increases number of victories after winning a combat against a wild unit
+   *
+   * In the context of the game, this value should increase in 2 if
+   * the player defeated another player
+   */
+  def increaseVictories(playerCharacter: PlayerCharacter): Unit = {this.victories += 2}
+
 }

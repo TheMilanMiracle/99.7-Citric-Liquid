@@ -9,7 +9,7 @@ class SeagullTest extends munit.FunSuite{
   val seagullEvasion: Int = -1
   val seagullStars: Int = 0
   val seagullName: String = "Seagull"
-  var seagull:IWildUnit = new Seagull
+  var seagull: WildUnit = new Seagull
 
   var testPlayer: PlayerCharacter = new PlayerCharacter("test player1", 1, 1, 1, 1, 1)
 
@@ -36,26 +36,28 @@ class SeagullTest extends munit.FunSuite{
     assertEquals(seagull.name, seagullName)
   }
 
-  test("Any kind of wild unit should be able to take stars from a player"){
-    testPlayer.stars = 50
-    seagull.takeStarsFrom(testPlayer)
-    assertEquals(testPlayer.stars, 25)
-    assertEquals(seagull.stars, 25)
-    seagull.takeStarsFrom(testPlayer)
-    assertEquals(testPlayer.stars, 12)
-    assertEquals(seagull.stars, 37)
-    seagull.takeStarsFrom(testPlayer)
-    assertEquals(testPlayer.stars, 6)
-    assertEquals(seagull.stars, 43)
+  test("Any type of Game Unit should be able to vary their own currentHP") {
+    seagull.varyCurrentHP(-2)
+    assertEquals(seagull.currentHP, 1)
+    seagull.varyCurrentHP(1)
+    assertEquals(seagull.currentHP, 2)
+    seagull.varyCurrentHP(15)
+    assertEquals(seagull.currentHP, seagullMaxHp)
+    seagull.varyCurrentHP(-15)
+    assertEquals(seagull.currentHP, 0)
   }
 
-  test("Any kind of wild unit should be able to give stars to a player"){
-    seagull.stars = 25
-    seagull.dropStarsTo(testPlayer)
-    assertEquals(testPlayer.stars, 25)
-    assertEquals(seagull.stars, 0)
+  test("Any type of game unit should be able to return and vary their current quantity of stars") {
+    var s = seagull.getStars
+    assertEquals(seagull.getStars, s)
+    seagull.varyStars(15)
+    assertEquals(seagull.getStars, 15)
+    seagull.varyStars(-5)
+    assertEquals(seagull.getStars, 10)
   }
 
-
+  test("Any type of game unit should be able to return their own name") {
+    assertEquals(seagull.getName, seagullName)
+  }
 }
 

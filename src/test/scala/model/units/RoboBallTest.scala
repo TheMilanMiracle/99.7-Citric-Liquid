@@ -9,7 +9,7 @@ class RoboBallTest extends munit.FunSuite {
   val roboBallEvasion: Int = -1
   val roboBallStars: Int = 0
   val roboBallName: String = "Robo Ball"
-  var roboBall: IWildUnit = new RoboBall
+  var roboBall: WildUnit = new RoboBall
 
   var testPlayer: PlayerCharacter = new PlayerCharacter("test player1", 1, 1, 1, 1, 1)
 
@@ -36,23 +36,27 @@ class RoboBallTest extends munit.FunSuite {
     assertEquals(roboBall.name, roboBallName)
   }
 
-  test("Any kind of wild unit should be able to take stars from a player") {
-    testPlayer.stars = 50
-    roboBall.takeStarsFrom(testPlayer)
-    assertEquals(testPlayer.stars, 25)
-    assertEquals(roboBall.stars, 25)
-    roboBall.takeStarsFrom(testPlayer)
-    assertEquals(testPlayer.stars, 12)
-    assertEquals(roboBall.stars, 37)
-    roboBall.takeStarsFrom(testPlayer)
-    assertEquals(testPlayer.stars, 6)
-    assertEquals(roboBall.stars, 43)
+  test("Any type of Game Unit should be able to vary their own currentHP") {
+    roboBall.varyCurrentHP(-2)
+    assertEquals(roboBall.currentHP, 1)
+    roboBall.varyCurrentHP(1)
+    assertEquals(roboBall.currentHP, 2)
+    roboBall.varyCurrentHP(15)
+    assertEquals(roboBall.currentHP, roboBallMaxHp)
+    roboBall.varyCurrentHP(-15)
+    assertEquals(roboBall.currentHP, 0)
   }
 
-  test("Any kind of wild unit should be able to give stars to a player") {
-    roboBall.stars = 25
-    roboBall.dropStarsTo(testPlayer)
-    assertEquals(testPlayer.stars, 25)
-    assertEquals(roboBall.stars, 0)
+  test("Any type of game unit should be able to return and vary their current quantity of stars") {
+    var s = roboBall.getStars
+    assertEquals(roboBall.getStars, s)
+    roboBall.varyStars(15)
+    assertEquals(roboBall.getStars, 15)
+    roboBall.varyStars(-5)
+    assertEquals(roboBall.getStars, 10)
+  }
+
+  test("Any type of game unit should be able to return their own name") {
+    assertEquals(roboBall.getName, roboBallName)
   }
 }

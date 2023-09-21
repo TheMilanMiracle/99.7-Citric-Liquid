@@ -68,7 +68,8 @@ class EncounterPanelTest extends munit.FunSuite {
 
   test("when landing this panel, the player will engage combat with the wild unit on it"){
     /**
-     * combat is not implemented yet :s
+     * combat is not yet implemented :s
      */
+    encounterPanel.triggerEffect()
   }
 }

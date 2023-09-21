@@ -1,13 +1,7 @@
 package cl.uchile.dcc.citric
 package model.panels
 
-import cl.uchile.dcc.citric.model.units.PlayerCharacter
-import cl.uchile.dcc.citric.model.units.IUnit
-import cl.uchile.dcc.citric.model.units.Chicken
-import cl.uchile.dcc.citric.model.units.RoboBall
-import cl.uchile.dcc.citric.model.units.Seagull
-
-
+import cl.uchile.dcc.citric.model.units.{Chicken, GameUnit, WildUnit, PlayerCharacter, RoboBall, Seagull}
 
 import scala.collection.mutable.ArrayBuffer
 import scala.util.Random.between
@@ -46,7 +40,7 @@ class EncounterPanel(next: ArrayBuffer[Panel], pos: Int) extends abstractPanel{
    * the initial wild unit will also be generated randomly
    *
    */
-  var wildUnit: IUnit = spawnWildUnit()
+  var wildUnit: WildUnit = spawnWildUnit()
 
   /** Triggers the effect of the panel
    *
@@ -55,7 +49,7 @@ class EncounterPanel(next: ArrayBuffer[Panel], pos: Int) extends abstractPanel{
    *
    */
   def triggerEffect(): Unit = {
-    val lastplayer: PlayerCharacter = this.characters(characters.size - 1)
+    //val lastplayer: PlayerCharacter = this.characters(characters.size - 1)
 
     //startFight(lastplayer, wildUnit) //combat is not yet implemented
   }
@@ -67,7 +61,7 @@ class EncounterPanel(next: ArrayBuffer[Panel], pos: Int) extends abstractPanel{
    *
    * @return
    */
-  def spawnWildUnit(): IUnit = {
+  def spawnWildUnit(): WildUnit = {
     val rand: Int = between(1,4)
 
     if(rand == 1) new Chicken()

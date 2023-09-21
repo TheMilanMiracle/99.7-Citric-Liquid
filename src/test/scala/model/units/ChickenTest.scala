@@ -9,7 +9,7 @@ class ChickenTest extends munit.FunSuite{
   val chickenEvasion: Int = 1
   val chickenStars: Int = 0
   val chickenName: String = "Chicken"
-  var chicken:IWildUnit = new Chicken
+  var chicken: WildUnit = new Chicken
 
   var testPlayer: PlayerCharacter = new PlayerCharacter("test player1", 1, 1, 1, 1, 1)
 
@@ -36,24 +36,28 @@ class ChickenTest extends munit.FunSuite{
     assertEquals(chicken.name, chickenName)
   }
 
-  test("Any kind of wild unit should be able to take stars from a player"){
-    testPlayer.stars = 50
-    chicken.takeStarsFrom(testPlayer)
-    assertEquals(testPlayer.stars, 25)
-    assertEquals(chicken.stars, 25)
-    chicken.takeStarsFrom(testPlayer)
-    assertEquals(testPlayer.stars, 12)
-    assertEquals(chicken.stars, 37)
-    chicken.takeStarsFrom(testPlayer)
-    assertEquals(testPlayer.stars, 6)
-    assertEquals(chicken.stars, 43)
+  test("Any type of Game Unit should be able to vary their own currentHP") {
+    chicken.varyCurrentHP(-2)
+    assertEquals(chicken.currentHP, 1)
+    chicken.varyCurrentHP(1)
+    assertEquals(chicken.currentHP, 2)
+    chicken.varyCurrentHP(15)
+    assertEquals(chicken.currentHP, chickenMaxHp)
+    chicken.varyCurrentHP(-15)
+    assertEquals(chicken.currentHP, 0)
   }
 
-  test("Any kind of wild unit should be able to give stars to a player"){
-    chicken.stars = 25
-    chicken.dropStarsTo(testPlayer)
-    assertEquals(testPlayer.stars, 25)
-    assertEquals(chicken.stars, 0)
+  test("Any type of game unit should be able to return and vary their current quantity of stars") {
+    var s = chicken.getStars
+    assertEquals(chicken.getStars, s)
+    chicken.varyStars(15)
+    assertEquals(chicken.getStars, 15)
+    chicken.varyStars(-5)
+    assertEquals(chicken.getStars, 10)
+  }
+
+  test("Any type of game unit should be able to return their own name") {
+    assertEquals(chicken.getName, chickenName)
   }
 
 
