@@ -36,15 +36,15 @@ class SeagullTest extends munit.FunSuite{
     assertEquals(seagull.name, seagullName)
   }
 
-  test("Any type of Game Unit should be able to vary their own currentHP") {
+  test("Any type of Game Unit should be able to vary and return their own currentHP") {
     seagull.varyCurrentHP(-2)
-    assertEquals(seagull.currentHP, 1)
+    assertEquals(seagull.getCurrentHP, 1)
     seagull.varyCurrentHP(1)
-    assertEquals(seagull.currentHP, 2)
+    assertEquals(seagull.getCurrentHP, 2)
     seagull.varyCurrentHP(15)
-    assertEquals(seagull.currentHP, seagullMaxHp)
+    assertEquals(seagull.getCurrentHP, seagullMaxHp)
     seagull.varyCurrentHP(-15)
-    assertEquals(seagull.currentHP, 0)
+    assertEquals(seagull.getCurrentHP, 0)
   }
 
   test("Any type of game unit should be able to return and vary their current quantity of stars") {

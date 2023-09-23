@@ -39,30 +39,30 @@ class PlayerCharacterTest extends munit.FunSuite {
     assertEquals(character.defense, defense)
     assertEquals(character.evasion, evasion)
     assertEquals(character.homePanel, homePos)
-    assertEquals(character.stars, 0)
-    assertEquals(character.victories, 0)
-    assertEquals(character.norma.getInt, norma.getInt)
-    assertEquals(character.objective, objective)
+    assertEquals(character.getStars, 0)
+    assertEquals(character.getVictories, 0)
+    assertEquals(character.getNorma.getInt, norma.getInt)
+    assertEquals(character.getObjective, objective)
   }
 
-  test("Any type of Game Unit should be able to vary their own currentHP"){
+  test("Any type of Game Unit should be able to vary and return their own currentHP"){
     character.varyCurrentHP(-5)
-    assertEquals(character.currentHP, 5)
+    assertEquals(character.getCurrentHP, 5)
     character.varyCurrentHP(3)
-    assertEquals(character.currentHP, 8)
+    assertEquals(character.getCurrentHP, 8)
     character.varyCurrentHP(15)
-    assertEquals(character.currentHP, maxHp)
+    assertEquals(character.getCurrentHP, maxHp)
     character.varyCurrentHP(-15)
-    assertEquals(character.currentHP, 0)
+    assertEquals(character.getCurrentHP, 0)
   }
 
   test("Any type of game unit should be able to return and vary their current quantity of stars"){
     var s = character.getStars
-    assertEquals(character.stars, s)
+    assertEquals(character.getStars, s)
     character.varyStars(15)
-    assertEquals(character.stars, 15)
+    assertEquals(character.getStars, 15)
     character.varyStars(-5)
-    assertEquals(character.stars, 10)
+    assertEquals(character.getStars, 10)
   }
 
   test("Any type of game unit should be able to return their own name"){
@@ -77,23 +77,27 @@ class PlayerCharacterTest extends munit.FunSuite {
     }
   }
 
+  test("A player should be able to return and change their own norma"){
+
+  }
+
   test("A player character should be able to return and increase their own victories, depending on what kind of game unit they defeated"){
     var v = character.getVictories
-    assertEquals(character.victories, v)
+    assertEquals(character.getVictories, v)
     character.increaseVictories(new Seagull)
-    assertEquals(character.victories, 1)
+    assertEquals(character.getVictories, 1)
     character.increaseVictories(new RoboBall)
-    assertEquals(character.victories, 2)
+    assertEquals(character.getVictories, 2)
     character.increaseVictories(new Chicken)
-    assertEquals(character.victories, 3)
+    assertEquals(character.getVictories, 3)
     character.increaseVictories(new PlayerCharacter("test character",1,1,1,1,1))
   }
 
-  test("A player should be able to return his current objective"){
+  test("A player should be able to return and change his current objective"){
     assertEquals(character.getObjective, "init")
-    character.objective = "victories"
+    character.changeObjective("victories")
     assertEquals(character.getObjective, "victories")
-    character.objective = "stars"
+    character.changeObjective("stars")
     assertEquals(character.getObjective, "stars")
 
   }

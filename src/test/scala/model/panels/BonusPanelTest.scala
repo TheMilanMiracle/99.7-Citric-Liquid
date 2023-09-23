@@ -3,6 +3,8 @@ package model.panels
 
 import model.units.PlayerCharacter
 
+import cl.uchile.dcc.citric.model.norma.NormaLevel3
+
 import scala.collection.mutable.ArrayBuffer
 
 class BonusPanelTest extends munit.FunSuite{
@@ -49,8 +51,24 @@ class BonusPanelTest extends munit.FunSuite{
   }
 
   test("the bonus panel will give to a player a quantity of stars depending on his norma and roll of the dice"){
+    bonusPanel.addCharacter(testPlayer1)
+    bonusPanel.triggerEffect()
 
+    assert(0 < testPlayer1.getStars)
+    assert(testPlayer1.stars <= 6 * testPlayer1.getNorma.getInt || testPlayer1.stars <= 6 * 3)
 
+    var ref: Int = testPlayer1.getStars
+    bonusPanel.triggerEffect()
+
+    assert(ref < testPlayer1.getStars)
+    assert(testPlayer1.stars <= ((6 * testPlayer1.getNorma.getInt) + ref) || testPlayer1.stars <= ((6 * 3) + ref))
+
+    ref = testPlayer1.stars
+    testPlayer1.changeNorma(new NormaLevel3)
+    bonusPanel.triggerEffect()
+
+    assert(ref < testPlayer1.stars)
+    assert(testPlayer1.stars <= ((6 * testPlayer1.getNorma.getInt) + ref) || testPlayer1.stars <= ((6 * 3) + ref))
   }
 
 }

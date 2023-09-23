@@ -9,7 +9,7 @@ package model.units
  *
  * For instance, game units can:
  *
- * - Vary their own current HP
+ * - Vary and return their own current HP
  * - return and vary their own stars
  * - return their own name
  *
@@ -80,7 +80,15 @@ trait GameUnit {
    */
   def varyCurrentHP(delta: Int): Unit
 
+  /** Returns the current HP of the unit
+   *
+   * @return the current HP of the unit
+   */
+  def getCurrentHP: Int
+
   /** Returns the quantity of stars that the unit currently has
+   *
+   * @return the current stars of the unit
    */
   def getStars: Int
 
@@ -94,6 +102,8 @@ trait GameUnit {
   def varyStars(delta:Int): Unit
 
   /** Returns the name of the game unit
+   *
+   * @return the name of the unit
    */
   def getName: String
 

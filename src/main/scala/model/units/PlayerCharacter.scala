@@ -13,8 +13,9 @@ import scala.util.Random
   * For instance, players can:
   *
   * - Roll a dice, a common action in many board games.
+  * - return and change its own norma level
   * - return and increase their victories
-  * - return their own objective
+  * - return an change their own objective
   *
   * Furthermore, the `Player` class has a utility for generating random numbers,
   * which is primarily used for simulating dice rolls. By default, this utility is
@@ -73,7 +74,7 @@ class PlayerCharacter(val name: String,
    * combat, the quantity starts at 0
    *
    */
-  var victories: Int = 0
+  private var victories: Int = 0
 
   /** Norma level of the player
    *
@@ -83,7 +84,7 @@ class PlayerCharacter(val name: String,
    *
    *  It starts at level 1
    */
-  var norma: Norma = new NormaLevel1
+  private var norma: Norma = new NormaLevel1
 
   /** Current Objective of the player
    *
@@ -94,17 +95,46 @@ class PlayerCharacter(val name: String,
    * this value is initialized with a meaningless value because the objective is
    * chosen for the first time at norma level 2
    */
-   var objective: String = "init"
+   private var objective: String = "init"
 
-  /** Rolls a dice and returns a value between 1 to 6. */
+  /** Method that changes the objective of the player
+   *
+   * @param obj objective that will be set
+   */
+  def changeObjective(obj: String): Unit = {
+    this.objective = obj
+  }
+
+  /** Returns the current norma level of the player
+   *
+   * @return the current norma of the player
+   */
+  def getNorma: Norma = this.norma
+
+  /** Changes the current norma level of the player
+   *
+   * @param norma the new norma level of the player
+   */
+  def changeNorma(norma: Norma): Unit = this.norma = norma
+
+  /** Rolls a dice and returns a value between 1 to 6 representing the faces of a dice
+   *
+   * @return an int between 1-6 (including 1 and 6)
+   */
   def rollDice(): Int = {
     randomNumberGenerator.nextInt(6) + 1
   }
 
-  /** returns the victories that the Player has */
+  /** returns the victories that the Player has
+   *
+   * @return the current victories of the player
+   */
   def getVictories: Int = this.victories
 
-  /** return the current objective of the player */
+  /** return the current objective of the player
+   *
+   * @return the current objective of the player
+   */
   def getObjective: String = this.objective
 
   /** Increases number of victories after winning a combat against a wild unit

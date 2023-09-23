@@ -1,7 +1,7 @@
 package cl.uchile.dcc.citric
 package model.norma
 
-import model.units.PlayerCharacter
+import model.units.{Chicken, PlayerCharacter}
 
 class NormaLevel4Test extends munit.FunSuite {
   var norma = new NormaLevel4
@@ -17,12 +17,16 @@ class NormaLevel4Test extends munit.FunSuite {
   }
 
   test("Every level of norma should be able to return if a player meets the requirements to level up his norma"){
-    testPlayer.stars = 119
-    testPlayer.victories = 9
+    testPlayer.varyStars(119)
+    testPlayer.increaseVictories(testPlayer)
+    testPlayer.increaseVictories(testPlayer)
+    testPlayer.increaseVictories(testPlayer)
+    testPlayer.increaseVictories(testPlayer)
+    testPlayer.increaseVictories(new Chicken)
     assertEquals(norma.normaCheck(testPlayer.getStars, "stars"),false)
     assertEquals(norma.normaCheck(testPlayer.getVictories, "victories"), false)
-    testPlayer.stars += 1
-    testPlayer.victories += 1
+    testPlayer.varyStars(1)
+    testPlayer.increaseVictories(new Chicken)
     assertEquals(norma.normaCheck(testPlayer.getStars, "stars"), true)
     assertEquals(norma.normaCheck(testPlayer.getVictories, "victories"), true)
   }

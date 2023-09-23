@@ -59,7 +59,7 @@ class EncounterPanel(next: ArrayBuffer[Panel], pos: Int) extends abstractPanel{
    * The function will decide randomly between the 3 possible wild
    * units: chicken, robo-ball and seagull
    *
-   * @return
+   * @return a random wild unit, it could be a chicken, robo ball or seagull
    */
   def spawnWildUnit(): WildUnit = {
     val rand: Int = between(1,4)

@@ -1,6 +1,7 @@
 package cl.uchile.dcc.citric
 package model.panels
 
+import cl.uchile.dcc.citric.model.norma.normaList
 import cl.uchile.dcc.citric.model.units.PlayerCharacter
 
 import scala.collection.mutable.ArrayBuffer
@@ -44,7 +45,20 @@ class HomePanel(next: ArrayBuffer[Panel], pos: Int) extends abstractPanel {
    *
    */
   def triggerEffect(): Unit = {
+    val lastplayer: PlayerCharacter = this.characters(characters.size - 1)
+    val norma = lastplayer.getNorma
+    val normaList = new normaList()
 
+    if(lastplayer.getObjective == "stars"){
+      if(norma.normaCheck(lastplayer.getStars, lastplayer.getObjective)){
+        lastplayer.changeNorma(normaList.next(norma))
+      }
+    }
+    else{
+      if(norma.normaCheck(lastplayer.getVictories, lastplayer.getObjective)){
+        lastplayer.changeNorma(normaList.next(norma))
+      }
+    }
   }
 
 }

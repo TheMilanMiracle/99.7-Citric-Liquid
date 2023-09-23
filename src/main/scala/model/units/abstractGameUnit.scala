@@ -26,7 +26,15 @@ trait abstractGameUnit extends GameUnit {
     if(this.currentHP < 0) this.currentHP = 0
   }
 
+  /** Returns the current HP of the unit
+   *
+   * @return the current HP of the unit
+   */
+  def getCurrentHP: Int = this.currentHP
+
   /** Returns the quantity of stars that the unit currently has
+   *
+   * @return the current stars of the unit
    */
   def getStars: Int = this.stars
 
@@ -42,6 +50,8 @@ trait abstractGameUnit extends GameUnit {
   def varyStars(delta: Int): Unit = {this.stars += delta}
 
   /** Returns the name of the game unit
+   *
+   * @return the name of the unit
    */
   def getName: String = {this.name}
 }

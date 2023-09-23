@@ -14,13 +14,17 @@ package model.norma
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
 trait Norma {
-  /** Method that returns an int of the norma level that is represented by the instance */
+  /** Method that returns an int of the norma level that is represented by the instance
+   * @return and int that represents a norma level
+   */
   def getInt: Int
 
   /**Method that checks if the requirements for leveling up are met
    *
    * @param current the current quantity of stars/victories for checking
    * @param objective the objective of the player, it could be "stars"/"victories"
+   *
+   * @return a boolean, whether or not the requirements are met for leveling up
    */
   def normaCheck(current: Int, objective: String): Boolean
 }

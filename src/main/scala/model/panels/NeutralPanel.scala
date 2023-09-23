@@ -32,7 +32,7 @@ class NeutralPanel(next: ArrayBuffer[Panel], pos: Int) extends abstractPanel {
   /** Triggers the effect of the panel
    *
    * This method will do nothing
-   * In the context of the game, when a player lands in this kind of panle
+   * In the context of the game, when a player lands in this kind of panel
    * his turn will end with no changes
    *
    */

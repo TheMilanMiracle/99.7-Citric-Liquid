@@ -36,15 +36,15 @@ class RoboBallTest extends munit.FunSuite {
     assertEquals(roboBall.name, roboBallName)
   }
 
-  test("Any type of Game Unit should be able to vary their own currentHP") {
+  test("Any type of Game Unit should be able to vary and return their own currentHP") {
     roboBall.varyCurrentHP(-2)
-    assertEquals(roboBall.currentHP, 1)
+    assertEquals(roboBall.getCurrentHP, 1)
     roboBall.varyCurrentHP(1)
-    assertEquals(roboBall.currentHP, 2)
+    assertEquals(roboBall.getCurrentHP, 2)
     roboBall.varyCurrentHP(15)
-    assertEquals(roboBall.currentHP, roboBallMaxHp)
+    assertEquals(roboBall.getCurrentHP, roboBallMaxHp)
     roboBall.varyCurrentHP(-15)
-    assertEquals(roboBall.currentHP, 0)
+    assertEquals(roboBall.getCurrentHP, 0)
   }
 
   test("Any type of game unit should be able to return and vary their current quantity of stars") {

@@ -13,7 +13,7 @@ import scala.collection.mutable.ArrayBuffer
   * structures.
   *
   * A panel should be able to:
-  * - Holds one or more players
+  * - Hold one or more players
   * - Be able to add and remove a player from the panel
   *
   * @author [[https://github.com/r8vnhill Ignacio Slater M.]]

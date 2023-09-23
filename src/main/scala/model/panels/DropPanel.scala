@@ -44,8 +44,7 @@ class DropPanel(next: ArrayBuffer[Panel], pos: Int) extends abstractPanel{
     val lastplayer: PlayerCharacter = this.characters(characters.size - 1)
     val roll: Int = lastplayer.rollDice()
 
-    lastplayer.stars -= (roll * lastplayer.norma.getInt)
-
+    lastplayer.varyStars(- (roll * lastplayer.getNorma.getInt))
   }
 
 }

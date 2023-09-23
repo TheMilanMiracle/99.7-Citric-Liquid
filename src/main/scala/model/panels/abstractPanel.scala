@@ -25,7 +25,7 @@ abstract class abstractPanel extends Panel{
 
   /** Adds a character to the list of characters currently on this panel.
    *
-   * This method must be invoked when a player moves to this panel or starts their turn on it.
+   * This method must be invoked when a player moves to this panel
    *
    * @param player The player character to add to this panel.
    */
