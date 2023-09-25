@@ -72,6 +72,25 @@ class HomePanelTest extends munit.FunSuite{
     assertEquals(testPlayer1.getNorma.getInt, 3)
     homePanel1.triggerEffect()
     assertEquals(testPlayer1.getNorma.getInt, 3)
+  }
 
+  test("a home panel heals one hp to a character after triggering its effect"){
+    testPlayer1 = new PlayerCharacter("test player1", 10, 1, 1, 1, 1)
+    homePanel1.addCharacter(testPlayer1)
+    homePanel1.triggerEffect()
+    assertEquals(testPlayer1.getCurrentHP, 10)
+    testPlayer1.varyCurrentHP(-5)
+    homePanel1.triggerEffect()
+    assertEquals(testPlayer1.getCurrentHP, 6)
+    homePanel1.triggerEffect()
+    assertEquals(testPlayer1.getCurrentHP, 7)
+    homePanel1.triggerEffect()
+    assertEquals(testPlayer1.getCurrentHP, 8)
+    homePanel1.triggerEffect()
+    assertEquals(testPlayer1.getCurrentHP, 9)
+    homePanel1.triggerEffect()
+    assertEquals(testPlayer1.getCurrentHP, 10)
+    homePanel1.triggerEffect()
+    assertEquals(testPlayer1.getCurrentHP, 10)
   }
 }

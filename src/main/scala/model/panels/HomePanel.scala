@@ -49,6 +49,8 @@ class HomePanel(next: ArrayBuffer[Panel], pos: Int) extends abstractPanel {
     val norma = lastplayer.getNorma
     val normaList = new normaList()
 
+    lastplayer.varyCurrentHP(1)
+
     if(lastplayer.getObjective == "stars"){
       if(norma.normaCheck(lastplayer.getStars, lastplayer.getObjective)){
         lastplayer.changeNorma(normaList.next(norma))
