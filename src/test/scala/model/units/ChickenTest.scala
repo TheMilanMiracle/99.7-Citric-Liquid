@@ -59,6 +59,4 @@ class ChickenTest extends munit.FunSuite{
   test("Any type of game unit should be able to return their own name") {
     assertEquals(chicken.getName, chickenName)
   }
-
-
 }

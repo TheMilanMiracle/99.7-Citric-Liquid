@@ -1,7 +1,7 @@
 package cl.uchile.dcc.citric
 package model.units
 
-import cl.uchile.dcc.citric.model.norma.NormaLevel1
+import cl.uchile.dcc.citric.model.norma.{NormaLevel1, NormaLevel2, NormaLevel3, NormaLevel4, NormaLevel5, NormaList}
 
 import scala.util.Random
 
@@ -78,7 +78,16 @@ class PlayerCharacterTest extends munit.FunSuite {
   }
 
   test("A player should be able to return and change their own norma"){
-
+    val normaList = new NormaList()
+    assertEquals(character.getNorma.getInt, (new NormaLevel1).getInt)
+    character.changeNorma(normaList.next(character.getNorma))
+    assertEquals(character.getNorma.getInt, (new NormaLevel2).getInt)
+    character.changeNorma(normaList.next(character.getNorma))
+    assertEquals(character.getNorma.getInt, (new NormaLevel3).getInt)
+    character.changeNorma(normaList.next(character.getNorma))
+    assertEquals(character.getNorma.getInt, (new NormaLevel4).getInt)
+    character.changeNorma(normaList.next(character.getNorma))
+    assertEquals(character.getNorma.getInt, (new NormaLevel5).getInt)
   }
 
   test("A player character should be able to return and increase their own victories, depending on what kind of game unit they defeated"){

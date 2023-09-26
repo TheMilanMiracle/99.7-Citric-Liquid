@@ -15,7 +15,7 @@ package model.norma
  */
 trait Norma {
   /** Method that returns an int of the norma level that is represented by the instance
-   * @return and int that represents a norma level
+   * @return an int that represents a norma level
    */
   def getInt: Int
 

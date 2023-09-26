@@ -10,7 +10,7 @@ package model.units
  *
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
-trait abstractGameUnit extends GameUnit {
+abstract class abstractGameUnit extends GameUnit {
   /** A Unit can vary their own current hp
    *
    * In the context of the game, any game unit can engage

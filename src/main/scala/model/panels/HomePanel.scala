@@ -1,7 +1,7 @@
 package cl.uchile.dcc.citric
 package model.panels
 
-import cl.uchile.dcc.citric.model.norma.normaList
+import cl.uchile.dcc.citric.model.norma.NormaList
 import cl.uchile.dcc.citric.model.units.PlayerCharacter
 
 import scala.collection.mutable.ArrayBuffer
@@ -47,7 +47,7 @@ class HomePanel(next: ArrayBuffer[Panel], pos: Int) extends abstractPanel {
   def triggerEffect(): Unit = {
     val lastplayer: PlayerCharacter = this.characters(characters.size - 1)
     val norma = lastplayer.getNorma
-    val normaList = new normaList()
+    val normaList = new NormaList()
 
     lastplayer.varyCurrentHP(1)
 

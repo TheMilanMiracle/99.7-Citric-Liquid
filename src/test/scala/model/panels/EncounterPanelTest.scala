@@ -9,7 +9,7 @@ class EncounterPanelTest extends munit.FunSuite {
   val np: ArrayBuffer[Panel] = ArrayBuffer[Panel]()
   val c: ArrayBuffer[PlayerCharacter] = ArrayBuffer[PlayerCharacter]()
   val p: Int = 1
-  var encounterPanel= new EncounterPanel(np, p)
+  var encounterPanel = new EncounterPanel(np, p)
   var testPlayer1: PlayerCharacter = new PlayerCharacter("test player1", 1, 1, 1, 1, 1)
   var testPlayer2: PlayerCharacter = new PlayerCharacter("test player2", 1, 1, 1, 1, 2)
 

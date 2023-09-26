@@ -15,7 +15,7 @@ import scala.collection.mutable.ArrayBuffer
  *
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
-class normaList{
+class NormaList{
   /**List that contains all of the norma levels to be had in the game
    *
    * Particularly, the first level on the list will be the one level that every player will have when starting a game

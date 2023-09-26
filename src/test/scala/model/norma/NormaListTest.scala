@@ -3,8 +3,8 @@ package model.norma
 
 import scala.collection.mutable.ArrayBuffer
 
-class normaListTest extends munit.FunSuite {
-  var normaList: normaList = new normaList()
+class NormaListTest extends munit.FunSuite {
+  var normaList: NormaList = new NormaList()
   var list: ArrayBuffer[Norma] = ArrayBuffer[Norma](new NormaLevel1, new NormaLevel2, new NormaLevel3, new NormaLevel4, new NormaLevel5, new NormaLevel6)
 
   test("a normaList should correctly have stored the norma levels and be able to return any of them"){
