@@ -54,21 +54,21 @@ class BonusPanelTest extends munit.FunSuite{
     bonusPanel.addCharacter(testPlayer1)
     bonusPanel.triggerEffect()
 
-    assert(0 < testPlayer1.getStars)
-    assert(testPlayer1.stars <= 6 * testPlayer1.getNorma.getInt || testPlayer1.stars <= 6 * 3)
+    assert(0 < testPlayer1.stars)
+    assert(testPlayer1.stars <= 6 * testPlayer1.norma.getInt || testPlayer1.stars <= 6 * 3)
 
-    var ref: Int = testPlayer1.getStars
-    bonusPanel.triggerEffect()
-
-    assert(ref < testPlayer1.getStars)
-    assert(testPlayer1.stars <= ((6 * testPlayer1.getNorma.getInt) + ref) || testPlayer1.stars <= ((6 * 3) + ref))
-
-    ref = testPlayer1.stars
-    testPlayer1.changeNorma(new NormaLevel3)
+    var ref: Int = testPlayer1.stars
     bonusPanel.triggerEffect()
 
     assert(ref < testPlayer1.stars)
-    assert(testPlayer1.stars <= ((6 * testPlayer1.getNorma.getInt) + ref) || testPlayer1.stars <= ((6 * 3) + ref))
+    assert(testPlayer1.stars <= ((6 * testPlayer1.norma.getInt) + ref) || testPlayer1.stars <= ((6 * 3) + ref))
+
+    ref = testPlayer1.stars
+    testPlayer1.norma_(new NormaLevel3)
+    bonusPanel.triggerEffect()
+
+    assert(ref < testPlayer1.stars)
+    assert(testPlayer1.stars <= ((6 * testPlayer1.norma.getInt) + ref) || testPlayer1.stars <= ((6 * 3) + ref))
   }
 
 }

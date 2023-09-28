@@ -36,27 +36,33 @@ class RoboBallTest extends munit.FunSuite {
     assertEquals(roboBall.name, roboBallName)
   }
 
+  test("Any type of Game Unit should be able to correctly return their ATK, DEF and EVA") {
+    assertEquals(roboBall.attack, roboBallAttack)
+    assertEquals(roboBall.defense, roboBallDefense)
+    assertEquals(roboBall.evasion, roboBallEvasion)
+  }
+
   test("Any type of Game Unit should be able to vary and return their own currentHP") {
     roboBall.varyCurrentHP(-2)
-    assertEquals(roboBall.getCurrentHP, 1)
+    assertEquals(roboBall.currentHP, 1)
     roboBall.varyCurrentHP(1)
-    assertEquals(roboBall.getCurrentHP, 2)
+    assertEquals(roboBall.currentHP, 2)
     roboBall.varyCurrentHP(15)
-    assertEquals(roboBall.getCurrentHP, roboBallMaxHp)
+    assertEquals(roboBall.currentHP, roboBallMaxHp)
     roboBall.varyCurrentHP(-15)
-    assertEquals(roboBall.getCurrentHP, 0)
+    assertEquals(roboBall.currentHP, 0)
   }
 
   test("Any type of game unit should be able to return and vary their current quantity of stars") {
-    var s = roboBall.getStars
-    assertEquals(roboBall.getStars, s)
+    var s = roboBall.stars
+    assertEquals(roboBall.stars, s)
     roboBall.varyStars(15)
-    assertEquals(roboBall.getStars, 15)
+    assertEquals(roboBall.stars, 15)
     roboBall.varyStars(-5)
-    assertEquals(roboBall.getStars, 10)
+    assertEquals(roboBall.stars, 10)
   }
 
   test("Any type of game unit should be able to return their own name") {
-    assertEquals(roboBall.getName, roboBallName)
+    assertEquals(roboBall.name, roboBallName)
   }
 }

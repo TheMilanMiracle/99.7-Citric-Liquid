@@ -24,36 +24,28 @@ class Chicken extends WildUnit {
    * the class
    *
    */
-  var currentHP: Int = maxHP
+  var _currentHP: Int = maxHP
 
   /** Base attack of the unit
    *
    * It defines the damage dealing capacities of a unit
    *
    */
-  val attack: Int = -1
+  val _attack: Int = -1
 
   /** Base defense of the unit
    *
    * It defines damage mitigation capacities of a unit
    *
    */
-  val defense: Int = -1
+  val _defense: Int = -1
 
   /** Base evasion of the unit
    *
    * It defines the capacity of the unit of completely avoid certain attacks
    *
    */
-  val evasion: Int = 1
-
-  /** Stars that the Unit has
-   *
-   * Units can holds stars and the number can vary depending on the
-   * outcome of combats with other Units, the stars start at 0
-   *
-   */
-  var stars: Int = 0
+  val _evasion: Int = 1
 
   /** The name of the unit
    *
@@ -62,5 +54,5 @@ class Chicken extends WildUnit {
    * available in the game
    *
    */
-  val name: String = "Chicken"
+  val _name: String = "Chicken"
 }

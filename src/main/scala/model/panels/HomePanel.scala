@@ -46,19 +46,19 @@ class HomePanel(next: ArrayBuffer[Panel], pos: Int) extends abstractPanel {
    */
   def triggerEffect(): Unit = {
     val lastplayer: PlayerCharacter = this.characters(characters.size - 1)
-    val norma = lastplayer.getNorma
+    val norma = lastplayer.norma
     val normaList = new NormaList()
 
     lastplayer.varyCurrentHP(1)
 
-    if(lastplayer.getObjective == "stars"){
-      if(norma.normaCheck(lastplayer.getStars, lastplayer.getObjective)){
-        lastplayer.changeNorma(normaList.next(norma))
+    if(lastplayer.objective == "stars"){
+      if(norma.normaCheck(lastplayer.stars, lastplayer.objective)){
+        lastplayer.norma_(normaList.next(norma))
       }
     }
     else{
-      if(norma.normaCheck(lastplayer.getVictories, lastplayer.getObjective)){
-        lastplayer.changeNorma(normaList.next(norma))
+      if(norma.normaCheck(lastplayer.victories, lastplayer.objective)){
+        lastplayer.norma_(normaList.next(norma))
       }
     }
   }

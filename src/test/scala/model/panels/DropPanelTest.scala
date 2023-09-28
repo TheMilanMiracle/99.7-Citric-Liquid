@@ -50,15 +50,15 @@ class DropPanelTest extends munit.FunSuite {
 
   test("this panel will take stars from the player that trigger its effects depending of his norma and roll of the dice"){
     testPlayer1.varyStars(50)
-    var ref: Int = testPlayer1.getStars
+    var ref: Int = testPlayer1.stars
     dropPanel.addCharacter(testPlayer1)
     dropPanel.triggerEffect()
-    assert(testPlayer1.getStars < ref)
-    assert(testPlayer1.getStars <= (ref - testPlayer1.getNorma.getInt))
+    assert(testPlayer1.stars < ref)
+    assert(testPlayer1.stars <= (ref - testPlayer1.norma.getInt))
 
-    ref = testPlayer1.getStars
+    ref = testPlayer1.stars
     dropPanel.triggerEffect()
-    assert(testPlayer1.getStars < ref)
-    assert(testPlayer1.getStars <= (ref - testPlayer1.getNorma.getInt))
+    assert(testPlayer1.stars < ref)
+    assert(testPlayer1.stars <= (ref - testPlayer1.norma.getInt))
   }
 }

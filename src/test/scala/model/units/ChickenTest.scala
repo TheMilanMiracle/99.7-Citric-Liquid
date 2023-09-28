@@ -28,35 +28,41 @@ class ChickenTest extends munit.FunSuite{
 
   test("Any kind of Unit should have its attributes well defined"){
     assertEquals(chicken.maxHP, chickenMaxHp)
-    assertEquals(chicken.getCurrentHP, chickenCurrentHp)
+    assertEquals(chicken.currentHP, chickenCurrentHp)
     assertEquals(chicken.attack, chickenAttack)
     assertEquals(chicken.defense, chickenDefense)
     assertEquals(chicken.evasion, chickenEvasion)
-    assertEquals(chicken.getStars, chickenStars)
-    assertEquals(chicken.getName, chickenName)
+    assertEquals(chicken.stars, chickenStars)
+    assertEquals(chicken.name, chickenName)
+  }
+
+  test("Any type of Game Unit should be able to correctly return their ATK, DEF and EVA") {
+    assertEquals(chicken.attack, chickenAttack)
+    assertEquals(chicken.defense, chickenDefense)
+    assertEquals(chicken.evasion, chickenEvasion)
   }
 
   test("Any type of Game Unit should be able to vary and return their own currentHP") {
     chicken.varyCurrentHP(-2)
-    assertEquals(chicken.getCurrentHP, 1)
+    assertEquals(chicken.currentHP, 1)
     chicken.varyCurrentHP(1)
-    assertEquals(chicken.getCurrentHP, 2)
+    assertEquals(chicken.currentHP, 2)
     chicken.varyCurrentHP(15)
-    assertEquals(chicken.getCurrentHP, chickenMaxHp)
+    assertEquals(chicken.currentHP, chickenMaxHp)
     chicken.varyCurrentHP(-15)
-    assertEquals(chicken.getCurrentHP, 0)
+    assertEquals(chicken.currentHP, 0)
   }
 
   test("Any type of game unit should be able to return and vary their current quantity of stars") {
-    var s = chicken.getStars
-    assertEquals(chicken.getStars, s)
+    var s = chicken.stars
+    assertEquals(chicken.stars, s)
     chicken.varyStars(15)
-    assertEquals(chicken.getStars, 15)
+    assertEquals(chicken.stars, 15)
     chicken.varyStars(-5)
-    assertEquals(chicken.getStars, 10)
+    assertEquals(chicken.stars, 10)
   }
 
   test("Any type of game unit should be able to return their own name") {
-    assertEquals(chicken.getName, chickenName)
+    assertEquals(chicken.name, chickenName)
   }
 }

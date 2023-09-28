@@ -36,28 +36,34 @@ class SeagullTest extends munit.FunSuite{
     assertEquals(seagull.name, seagullName)
   }
 
+  test("Any type of Game Unit should be able to correctly return their ATK, DEF and EVA") {
+    assertEquals(seagull.attack, seagullAttack)
+    assertEquals(seagull.defense, seagullDefense)
+    assertEquals(seagull.evasion, seagullEvasion)
+  }
+
   test("Any type of Game Unit should be able to vary and return their own currentHP") {
     seagull.varyCurrentHP(-2)
-    assertEquals(seagull.getCurrentHP, 1)
+    assertEquals(seagull.currentHP, 1)
     seagull.varyCurrentHP(1)
-    assertEquals(seagull.getCurrentHP, 2)
+    assertEquals(seagull.currentHP, 2)
     seagull.varyCurrentHP(15)
-    assertEquals(seagull.getCurrentHP, seagullMaxHp)
+    assertEquals(seagull.currentHP, seagullMaxHp)
     seagull.varyCurrentHP(-15)
-    assertEquals(seagull.getCurrentHP, 0)
+    assertEquals(seagull.currentHP, 0)
   }
 
   test("Any type of game unit should be able to return and vary their current quantity of stars") {
-    var s = seagull.getStars
-    assertEquals(seagull.getStars, s)
+    var s = seagull.stars
+    assertEquals(seagull.stars, s)
     seagull.varyStars(15)
-    assertEquals(seagull.getStars, 15)
+    assertEquals(seagull.stars, 15)
     seagull.varyStars(-5)
-    assertEquals(seagull.getStars, 10)
+    assertEquals(seagull.stars, 10)
   }
 
   test("Any type of game unit should be able to return their own name") {
-    assertEquals(seagull.getName, seagullName)
+    assertEquals(seagull.name, seagullName)
   }
 }
 

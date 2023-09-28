@@ -31,28 +31,28 @@ trait GameUnit {
    *  the class
    *
    */
-  var currentHP: Int
+  var _currentHP: Int
 
   /** Base attack of the unit
    *
    *  It defines the damage dealing capacities of a unit
    *
    */
-  val attack: Int
+  val _attack: Int
 
   /** Base defense of the unit
    *
    *  It defines damage mitigation capacities of a unit
    *
    */
-  val defense: Int
+  val _defense: Int
 
   /** Base evasion of the unit
    *
    *  It defines the capacity of the unit of completely avoid certain attacks
    *
    */
-  val evasion: Int
+  val _evasion: Int
 
   /** The name of the unit
    *
@@ -61,7 +61,7 @@ trait GameUnit {
    *  available in the game
    *
    */
-  val name: String
+  val _name: String
 
   /** Stars that the Unit has
    *
@@ -69,7 +69,22 @@ trait GameUnit {
    * outcome of combats with other Units, the stars start at 0
    *
    */
-  var stars: Int
+  var _stars: Int
+
+  /**Returns the attack of the unit
+  *
+  * @return an integer representing the attack of the unit */
+  def attack: Int
+
+  /** Returns the defense of the unit
+   *
+   * @return an integer representing the defense of the unit */
+  def defense: Int
+
+  /** Returns the evasion of the unit
+   *
+   * @return an integer representing the evasion of the unit */
+  def evasion: Int
 
   /** A Unit can vary their own current hp
    *
@@ -84,13 +99,13 @@ trait GameUnit {
    *
    * @return the current HP of the unit
    */
-  def getCurrentHP: Int
+  def currentHP: Int
 
   /** Returns the quantity of stars that the unit currently has
    *
    * @return the current stars of the unit
    */
-  def getStars: Int
+  def stars: Int
 
   /** A Unit can vary their own current hp
    *
@@ -105,6 +120,6 @@ trait GameUnit {
    *
    * @return the name of the unit
    */
-  def getName: String
+  def name: String
 
 }
