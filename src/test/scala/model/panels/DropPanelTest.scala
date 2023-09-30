@@ -22,7 +22,7 @@ class DropPanelTest extends munit.FunSuite {
     testPlayer2 = new PlayerCharacter("test player2", 1, 1, 1, 1, 2)
   }
 
-  test("any kind of panel has to have its attributes well defined") {
+  test("any kind of panel has to have its attributes well defined and their getters work correctly") {
     assertEquals(dropPanel.characters, c)
     assertEquals(dropPanel.nextPanels, np)
     assertEquals(dropPanel.position, p)
@@ -49,7 +49,7 @@ class DropPanelTest extends munit.FunSuite {
   }
 
   test("this panel will take stars from the player that trigger its effects depending of his norma and roll of the dice"){
-    testPlayer1.varyStars(50)
+    testPlayer1.stars = (50)
     var ref: Int = testPlayer1.stars
     dropPanel.addCharacter(testPlayer1)
     dropPanel.triggerEffect()

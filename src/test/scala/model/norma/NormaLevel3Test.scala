@@ -17,13 +17,13 @@ class NormaLevel3Test extends munit.FunSuite {
   }
 
   test("Every level of norma should be able to return if a player meets the requirements to level up his norma"){
-    testPlayer.varyStars(69)
+    testPlayer.stars = (69)
     testPlayer.increaseVictories(testPlayer)
     testPlayer.increaseVictories(testPlayer)
     testPlayer.increaseVictories(new Chicken)
     assertEquals(norma.normaCheck(testPlayer.stars, "stars"),false)
     assertEquals(norma.normaCheck(testPlayer.victories, "victories"), false)
-    testPlayer.varyStars(1)
+    testPlayer.stars = (testPlayer.stars + 1)
     testPlayer.increaseVictories(new Chicken)
     assertEquals(norma.normaCheck(testPlayer.stars, "stars"), true)
     assertEquals(norma.normaCheck(testPlayer.victories, "victories"), true)

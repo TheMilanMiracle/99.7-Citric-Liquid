@@ -13,27 +13,12 @@ import scala.util.Random.between
  *
  * after triggering the effect, the player's turn will end
  *
- * @param next array containing the panels directly next to this one
+ * @param _nextPanels array containing the panels directly next to this one
+ * @param _position integer of the position of the panel on the board
  *
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
-class EncounterPanel(next: ArrayBuffer[Panel], pos: Int) extends abstractPanel{
-  /** An array of panels that are directly positioned next to this one
-   *
-   * In the context of the game, multiple routes or paths may exist, this could represent the
-   * possible next steps a player might take after being on this panel.
-   *
-   */
-  var nextPanels: ArrayBuffer[Panel] = next
-
-  /** The position of the panel on the board
-   *
-   * every panel has its own unique position in the board that has to be defines at
-   * the beginning of a game
-   *
-   */
-  var position: Int = pos
-
+class EncounterPanel(val _nextPanels: ArrayBuffer[Panel], val _position: Int) extends abstractPanel{
   /** The wild unit in the panel
    *
    * The panel has to have a wild unit, that will be generated randomly each time

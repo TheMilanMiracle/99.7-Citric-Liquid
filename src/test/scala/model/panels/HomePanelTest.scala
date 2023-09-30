@@ -31,7 +31,7 @@ class HomePanelTest extends munit.FunSuite{
     testPlayer2 = new PlayerCharacter("test player2", 1, 1, 1, 1, 2)
   }
 
-  test("any kind of panel has to have its attributes well defined") {
+  test("any kind of panel has to have its attributes well defined and their getters work correctly") {
     assertEquals(homePanel1.characters, c1)
     assertEquals(homePanel1.nextPanels, np1)
     assertEquals(homePanel1.position, p1)
@@ -58,14 +58,14 @@ class HomePanelTest extends munit.FunSuite{
   }
 
   test("a home panel can upgrade a player's norma level if the requirements are met"){
-    testPlayer1.varyStars(12)
-    testPlayer1.objective_("stars")
+    testPlayer1.stars = (12)
+    testPlayer1.objective_=("stars")
     homePanel1.addCharacter(testPlayer1)
     homePanel1.triggerEffect()
     assertEquals(testPlayer1.norma.getInt, 2)
     homePanel1.triggerEffect()
     assertEquals(testPlayer1.norma.getInt, 2)
-    testPlayer1.objective_("victories")
+    testPlayer1.objective_=("victories")
     testPlayer1.increaseVictories(testPlayer2)
     testPlayer1.increaseVictories(testPlayer2)
     homePanel1.triggerEffect()
@@ -79,7 +79,7 @@ class HomePanelTest extends munit.FunSuite{
     homePanel1.addCharacter(testPlayer1)
     homePanel1.triggerEffect()
     assertEquals(testPlayer1.currentHP, 10)
-    testPlayer1.varyCurrentHP(-5)
+    testPlayer1.currentHP = (testPlayer1.currentHP  -5)
     homePanel1.triggerEffect()
     assertEquals(testPlayer1.currentHP, 6)
     homePanel1.triggerEffect()

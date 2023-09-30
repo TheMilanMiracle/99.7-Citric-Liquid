@@ -15,7 +15,7 @@ class RoboBall extends WildUnit {
    * to not surpass it when healing the unit
    *
    */
-  val maxHP: Int = 3
+  val _maxHP: Int = 3
 
   /** Current hp of the unit
    *
@@ -24,7 +24,7 @@ class RoboBall extends WildUnit {
    * the class
    *
    */
-  var _currentHP: Int = maxHP
+  var _currentHP: Int = _maxHP
 
   /** Base attack of the unit
    *

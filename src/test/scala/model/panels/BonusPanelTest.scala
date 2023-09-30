@@ -24,7 +24,7 @@ class BonusPanelTest extends munit.FunSuite{
     testPlayer2 = new PlayerCharacter("test player2", 1, 1, 1, 1, 2)
   }
 
-  test("any kind of panel has to have its attributes well defined") {
+  test("any kind of panel has to have its attributes well defined and their getters work correctly") {
     assertEquals(bonusPanel.characters, c)
     assertEquals(bonusPanel.nextPanels, np)
     assertEquals(bonusPanel.position, p)
@@ -64,7 +64,7 @@ class BonusPanelTest extends munit.FunSuite{
     assert(testPlayer1.stars <= ((6 * testPlayer1.norma.getInt) + ref) || testPlayer1.stars <= ((6 * 3) + ref))
 
     ref = testPlayer1.stars
-    testPlayer1.norma_(new NormaLevel3)
+    testPlayer1.norma_=(new NormaLevel3)
     bonusPanel.triggerEffect()
 
     assert(ref < testPlayer1.stars)

@@ -33,6 +33,10 @@ and the classes of the norma levels themselves. Finally, I created a last test f
 first one being the starting level and the last one the winning one, and
 be able to return any normaLevel next level and check if a level is the last one in the list, so I made a tests for this as well to implement it later.
 
+##Tarea 2
+For this assignment, the first thing to do was to create new getters and setter for the attributes of the basic entities, for this, first i updated the tests for the Game Units
+to then implement this new getters and setters(for vars)
+
 <div style="text-align:center;">
     <img src="https://i.creativecommons.org/l/by/4.0/88x31.png" alt="Creative Commons License">
 </div>

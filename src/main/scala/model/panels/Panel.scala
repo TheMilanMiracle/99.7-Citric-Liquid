@@ -13,6 +13,7 @@ import scala.collection.mutable.ArrayBuffer
   * structures.
   *
   * A panel should be able to:
+  * - get its position on the board, a copy of its players and a copy of its next panels
   * - Hold one or more players
   * - Be able to add and remove a player from the panel
   *
@@ -20,30 +21,23 @@ import scala.collection.mutable.ArrayBuffer
   * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
   */
 trait Panel {
-
-  /** Array of the characters currently positioned on this panel.
-    *
-    * In the game, multiple characters might be on the same panel at once, e.g., if multiple players
-    * land on the same spaces
-    *
-    */
-  val characters: ArrayBuffer[PlayerCharacter]
-
-  /** An array of panels that are directly positioned next to this one
+  /** returns the panels next to this one (not modifiable)
    *
-   * In the context of the game, multiple routes or paths may exist, this could represent the
-   * possible next steps a player might take after being on this panel.
-   *
+   * @return an array buffer of panels, this are the ones positioned next to this one
    */
-  var nextPanels: ArrayBuffer[Panel]
+  def nextPanels: ArrayBuffer[Panel]
 
-  /** The position of the panel on the board
+  /** returns the position of the panel
    *
-   *  every panel has its own unique position in the board that has to be defines at
-   *  the beginning of a game
-   *
+   * @return an integer representing the position of the panel in the board
    */
-  var position: Int
+  def position: Int
+
+  /** returns the characters on the panel
+   *
+   * @return an array buffer of PlayerCharacters representing the characters currently on the panel
+   */
+  def characters: ArrayBuffer[PlayerCharacter]
 
   /** Adds a character to the list of characters currently on this panel.
     *

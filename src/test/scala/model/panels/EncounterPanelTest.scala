@@ -22,7 +22,7 @@ class EncounterPanelTest extends munit.FunSuite {
     testPlayer2 = new PlayerCharacter("test player2", 1, 1, 1, 1, 2)
   }
 
-  test("any kind of panel has to have its attributes well defined") {
+  test("any kind of panel has to have its attributes well defined and their getters work correctly") {
     assertEquals(encounterPanel.characters, c)
     assertEquals(encounterPanel.nextPanels, np)
     assertEquals(encounterPanel.position, p)

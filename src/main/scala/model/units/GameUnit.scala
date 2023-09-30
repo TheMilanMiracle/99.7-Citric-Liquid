@@ -9,67 +9,35 @@ package model.units
  *
  * For instance, game units can:
  *
- * - Vary and return their own current HP
- * - return and vary their own stars
- * - return their own name
+ * - get their basics stats HP, attack, defense, evasion and its name
+ * - get and set their current HP, maintaining the value between 0 and maxHP
+ * - get and set their current number of stars
+ *
  *
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
 trait GameUnit {
-  /** Maximum health the unit can have
+  /** Returns the maxHP of the unit
    *
-   *  In the context of the game, units can be healed, this attributes is useful
-   *  to not surpass it when healing the unit
-   *
-   */
-  val maxHP: Int
+   * @return an integer representing the maximum HP the unit can have */
+  def maxHP: Int
 
-  /** Current hp of the unit
+  /** Returns the current HP of the unit
    *
-   *  Units health can vary when a combat with another Unit is initiated
-   *  its value is initiated with the maxHp declared at the constructor of
-   *  the class
+   * its value only can be between 0 and the maxHP of the unit
    *
+   * @return an integer representing the current HP of the unit
    */
-  var _currentHP: Int
+  def currentHP: Int
 
-  /** Base attack of the unit
+  /** sets the current star of the unit to a given number
    *
-   *  It defines the damage dealing capacities of a unit
+   * in case the given number is out of range, the set value will be
+   * modified to do so
    *
+   * @param n an integer representing the new number of stars of the unit
    */
-  val _attack: Int
-
-  /** Base defense of the unit
-   *
-   *  It defines damage mitigation capacities of a unit
-   *
-   */
-  val _defense: Int
-
-  /** Base evasion of the unit
-   *
-   *  It defines the capacity of the unit of completely avoid certain attacks
-   *
-   */
-  val _evasion: Int
-
-  /** The name of the unit
-   *
-   *  Every unit has a name, in the case of player character it has to be unique,
-   *  in the case of wild units it has to be one of the ones that are
-   *  available in the game
-   *
-   */
-  val _name: String
-
-  /** Stars that the Unit has
-   *
-   * Units can holds stars and the number can vary depending on the
-   * outcome of combats with other Units, the stars start at 0
-   *
-   */
-  var _stars: Int
+  def currentHP_=(n: Int): Unit
 
   /**Returns the attack of the unit
   *
@@ -86,39 +54,20 @@ trait GameUnit {
    * @return an integer representing the evasion of the unit */
   def evasion: Int
 
-  /** A Unit can vary their own current hp
-   *
-   * In the context of the game, any game unit can engage
-   * combat, so it is required that they can vary their own current hp
-   *
-   * this variable can NOT be less than zero or over the unit maxHP
-   */
-  def varyCurrentHP(delta: Int): Unit
-
-  /** Returns the current HP of the unit
-   *
-   * @return the current HP of the unit
-   */
-  def currentHP: Int
-
   /** Returns the quantity of stars that the unit currently has
    *
-   * @return the current stars of the unit
+   * @return an integer representing the current stars of the unit
    */
   def stars: Int
 
-  /** A Unit can vary their own current hp
+  /** Changes the current stars of the units
    *
-   * In the context of the game, any game unit can engage
-   * combat, so it is required that they can vary their own current hp
-   *
-   * this variable can NOT be less than zero or over the unit maxHP
-   */
-  def varyStars(delta:Int): Unit
+   * @param n an integer representing the new quantity of stars */
+  def stars_=(n: Int): Unit
 
   /** Returns the name of the game unit
    *
-   * @return the name of the unit
+   * @return a string representing the name of the unit
    */
   def name: String
 

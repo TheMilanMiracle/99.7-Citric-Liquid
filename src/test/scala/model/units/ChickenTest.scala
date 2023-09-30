@@ -36,33 +36,30 @@ class ChickenTest extends munit.FunSuite{
     assertEquals(chicken.name, chickenName)
   }
 
-  test("Any type of Game Unit should be able to correctly return their ATK, DEF and EVA") {
+  test("a game unit should be able to get their basics stats HP, attack, defense, evasion and its name") {
+    assertEquals(chicken.maxHP, chickenMaxHp)
     assertEquals(chicken.attack, chickenAttack)
     assertEquals(chicken.defense, chickenDefense)
     assertEquals(chicken.evasion, chickenEvasion)
+    assertEquals(chicken.name, chickenName)
   }
 
-  test("Any type of Game Unit should be able to vary and return their own currentHP") {
-    chicken.varyCurrentHP(-2)
-    assertEquals(chicken.currentHP, 1)
-    chicken.varyCurrentHP(1)
+  test("a game unit should be able to get and set their current HP, maintaining the value between 0 and maxHP") {
+    chicken.currentHP = 2
     assertEquals(chicken.currentHP, 2)
-    chicken.varyCurrentHP(15)
+    chicken.currentHP = 1
+    assertEquals(chicken.currentHP, 1)
+    chicken.currentHP = 10
     assertEquals(chicken.currentHP, chickenMaxHp)
-    chicken.varyCurrentHP(-15)
+    chicken.currentHP = -4
     assertEquals(chicken.currentHP, 0)
   }
 
   test("Any type of game unit should be able to return and vary their current quantity of stars") {
-    var s = chicken.stars
-    assertEquals(chicken.stars, s)
-    chicken.varyStars(15)
+    assertEquals(chicken.stars, 0)
+    chicken.stars = (15)
     assertEquals(chicken.stars, 15)
-    chicken.varyStars(-5)
+    chicken.stars = (chicken.stars - 5)
     assertEquals(chicken.stars, 10)
-  }
-
-  test("Any type of game unit should be able to return their own name") {
-    assertEquals(chicken.name, chickenName)
   }
 }

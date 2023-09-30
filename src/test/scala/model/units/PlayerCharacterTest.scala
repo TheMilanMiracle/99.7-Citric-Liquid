@@ -45,34 +45,31 @@ class PlayerCharacterTest extends munit.FunSuite {
     assertEquals(character.objective, objective)
   }
 
-  test("Any type of Game Unit should be able to correctly return their ATK, DEF and EVA"){
+  test("a game unit should be able to get their basics stats HP, attack, defense, evasion and its name"){
+    assertEquals(character.maxHP, maxHp)
     assertEquals(character.attack, attack)
     assertEquals(character.defense, defense)
     assertEquals(character.evasion, evasion)
+    assertEquals(character.name, name)
   }
 
-  test("Any type of Game Unit should be able to vary and return their own currentHP"){
-    character.varyCurrentHP(-5)
+  test("a game unit should be able to get and set their current HP, maintaining the value between 0 and maxHP"){
+    character.currentHP = 5
     assertEquals(character.currentHP, 5)
-    character.varyCurrentHP(3)
-    assertEquals(character.currentHP, 8)
-    character.varyCurrentHP(15)
-    assertEquals(character.currentHP, maxHp)
-    character.varyCurrentHP(-15)
+    character.currentHP = 6
+    assertEquals(character.currentHP, 6)
+    character.currentHP = 12
+    assertEquals(character.currentHP, 10)
+    character.currentHP = -4
     assertEquals(character.currentHP, 0)
   }
 
   test("Any type of game unit should be able to return and vary their current quantity of stars"){
-    var s = character.stars
-    assertEquals(character.stars, s)
-    character.varyStars(15)
+    assertEquals(character.stars, 0)
+    character.stars = (15)
     assertEquals(character.stars, 15)
-    character.varyStars(-5)
+    character.stars = (character.stars -5)
     assertEquals(character.stars, 10)
-  }
-
-  test("Any type of game unit should be able to return their own name"){
-    assertEquals(character.name, name)
   }
 
   test("A player character should be able to return his home panel position"){
@@ -94,21 +91,21 @@ class PlayerCharacterTest extends munit.FunSuite {
   test("A player should be able to return and change their own norma") {
     val normaList = new NormaList()
     assertEquals(character.norma.getInt, (new NormaLevel1).getInt)
-    character.norma_(normaList.next(character.norma))
+    character.norma_=(normaList.next(character.norma))
     assertEquals(character.norma.getInt, (new NormaLevel2).getInt)
-    character.norma_(normaList.next(character.norma))
+    character.norma_=(normaList.next(character.norma))
     assertEquals(character.norma.getInt, (new NormaLevel3).getInt)
-    character.norma_(normaList.next(character.norma))
+    character.norma_=(normaList.next(character.norma))
     assertEquals(character.norma.getInt, (new NormaLevel4).getInt)
-    character.norma_(normaList.next(character.norma))
+    character.norma_=(normaList.next(character.norma))
     assertEquals(character.norma.getInt, (new NormaLevel5).getInt)
   }
 
   test("A player should be able to return and change his current objective"){
     assertEquals(character.objective, "init")
-    character.objective_("victories")
+    character.objective_=("victories")
     assertEquals(character.objective, "victories")
-    character.objective_("stars")
+    character.objective_=("stars")
     assertEquals(character.objective, "stars")
 
   }

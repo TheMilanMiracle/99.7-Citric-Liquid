@@ -23,7 +23,7 @@ import scala.util.Random
   * generation behaviors are desired.
   *
   * @param _name The name of the player. This is an identifier and should be unique.
-  * @param maxHP The maximum health points a player can have. It represents the player's endurance.
+  * @param _maxHP The maximum health points a player can have. It represents the player's endurance.
   * @param _attack The player's capability to deal damage to opponents.
   * @param _defense The player's capability to resist or mitigate damage from opponents.
   * @param _evasion The player's skill to completely avoid certain attacks.
@@ -38,7 +38,7 @@ import scala.util.Random
   * @author [[https://github.com/TheMilanMiracle/ Luciano Márquez C.]]
   */
 class PlayerCharacter(val _name: String,
-                      val maxHP: Int,
+                      val _maxHP: Int,
                       val _attack: Int,
                       val _defense: Int,
                       val _evasion: Int,
@@ -51,7 +51,7 @@ class PlayerCharacter(val _name: String,
    * the class
    *
    */
-  var _currentHP: Int = maxHP
+  var _currentHP: Int = _maxHP
 
   /** The position of the home panel that this player owns
    *
@@ -130,7 +130,7 @@ class PlayerCharacter(val _name: String,
    *
    * @param norma the new norma level of the player
    */
-  def norma_(norma: Norma): Unit = this._norma = norma
+  def norma_=(norma: Norma): Unit = this._norma = norma
 
   /** return the current objective of the player
    *
@@ -142,7 +142,7 @@ class PlayerCharacter(val _name: String,
    *
    * @param obj objective that will be set
    */
-  def objective_(obj: String): Unit = {
+  def objective_=(obj: String): Unit = {
     this._objective = obj
   }
 
