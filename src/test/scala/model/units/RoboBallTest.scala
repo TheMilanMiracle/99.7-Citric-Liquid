@@ -62,4 +62,32 @@ class RoboBallTest extends munit.FunSuite {
     roboBall.stars = (roboBall.stars - 5)
     assertEquals(roboBall.stars, 10)
   }
+
+  test("A game unit should be able to roll a dice") {
+    var i = 0
+    while (i < 5) {
+      assert(roboBall.rollDice >= 1 && roboBall.rollDice <= 6)
+      i += 1
+    }
+  }
+
+  test("A game unit should be able to attack another one") {
+    val combatTest: GameUnit = new PlayerCharacter("combat test", 10, 3, 3, 3, 1)
+
+    val ret: Int = roboBall.attack(combatTest)
+    assert(ret >= roboBall.attack + 1 && ret <= roboBall.attack + 6)
+  }
+  test("A game unit should be able to defend itself from another one") {
+    val combatTest: GameUnit = new PlayerCharacter("combat test", 10, 3, 3, 3, 1)
+
+    val ret: Int = roboBall.defend(combatTest)
+    assert(ret >= roboBall.defense + 1 && ret <= roboBall.defense + 6)
+  }
+
+  test("A game unit should be able to try to avoid an attack from another one") {
+    val combatTest: GameUnit = new PlayerCharacter("combat test", 10, 3, 3, 3, 1)
+
+    val ret: Int = roboBall.evade(combatTest)
+    assert(ret >= roboBall.evasion + 1 && ret <= roboBall.evasion + 6)
+  }
 }

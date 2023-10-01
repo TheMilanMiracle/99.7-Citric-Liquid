@@ -1,13 +1,14 @@
 package cl.uchile.dcc.citric
 package model.units
 
+import scala.util.Random
+
 /** An abstract class that implements common behaviour between Game Units
  *
  *  it implements the next common behaviours:
  * - a game unit can get their basics stats HP, attack, defense, evasion and its name
  * - a game unit can get and set their current HP, maintaining the value between 0 and maxHP
  * - a game unit can get and set their current number of stars
- *
  *
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
@@ -66,7 +67,7 @@ abstract class abstractGameUnit extends GameUnit {
    * Any kind of unit starts with 0 stars
    *
    */
-  protected var _stars: Int = 0
+  private[this] var _stars: Int = 0
 
   /** Returns the maxHP of the unit
    *
@@ -125,4 +126,46 @@ abstract class abstractGameUnit extends GameUnit {
    * @return a string representing the name of the unit
    */
   def name: String = {this._name}
+
+  /** Rolls a dice and returns a value between 1 to 6 representing the faces of a dice
+   *
+   * @return an int between 1-6 (including 1 and 6)
+   */
+  def rollDice(): Int = {Random.between(1,7)}
+
+  /** Method that allows a game Unit to attack another one
+   *
+   * the damage depends on a dice roll and the unit attack stat
+   *
+   * @return an integer representing how much raw damage the unit will make
+   */
+  def attack(gu: GameUnit): Int = {
+    val roll_attack = this.rollDice()
+
+    this.attack + roll_attack
+  }
+
+  /** Method that allows a game Unit to defend itself from an attack
+   *
+   * the damage absorbed depends on a dice roll and the unit defense stat
+   *
+   * @return an integer representing how much damage the unit will not receive from the attack
+   */
+  def defend(gu: GameUnit): Int = {
+    val roll_defense = this.rollDice()
+
+    this.defense + roll_defense
+  }
+
+  /** Method that allows a game Unit to evade an attack from another one
+   *
+   * the capability of evading an attack depends on a dice roll an the unit evasion stat
+   *
+   * @return an integer representing how much capability of evading the attack the unit has
+   */
+  def evade(gu: GameUnit): Int = {
+    val roll_evasion = this.rollDice()
+
+    this.evasion + roll_evasion
+  }
 }

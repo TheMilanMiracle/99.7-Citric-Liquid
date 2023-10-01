@@ -71,4 +71,33 @@ trait GameUnit {
    */
   def name: String
 
+  /** Rolls a dice and returns a value between 1 to 6 representing the faces of a dice
+   *
+   * @return an int between 1-6 (including 1 and 6)
+   */
+  def rollDice(): Int
+
+  /** Method that allows a game Unit to attack another one
+   *
+   * the damage depends on a dice roll and the unit attack stat
+   *
+   * @return an integer representing how much raw damage the unit will make
+   */
+  def attack(gu: GameUnit): Int
+
+  /** Method that allows a game Unit to defend itself from an attack
+   *
+   * the damage absorbed depends on a dice roll and the unit defense stat
+   *
+   * @return an integer representing how much damage the unit will not receive from the attack
+   */
+  def defend(gu: GameUnit): Int
+
+  /** Method that allows a game Unit to evade an attack from another one
+   *
+   * the capability of evading an attack depends on a dice roll an the unit evasion stat
+   *
+   * @return an integer representing how much capability of evading the attack the unit has
+   */
+  def evade(gu: GameUnit): Int
 }

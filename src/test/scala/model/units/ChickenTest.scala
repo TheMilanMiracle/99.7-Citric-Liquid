@@ -62,4 +62,33 @@ class ChickenTest extends munit.FunSuite{
     chicken.stars = (chicken.stars - 5)
     assertEquals(chicken.stars, 10)
   }
+
+  test("A game unit should be able to roll a dice") {
+    var i = 0
+    while (i < 5) {
+      assert(chicken.rollDice >= 1 && chicken.rollDice <= 6)
+      i += 1
+    }
+  }
+
+  test("A game unit should be able to attack another one") {
+    val combatTest: GameUnit = new PlayerCharacter("combat test", 10, 3, 3, 3, 1)
+
+    val ret: Int = chicken.attack(combatTest)
+    assert(ret >= chicken.attack + 1 && ret <= chicken.attack + 6)
+  }
+
+  test("A game unit should be able to defend itself from another one") {
+    val combatTest: GameUnit = new PlayerCharacter("combat test", 10, 3, 3, 3, 1)
+
+    val ret: Int = chicken.defend(combatTest)
+    assert(ret >= chicken.defense + 1 && ret <= chicken.defense + 6)
+  }
+
+  test("A game unit should be able to try to avoid an attack from another one") {
+    val combatTest: GameUnit = new PlayerCharacter("combat test", 10, 3, 3, 3, 1)
+
+    val ret: Int = chicken.evade(combatTest)
+    assert(ret >= chicken.evasion + 1 && ret <= chicken.evasion + 6)
+  }
 }

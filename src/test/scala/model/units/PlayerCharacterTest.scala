@@ -12,26 +12,25 @@ class PlayerCharacterTest extends munit.FunSuite {
   private val defense = 2
   private val evasion = 3
   private val homePos = 4
-  private var randomNumberGenerator = new Random(11)
 
   private var norma = new NormaLevel1
   private var objective = "init"
 
-  private var character: PlayerCharacter = new PlayerCharacter(name, maxHp, attack, defense, evasion, homePos, randomNumberGenerator)
+  private var character: PlayerCharacter = new PlayerCharacter(name, maxHp, attack, defense, evasion, homePos)
 
   override def beforeEach(context: BeforeEach): Unit = {
-    randomNumberGenerator = new Random(11)
     character = new PlayerCharacter(
       name,
       maxHp,
       attack,
       defense,
       evasion,
-      homePos,
-      randomNumberGenerator
+      homePos
     )
   }
 
+
+  /** Game Unit tests */
   test("A character should have correctly set their attributes") {
     assertEquals(character.name, name)
     assertEquals(character.maxHP, maxHp)
@@ -72,6 +71,36 @@ class PlayerCharacterTest extends munit.FunSuite {
     assertEquals(character.stars, 10)
   }
 
+  test("A game unit should be able to roll a dice") {
+    var i = 0
+    while (i < 5) {
+      assert(character.rollDice >= 1 && character.rollDice <= 6)
+      i += 1
+    }
+  }
+
+  test("A game unit should be able to attack another one") {
+    val combatTest: GameUnit = new PlayerCharacter("combat test", 10, 3, 3, 3, 1)
+
+    val ret: Int = character.attack(combatTest)
+    assert(ret >= character.attack + 1 && ret <= character.attack + 6)
+  }
+
+  test("A game unit should be able to defend itself from another one") {
+    val combatTest: GameUnit = new PlayerCharacter("combat test", 10, 3, 3, 3, 1)
+
+    val ret: Int = character.defend(combatTest)
+    assert(ret >= character.defense + 1 && ret <= character.defense + 6)
+  }
+
+  test("A game unit should be able to try to avoid an attack from another one") {
+    val combatTest: GameUnit = new PlayerCharacter("combat test", 10, 3, 3, 3, 1)
+
+    val ret: Int = character.evade(combatTest)
+    assert(ret >= character.evasion + 1 && ret <= character.evasion + 6)
+  }
+
+  /**Player Character Tests*/
   test("A player character should be able to return his home panel position"){
     assertEquals(character.homePanel, homePos)
   }
@@ -108,13 +137,5 @@ class PlayerCharacterTest extends munit.FunSuite {
     character.objective_=("stars")
     assertEquals(character.objective, "stars")
 
-  }
-
-  test("A character should be able to roll a dice") {
-    var i = 0
-    while (i < 5) {
-      assert(character.rollDice >= 1 && character.rollDice <= 6)
-      i += 1
-    }
   }
 }

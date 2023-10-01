@@ -4,7 +4,7 @@ package model.panels
 import cl.uchile.dcc.citric.model.units.{Chicken, GameUnit, WildUnit, PlayerCharacter, RoboBall, Seagull}
 
 import scala.collection.mutable.ArrayBuffer
-import scala.util.Random.between
+import scala.util.Random
 
 /** This class represent the Encounter type of panel
  *
@@ -47,7 +47,7 @@ class EncounterPanel(val _nextPanels: ArrayBuffer[Panel], val _position: Int) ex
    * @return a random wild unit, it could be a chicken, robo ball or seagull
    */
   def spawnWildUnit(): WildUnit = {
-    val rand: Int = between(1,4)
+    val rand: Int = Random.between(1,4)
 
     if(rand == 1) new Chicken()
     if(rand == 2) new RoboBall()

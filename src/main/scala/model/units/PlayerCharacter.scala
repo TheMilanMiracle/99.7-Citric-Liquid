@@ -28,8 +28,7 @@ import scala.util.Random
   * @param _defense The player's capability to resist or mitigate damage from opponents.
   * @param _evasion The player's skill to completely avoid certain attacks.
   * @param homePos The player's home panel position on the board
-  * @param randomNumberGenerator A utility to generate random numbers. Defaults to a new `Random`
-  *                              instance.
+  *
   *
   * @author [[https://github.com/danielRamirezL/ Daniel Ramírez L.]]
   * @author [[https://github.com/joelriquelme/ Joel Riquelme P.]]
@@ -42,8 +41,7 @@ class PlayerCharacter(val _name: String,
                       val _attack: Int,
                       val _defense: Int,
                       val _evasion: Int,
-                      homePos: Int,
-                      val randomNumberGenerator: Random = new Random()) extends abstractGameUnit {
+                      homePos: Int) extends abstractGameUnit {
   /** Current hp of the unit
    *
    * Units health can vary when a combat with another Unit is initiated
@@ -144,13 +142,5 @@ class PlayerCharacter(val _name: String,
    */
   def objective_=(obj: String): Unit = {
     this._objective = obj
-  }
-
-  /** Rolls a dice and returns a value between 1 to 6 representing the faces of a dice
-   *
-   * @return an int between 1-6 (including 1 and 6)
-   */
-  def rollDice(): Int = {
-    randomNumberGenerator.nextInt(6) + 1
   }
 }
