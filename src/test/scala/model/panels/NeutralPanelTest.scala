@@ -54,9 +54,9 @@ class NeutralPanelTest extends munit.FunSuite{
     val starsBefore2 = testPlayer2.stars
 
     neutralPanel.addCharacter(testPlayer1)
-    neutralPanel.triggerEffect()
+    neutralPanel.apply()
     neutralPanel.addCharacter(testPlayer2)
-    neutralPanel.triggerEffect()
+    neutralPanel.apply()
     assertEquals(testPlayer1.stars, starsBefore1)
     assertEquals(testPlayer2.stars, starsBefore2)
   }

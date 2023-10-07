@@ -25,7 +25,7 @@ class DropPanel(val _nextPanels: ArrayBuffer[Panel], val _position: Int) extends
    * and make him lose a number of stars equals to roll * norma
    *
    */
-  def triggerEffect(): Unit = {
+  def apply(): Unit = {
     val lastplayer: PlayerCharacter = this.characters(characters.size - 1)
     val roll: Int = lastplayer.rollDice()
 

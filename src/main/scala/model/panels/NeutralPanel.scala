@@ -21,6 +21,6 @@ class NeutralPanel(val _nextPanels: ArrayBuffer[Panel], val _position: Int) exte
    * his turn will end with no changes
    *
    */
-  def triggerEffect(): Unit = {}
+  def apply(): Unit = {}
 
 }

@@ -33,7 +33,7 @@ class EncounterPanel(val _nextPanels: ArrayBuffer[Panel], val _position: Int) ex
    * a random wild unit
    *
    */
-  def triggerEffect(): Unit = {
+  def apply(): Unit = {
     //val lastplayer: PlayerCharacter = this.characters(characters.size - 1)
 
     //startFight(lastplayer, wildUnit) //combat is not yet implemented

@@ -29,7 +29,7 @@ class HomePanel(val _nextPanels: ArrayBuffer[Panel], val _position: Int) extends
    * his norma level)
    *
    */
-  def triggerEffect(): Unit = {
+  def apply(): Unit = {
     val lastplayer: PlayerCharacter = this.characters(characters.size - 1)
     val norma = lastplayer.norma
     val normaList = new NormaList()

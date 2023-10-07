@@ -70,6 +70,6 @@ class EncounterPanelTest extends munit.FunSuite {
     /**
      * combat is not yet implemented :s
      */
-    encounterPanel.triggerEffect()
+    encounterPanel.apply()
   }
 }

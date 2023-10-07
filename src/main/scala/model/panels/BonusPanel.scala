@@ -27,7 +27,7 @@ class BonusPanel(val _nextPanels: ArrayBuffer[Panel], val _position:Int) extends
    * the player will win min(roll * norma, roll * 3) stars
    *
    */
-  def triggerEffect(): Unit = {
+  def apply(): Unit = {
     val lastplayer: PlayerCharacter = this.characters(characters.size - 1)
     val roll: Int = lastplayer.rollDice()
 

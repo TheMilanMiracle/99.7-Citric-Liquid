@@ -52,12 +52,12 @@ class DropPanelTest extends munit.FunSuite {
     testPlayer1.stars = (50)
     var ref: Int = testPlayer1.stars
     dropPanel.addCharacter(testPlayer1)
-    dropPanel.triggerEffect()
+    dropPanel.apply()
     assert(testPlayer1.stars < ref)
     assert(testPlayer1.stars <= (ref - testPlayer1.norma.getInt))
 
     ref = testPlayer1.stars
-    dropPanel.triggerEffect()
+    dropPanel.apply()
     assert(testPlayer1.stars < ref)
     assert(testPlayer1.stars <= (ref - testPlayer1.norma.getInt))
   }

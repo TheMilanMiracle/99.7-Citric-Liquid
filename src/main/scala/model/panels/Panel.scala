@@ -62,5 +62,5 @@ trait Panel {
    *  This method will trigger a different effect depending on the type of the panel
    *
    */
-  def triggerEffect(): Unit
+  def apply (): Unit
 }
