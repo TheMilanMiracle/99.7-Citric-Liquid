@@ -105,16 +105,22 @@ class PlayerCharacterTest extends munit.FunSuite {
     assertEquals(character.homePanel, homePos)
   }
 
-  test("A player character should be able to return and increase their own victories, depending on what kind of game unit they defeated"){
+  test("A player character should be able to get and set their own victories"){
     var v = character.victories
+
     assertEquals(character.victories, v)
-    character.increaseVictories(new Seagull)
-    assertEquals(character.victories, 1)
-    character.increaseVictories(new RoboBall)
-    assertEquals(character.victories, 2)
-    character.increaseVictories(new Chicken)
-    assertEquals(character.victories, 3)
-    character.increaseVictories(new PlayerCharacter("test character",1,1,1,1,1))
+    character.victories = 1
+    assertEquals(character.victories, v + 1)
+    character.victories = 3
+    assertEquals(character.victories, v + 3)
+  }
+
+  test("A wild unit should be able to increase a player's victories by 2") {
+    val testPlayer = new PlayerCharacter("testchar1", 1, 1, 1, 1, 1)
+    character.increaseVictoriesTo(testPlayer)
+    assertEquals(testPlayer.victories, 2)
+    character.increaseVictoriesTo(testPlayer)
+    assertEquals(testPlayer.victories, 4)
   }
 
   test("A player should be able to return and change their own norma") {

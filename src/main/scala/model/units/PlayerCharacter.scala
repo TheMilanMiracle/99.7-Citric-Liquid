@@ -100,22 +100,21 @@ class PlayerCharacter(val _name: String,
    */
   def victories: Int = this._victories
 
-  /** Increases number of victories after winning a combat against a wild unit
+  /** Changes the current victories of the player
    *
-   * In the context of the game, this value should increase in 1 if
-   * the player defeated a wilds unit
+   * @param v the new victories that the player will have
    */
-  def increaseVictories(wildUnit: WildUnit): Unit = {
-    this._victories += 1
-  }
+  def victories_=(v: Int): Unit = this._victories = v
 
-  /** Increases number of victories after winning a combat against a wild unit
+  /** Method that allows a unit to increase the victories of another one
    *
-   * In the context of the game, this value should increase in 2 if
-   * the player defeated another player
+   * in the context of a game this method is meant to be used after a combat is finished,
+   * and this is the only ways this variable from player characters is increased/changed
+   *
+   * when a player increases the victories of another player, this value is incremented by 2
    */
-  def increaseVictories(playerCharacter: PlayerCharacter): Unit = {
-    this._victories += 2
+  def increaseVictoriesTo(p: PlayerCharacter):Unit = {
+    p.victories = (p.victories + 2)
   }
 
   /** Returns the current norma level of the player

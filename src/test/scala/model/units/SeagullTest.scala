@@ -91,5 +91,12 @@ class SeagullTest extends munit.FunSuite{
     val ret: Int = seagull.evade(combatTest)
     assert(ret >= seagull.evasion + 1 && ret <= seagull.evasion + 6)
   }
+
+  test("A wild unit should be able to increase a player's victories by 1") {
+    seagull.increaseVictoriesTo(testPlayer)
+    assertEquals(testPlayer.victories, 1)
+    seagull.increaseVictoriesTo(testPlayer)
+    assertEquals(testPlayer.victories, 2)
+  }
 }
 

@@ -100,4 +100,11 @@ trait GameUnit {
    * @return an integer representing how much capability of evading the attack the unit has
    */
   def evade(gu: GameUnit): Int
+
+  /** Method that allows a unit to increase the victories of another one
+   *
+   * in the context of a game this method is meant to be used after a combat is finished,
+   * and this is the only ways this variable from player characters is increased/changed
+   */
+  def increaseVictoriesTo(p: PlayerCharacter): Unit
 }

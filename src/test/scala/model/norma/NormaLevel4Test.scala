@@ -17,16 +17,18 @@ class NormaLevel4Test extends munit.FunSuite {
   }
 
   test("Every level of norma should be able to return if a player meets the requirements to level up his norma"){
+    val testPlayer2 = new PlayerCharacter("test2",1,1,1,1,1)
+
     testPlayer.stars = (119)
-    testPlayer.increaseVictories(testPlayer)
-    testPlayer.increaseVictories(testPlayer)
-    testPlayer.increaseVictories(testPlayer)
-    testPlayer.increaseVictories(testPlayer)
-    testPlayer.increaseVictories(new Chicken)
+    testPlayer2.increaseVictoriesTo(testPlayer)
+    testPlayer2.increaseVictoriesTo(testPlayer)
+    testPlayer2.increaseVictoriesTo(testPlayer)
+    testPlayer2.increaseVictoriesTo(testPlayer)
+    (new Chicken).increaseVictoriesTo(testPlayer)
     assertEquals(norma.normaCheck(testPlayer.stars, "stars"),false)
     assertEquals(norma.normaCheck(testPlayer.victories, "victories"), false)
     testPlayer.stars = (testPlayer.stars + 1)
-    testPlayer.increaseVictories(new Chicken)
+    (new Chicken).increaseVictoriesTo(testPlayer)
     assertEquals(norma.normaCheck(testPlayer.stars, "stars"), true)
     assertEquals(norma.normaCheck(testPlayer.victories, "victories"), true)
   }

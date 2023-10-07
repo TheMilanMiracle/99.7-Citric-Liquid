@@ -8,7 +8,7 @@ package model.units
  *
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
-class Seagull extends WildUnit {
+class Seagull extends abstractWildUnit {
   /** Maximum health the unit can have
    *
    * In the context of the game, units can be healed, this attributes is useful

@@ -91,4 +91,11 @@ class ChickenTest extends munit.FunSuite{
     val ret: Int = chicken.evade(combatTest)
     assert(ret >= chicken.evasion + 1 && ret <= chicken.evasion + 6)
   }
+
+  test("A wild unit should be able to increase a player's victories by 1"){
+    chicken.increaseVictoriesTo(testPlayer)
+    assertEquals(testPlayer.victories, 1)
+    chicken.increaseVictoriesTo(testPlayer)
+    assertEquals(testPlayer.victories, 2)
+  }
 }

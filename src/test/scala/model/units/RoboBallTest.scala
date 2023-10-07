@@ -90,4 +90,11 @@ class RoboBallTest extends munit.FunSuite {
     val ret: Int = roboBall.evade(combatTest)
     assert(ret >= roboBall.evasion + 1 && ret <= roboBall.evasion + 6)
   }
+
+  test("A wild unit should be able to increase a player's victories by 1") {
+    roboBall.increaseVictoriesTo(testPlayer)
+    assertEquals(testPlayer.victories, 1)
+    roboBall.increaseVictoriesTo(testPlayer)
+    assertEquals(testPlayer.victories, 2)
+  }
 }

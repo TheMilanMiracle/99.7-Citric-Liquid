@@ -21,7 +21,7 @@ class NormaLevel1Test extends munit.FunSuite {
     assertEquals(norma.normaCheck(testPlayer.stars, "stars"), false)
     assertEquals(norma.normaCheck(testPlayer.victories, "victories"), false)
     testPlayer.stars = ( testPlayer.stars + 1)
-    testPlayer.increaseVictories(new Chicken)
+    (new Chicken).increaseVictoriesTo(testPlayer)
     assertEquals(norma.normaCheck(testPlayer.stars, "stars"), true)
     assertEquals(norma.normaCheck(testPlayer.victories, "victories"), true)
   }
