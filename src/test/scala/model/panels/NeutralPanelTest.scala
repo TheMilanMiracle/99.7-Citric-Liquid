@@ -6,31 +6,27 @@ import model.units.PlayerCharacter
 import scala.collection.mutable.ArrayBuffer
 
 class NeutralPanelTest extends munit.FunSuite{
-  val np: ArrayBuffer[Panel] = ArrayBuffer[Panel]()
-  val c: ArrayBuffer[PlayerCharacter] = ArrayBuffer[PlayerCharacter]()
   val p: Int = 1
-  var neutralPanel = new NeutralPanel(np, p)
+  var neutralPanel = new NeutralPanel(p)
   var testPlayer1: PlayerCharacter = new PlayerCharacter("test player1",1 ,1,1, 1, 1)
   var testPlayer2: PlayerCharacter = new PlayerCharacter("test player2",1 ,1,1, 1, 2)
 
   override def beforeEach(context: BeforeEach): Unit = {
-    val np: ArrayBuffer[Panel] = ArrayBuffer[Panel]()
-    val c: ArrayBuffer[PlayerCharacter] = ArrayBuffer[PlayerCharacter]()
     val p: Int = 1
-    neutralPanel = new NeutralPanel(np, p)
+    neutralPanel = new NeutralPanel(p)
     testPlayer1 = new PlayerCharacter("test player1", 1, 1, 1, 1, 1)
     testPlayer2 = new PlayerCharacter("test player2", 1, 1, 1, 1, 2)
   }
 
   test("any kind of panel has to have its attributes well defined and their getters work correctly"){
-    assertEquals(neutralPanel.characters, c)
-    assertEquals(neutralPanel.nextPanels, np)
+    assertEquals(neutralPanel.characters, ArrayBuffer[PlayerCharacter]())
+    assertEquals(neutralPanel.nextPanels, ArrayBuffer[Panel]())
     assertEquals(neutralPanel.position, p)
   }
 
   test("any kind of panel should be able to have one or more players in it"){
     neutralPanel.addCharacter(testPlayer1)
-    assertNotEquals(neutralPanel.characters, c)
+    assertNotEquals(neutralPanel.characters, ArrayBuffer[PlayerCharacter]())
     assertEquals(neutralPanel.characters.size, 1)
     assertEquals(neutralPanel.characters(0),testPlayer1)
     neutralPanel.removeCharacter(testPlayer2)
@@ -45,8 +41,21 @@ class NeutralPanelTest extends munit.FunSuite{
     assertEquals(neutralPanel.characters(0), testPlayer2)
     neutralPanel.removeCharacter(testPlayer2)
     assertEquals(neutralPanel.characters.size, 0)
-    assertEquals(neutralPanel.characters, c)
+    assertEquals(neutralPanel.characters, ArrayBuffer[PlayerCharacter]())
 
+  }
+
+  test("any kind of panel should be able to add and remove panels from their next panels list") {
+    val panel1 = new NeutralPanel(2)
+    val panel2 = new NeutralPanel(3)
+
+    neutralPanel.addPanel(panel1)
+    assertEquals(neutralPanel.nextPanels, ArrayBuffer[Panel](panel1))
+    neutralPanel.removePanel(panel1)
+    assertEquals(neutralPanel.nextPanels, ArrayBuffer[Panel]())
+    neutralPanel.addPanel(panel1)
+    neutralPanel.addPanel(panel2)
+    assertEquals(neutralPanel.nextPanels, ArrayBuffer[Panel](panel1, panel2))
   }
 
   test("the neutral kind of panel shouldn't have any effect on the player landing on it"){

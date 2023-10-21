@@ -16,6 +16,8 @@ import scala.util.Random
   * - return and change its own norma level
   * - return and increase their victories
   * - return an change their own objective
+  * - a PlayerCharacter can increase the victories of another PlayerCharacter
+  * - a PlayerCharacter can drop stars to a PlayerCharacter
   *
   * Furthermore, the `Player` class has a utility for generating random numbers,
   * which is primarily used for simulating dice rolls. By default, this utility is
@@ -115,6 +117,18 @@ class PlayerCharacter(val _name: String,
    */
   def increaseVictoriesTo(p: PlayerCharacter):Unit = {
     p.victories = (p.victories + 2)
+  }
+
+  /** Method that allow a unit to drop their stars to a PlayerCharacter
+   *
+   * when a player drop their stars to another he will drop half of the current stars
+   * to the other player
+   *
+   * @param player the player character that will gain the stars dropped
+   */
+  def dropStarsTo(player: PlayerCharacter): Unit = {
+    player.stars = player.stars + (this.stars/2)
+    this.stars /= 2
   }
 
   /** Returns the current norma level of the player

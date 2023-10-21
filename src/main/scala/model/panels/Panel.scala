@@ -16,6 +16,7 @@ import scala.collection.mutable.ArrayBuffer
   * - get its position on the board, a copy of its players and a copy of its next panels
   * - Hold one or more players
   * - Be able to add and remove a player from the panel
+  * - Be able to add and remove a panel from its next panels
   *
   * @author [[https://github.com/r8vnhill Ignacio Slater M.]]
   * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
@@ -44,7 +45,6 @@ trait Panel {
     * This method must be invoked when a player moves to this panel or starts their turn on it.
     *
     * @param player The player character to add to this panel.
-   *
     */
   def addCharacter(player: PlayerCharacter): Unit
 
@@ -53,9 +53,20 @@ trait Panel {
     * This method must be invoked when a player moves off this panel.
     *
     * @param player The player character to remove from this panel.
-   *
     */
   def removeCharacter(player: PlayerCharacter): Unit
+
+  /** Adds a Panel to the list of panels currently next to this panel.
+   *
+   * @param panel The panel that will be added to this panel next list.
+   */
+  def addPanel(panel: Panel): Unit
+
+    /** Removes a Panel from the list of panels currently next to this panel.
+   *
+   * @param panel The panel that will be removed from this panel next list.
+   */
+  def removePanel(panel: Panel): Unit
 
   /** Triggers the effect of the panel
    *

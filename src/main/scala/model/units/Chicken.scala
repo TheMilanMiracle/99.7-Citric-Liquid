@@ -55,4 +55,14 @@ class Chicken extends abstractWildUnit {
    *
    */
   val _name: String = "Chicken"
+
+  /** Method that allow a unit to drop their stars to a PlayerCharacter
+   *
+   * when a chicken drops its stars, it will give all of its stars + 3 to a PlayerCharacter
+   *
+   * @param player the player character that will gain the stars dropped
+   */
+  def dropStarsTo(player: PlayerCharacter): Unit  = {
+    player.stars = player.stars + (this.stars + 3)
+  }
 }

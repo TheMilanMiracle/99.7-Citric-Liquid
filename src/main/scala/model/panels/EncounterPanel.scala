@@ -13,12 +13,11 @@ import scala.util.Random
  *
  * after triggering the effect, the player's turn will end
  *
- * @param _nextPanels array containing the panels directly next to this one
- * @param _position integer of the position of the panel on the board
+ * @param pos integer of the position of the panel on the board
  *
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
-class EncounterPanel(val _nextPanels: ArrayBuffer[Panel], val _position: Int) extends abstractPanel{
+class EncounterPanel(pos: Int) extends abstractPanel(pos){
   /** The wild unit in the panel
    *
    * The panel has to have a wild unit, that will be generated randomly each time

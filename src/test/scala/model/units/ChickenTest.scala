@@ -92,10 +92,19 @@ class ChickenTest extends munit.FunSuite{
     assert(ret >= chicken.evasion + 1 && ret <= chicken.evasion + 6)
   }
 
+  test("A game unit should be able to drop stars to a player correctly"){
+    chicken.dropStarsTo(testPlayer)
+    assertEquals(testPlayer.stars, 3)
+    chicken.stars = chickenStars + 10
+    chicken.dropStarsTo(testPlayer)
+    assertEquals(testPlayer.stars, chicken.stars + 6)
+  }
+
   test("A wild unit should be able to increase a player's victories by 1"){
     chicken.increaseVictoriesTo(testPlayer)
     assertEquals(testPlayer.victories, 1)
     chicken.increaseVictoriesTo(testPlayer)
     assertEquals(testPlayer.victories, 2)
   }
+
 }

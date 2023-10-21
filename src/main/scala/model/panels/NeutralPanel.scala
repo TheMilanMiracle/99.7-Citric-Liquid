@@ -8,12 +8,11 @@ import scala.collection.mutable.ArrayBuffer
  * When a player lands on this panel nothing is meant to happen, and the player's
  * tur should end afterwards
  *
- * @param _nextPanels array containing the panels directly next to this one
- * @param _position integer of the position of the panel on the board
+ * @param pos integer of the position of the panel on the board
  *
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
-class NeutralPanel(val _nextPanels: ArrayBuffer[Panel], val _position: Int) extends abstractPanel {
+class NeutralPanel(pos: Int) extends abstractPanel(pos) {
   /** Triggers the effect of the panel
    *
    * This method will do nothing

@@ -115,8 +115,17 @@ class PlayerCharacterTest extends munit.FunSuite {
     assertEquals(character.victories, v + 3)
   }
 
-  test("A wild unit should be able to increase a player's victories by 2") {
-    val testPlayer = new PlayerCharacter("testchar1", 1, 1, 1, 1, 1)
+  test("A player character should be able to correctly drop half of his stars to another player") {
+    val testPlayer = new PlayerCharacter("test char1", 1, 1, 1, 1, 1)
+    character.dropStarsTo(testPlayer)
+    assertEquals(testPlayer.stars, 0)
+    character.stars = 20
+    character.dropStarsTo(testPlayer)
+    assertEquals(testPlayer.stars, 10)
+  }
+
+  test("A player character should be able to increase another player's victories by 2") {
+    val testPlayer = new PlayerCharacter("test char1", 1, 1, 1, 1, 1)
     character.increaseVictoriesTo(testPlayer)
     assertEquals(testPlayer.victories, 2)
     character.increaseVictoriesTo(testPlayer)

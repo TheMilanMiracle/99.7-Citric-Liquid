@@ -12,6 +12,8 @@ package model.units
  * - get their basics stats HP, attack, defense, evasion and its name
  * - get and set their current HP, maintaining the value between 0 and maxHP
  * - get and set their current number of stars
+ * - increase the victories of a PlayerCharacter
+ * - drop stars to a PlayerCharacter
  *
  *
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
@@ -107,4 +109,13 @@ trait GameUnit {
    * and this is the only ways this variable from player characters is increased/changed
    */
   def increaseVictoriesTo(p: PlayerCharacter): Unit
+
+  /** Method that allow a unit to drop their stars to a PlayerCharacter
+   *
+   * in the context of the game, the kinds of game unit have uniques ways to
+   * drop their stars
+   *
+   * @param player the player character that will gain the stars dropped
+   */
+  def dropStarsTo(player: PlayerCharacter): Unit
 }

@@ -13,12 +13,11 @@ import scala.collection.mutable.ArrayBuffer
  *
  * after triggering the effect, the player's turn will end
  *
- * @param _nextPanels array containing the panels directly next to this one
- * @param _position integer of the position of the panel on the board
+ * @param pos integer of the position of the panel on the board
  *
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
-class DropPanel(val _nextPanels: ArrayBuffer[Panel], val _position: Int) extends abstractPanel{
+class DropPanel(pos: Int) extends abstractPanel(pos){
   /** Triggers the effect of the panel
    *
    * This method will make the player that triggered the effect roll the dice

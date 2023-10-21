@@ -91,6 +91,14 @@ class RoboBallTest extends munit.FunSuite {
     assert(ret >= roboBall.evasion + 1 && ret <= roboBall.evasion + 6)
   }
 
+  test("A game unit should be able to drop stars to a player correctly") {
+    roboBall.dropStarsTo(testPlayer)
+    assertEquals(testPlayer.stars, roboBall.stars + 2)
+    roboBall.stars = roboBallStars + 10
+    roboBall.dropStarsTo(testPlayer)
+    assertEquals(testPlayer.stars, roboBall.stars + 4)
+  }
+
   test("A wild unit should be able to increase a player's victories by 1") {
     roboBall.increaseVictoriesTo(testPlayer)
     assertEquals(testPlayer.victories, 1)

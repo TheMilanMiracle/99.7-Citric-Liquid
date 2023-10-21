@@ -92,6 +92,14 @@ class SeagullTest extends munit.FunSuite{
     assert(ret >= seagull.evasion + 1 && ret <= seagull.evasion + 6)
   }
 
+  test("A game unit should be able to drop stars to a player correctly") {
+    seagull.dropStarsTo(testPlayer)
+    assertEquals(testPlayer.stars, seagull.stars + 2)
+    seagull.stars = seagullStars + 10
+    seagull.dropStarsTo(testPlayer)
+    assertEquals(testPlayer.stars, seagull.stars + 4)
+  }
+
   test("A wild unit should be able to increase a player's victories by 1") {
     seagull.increaseVictoriesTo(testPlayer)
     assertEquals(testPlayer.victories, 1)

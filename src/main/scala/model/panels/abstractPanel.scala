@@ -15,17 +15,18 @@ import scala.collection.mutable.ArrayBuffer
  *  - A panel can get its position, a copy of its players and a copy of its panels
  *  - A panel can hold one or more players
  *  - A panel can add or remove a player from itself
+ *  - A panel can add and remove a panel from its next panels
  *
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
-abstract class abstractPanel extends Panel{
+abstract class abstractPanel(pos: Int) extends Panel{
   /** An array of panels that are directly positioned next to this one
    *
    * In the context of the game, multiple routes or paths may exist, this could represent the
    * possible next steps a player might take after being on this panel.
    *
    */
-  protected val _nextPanels: ArrayBuffer[Panel]
+  private val _nextPanels: ArrayBuffer[Panel] = ArrayBuffer[Panel]()
 
   /** The position of the panel on the board
    *
@@ -33,7 +34,7 @@ abstract class abstractPanel extends Panel{
    * the beginning of a game
    *
    */
-  protected val _position: Int
+  private val _position: Int = pos
 
   /** Array of the characters currently positioned on this panel.
    *
@@ -42,7 +43,7 @@ abstract class abstractPanel extends Panel{
    * At the beginning of a game there are no player in any panel so the array begins
    * the game empty
    */
-  protected val _characters: ArrayBuffer[PlayerCharacter] = ArrayBuffer[PlayerCharacter]()
+  private val _characters: ArrayBuffer[PlayerCharacter] = ArrayBuffer[PlayerCharacter]()
 
   /** returns the panels next to this one (not modifiable)
    *
@@ -86,5 +87,21 @@ abstract class abstractPanel extends Panel{
    */
   def removeCharacter(player: PlayerCharacter): Unit = {
     this._characters -= player
+  }
+
+  /** Adds a Panel to the list of panels currently next to this panel.
+   *
+   * @param panel The panel that will be added to this panel next list.
+   */
+  def addPanel(panel: Panel): Unit = {
+    this._nextPanels += panel
+  }
+
+  /** Removes a Panel from the list of panels currently next to this panel.
+   *
+   * @param panel The panel that will be removed from this panel next list.
+   */
+  def removePanel(panel: Panel): Unit = {
+    this._nextPanels -= panel
   }
 }
