@@ -4,6 +4,8 @@ package model.panels
 import model.units.PlayerCharacter
 
 import scala.collection.mutable.ArrayBuffer
+import scala.collection.mutable.ArrayBuffer
+
 
 /** An abstract class that implements common behaviour between Panels
  *
@@ -50,8 +52,7 @@ abstract class abstractPanel(pos: Int) extends Panel{
    * @return an array buffer of panels, this are the ones positioned next to this one
    */
   def nextPanels: ArrayBuffer[Panel] = {
-    val aux = this._nextPanels
-    aux
+    this._nextPanels.clone()
   }
 
   /**returns the position of the panel
@@ -65,8 +66,7 @@ abstract class abstractPanel(pos: Int) extends Panel{
    * @return an array buffer of PlayerCharacters representing the characters currently on the panel
    */
   def characters: ArrayBuffer[PlayerCharacter] = {
-    val aux = this._characters
-    aux
+    this._characters.clone()
   }
 
   /** Adds a character to the list of characters currently on this panel.

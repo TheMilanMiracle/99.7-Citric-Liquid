@@ -6,21 +6,21 @@ import model.units.PlayerCharacter
 import scala.collection.mutable.ArrayBuffer
 
 class HomePanelTest extends munit.FunSuite{
-  val p1: Int = 1
-  var homePanel1 = new HomePanel(p1)
-  val p2: Int = 2
-  var homePanel2 = new HomePanel(p2)
   var testPlayer1: PlayerCharacter = new PlayerCharacter("test player1", 1, 1, 1, 1, 1)
   var testPlayer2: PlayerCharacter = new PlayerCharacter("test player2", 1, 1, 1, 1, 2)
+  val p1: Int = 1
+  var homePanel1 = new HomePanel(p1, testPlayer1)
+  val p2: Int = 2
+  var homePanel2 = new HomePanel(p2, testPlayer2)
 
 
   override def beforeEach(context: BeforeEach): Unit = {
-    val p1: Int = 1
-    homePanel1 = new HomePanel(p1)
-    val p2: Int = 2
-    homePanel2 = new HomePanel(p2)
     testPlayer1 = new PlayerCharacter("test player1", 1, 1, 1, 1, 1)
     testPlayer2 = new PlayerCharacter("test player2", 1, 1, 1, 1, 2)
+    val p1: Int = 1
+    homePanel1 = new HomePanel(p1, testPlayer1)
+    val p2: Int = 2
+    homePanel2 = new HomePanel(p2, testPlayer2)
   }
 
   test("any kind of panel has to have its attributes well defined and their getters work correctly") {
@@ -50,8 +50,8 @@ class HomePanelTest extends munit.FunSuite{
   }
 
   test("any kind of panel should be able to add and remove panels from their next panels list") {
-    val panel1 = new HomePanel(3)
-    val panel2 = new HomePanel(4)
+    val panel1 = new HomePanel(3, new PlayerCharacter("test3", 1, 1, 1 ,1, 3))
+    val panel2 = new HomePanel(4, new PlayerCharacter("test4", 1, 1, 1 ,1, 4))
 
     homePanel1.addPanel(panel1)
     assertEquals(homePanel1.nextPanels, ArrayBuffer[Panel](panel1))

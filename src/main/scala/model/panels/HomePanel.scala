@@ -20,7 +20,17 @@ import scala.collection.mutable.ArrayBuffer
  *
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
-class HomePanel(pos: Int) extends abstractPanel(pos) {
+class HomePanel(pos: Int, panel_owner: PlayerCharacter) extends abstractPanel(pos) {
+  /** The PlayerCharacter that owns this panel
+   *
+   * In the context of the game, a Home Panel should be able to tell if a passing by PlayerCharacter
+   * is its owner, to let them stop in this position
+   */
+  private val _owner: PlayerCharacter = panel_owner
+
+  /** Getter for the player character owner of this home panel */
+  def owner: PlayerCharacter = {this._owner}
+
   /** Triggers the effect of the panel
    *
    * if possible this method will heal one health point to the player that landed on the panel
