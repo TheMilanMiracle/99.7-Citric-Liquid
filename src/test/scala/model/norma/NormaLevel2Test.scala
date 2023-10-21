@@ -27,4 +27,8 @@ class NormaLevel2Test extends munit.FunSuite {
     assertEquals(norma.normaCheck(testPlayer.stars, "stars"), true)
     assertEquals(norma.normaCheck(testPlayer.victories, "victories"), true)
   }
+
+  test("Every level of norma should be able to return the norma next to the current level") {
+    assertEquals(norma.getNext.getInt, (new NormaLevel3).getInt)
+  }
 }

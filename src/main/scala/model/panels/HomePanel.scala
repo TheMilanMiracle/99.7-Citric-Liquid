@@ -1,7 +1,6 @@
 package cl.uchile.dcc.citric
 package model.panels
 
-import cl.uchile.dcc.citric.model.norma.NormaList
 import cl.uchile.dcc.citric.model.units.PlayerCharacter
 
 import scala.collection.mutable.ArrayBuffer
@@ -17,6 +16,7 @@ import scala.collection.mutable.ArrayBuffer
  *  after triggering the effect, the player's turn will end
  *
  * @param pos integer of the position of the panel on the board
+ * @param panel_owner the player character to own this home panel
  *
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
@@ -41,18 +41,17 @@ class HomePanel(pos: Int, panel_owner: PlayerCharacter) extends abstractPanel(po
   def apply(): Unit = {
     val lastplayer: PlayerCharacter = this.characters(characters.size - 1)
     val norma = lastplayer.norma
-    val normaList = new NormaList()
 
     lastplayer.currentHP = ( lastplayer.currentHP + 1)
 
     if(lastplayer.objective == "stars"){
       if(norma.normaCheck(lastplayer.stars, lastplayer.objective)){
-        lastplayer.norma_=(normaList.next(norma))
+        lastplayer.norma =(norma.getNext)
       }
     }
     else{
       if(norma.normaCheck(lastplayer.victories, lastplayer.objective)){
-        lastplayer.norma_=(normaList.next(norma))
+        lastplayer.norma =(norma.getNext)
       }
     }
   }

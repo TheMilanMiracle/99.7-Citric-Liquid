@@ -10,6 +10,7 @@ package model.norma
  * a norma instance should be able to:
  * -return an int representing its level
  * -check if the requirements for leveling up are met
+ * -return which normaLevel is next the current one
  *
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
@@ -27,6 +28,9 @@ trait Norma {
    * @return a boolean, whether or not the requirements are met for leveling up
    */
   def normaCheck(current: Int, objective: String): Boolean
+
+  /** Method that return the norma level new to the current one */
+  def getNext: Norma
 }
 
 

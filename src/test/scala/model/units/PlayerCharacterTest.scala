@@ -1,7 +1,7 @@
 package cl.uchile.dcc.citric
 package model.units
 
-import cl.uchile.dcc.citric.model.norma.{NormaLevel1, NormaLevel2, NormaLevel3, NormaLevel4, NormaLevel5, NormaList}
+import cl.uchile.dcc.citric.model.norma.{NormaLevel1, NormaLevel2, NormaLevel3, NormaLevel4, NormaLevel5}
 
 import scala.util.Random
 
@@ -133,15 +133,14 @@ class PlayerCharacterTest extends munit.FunSuite {
   }
 
   test("A player should be able to return and change their own norma") {
-    val normaList = new NormaList()
     assertEquals(character.norma.getInt, (new NormaLevel1).getInt)
-    character.norma_=(normaList.next(character.norma))
+    character.norma_=(character.norma.getNext)
     assertEquals(character.norma.getInt, (new NormaLevel2).getInt)
-    character.norma_=(normaList.next(character.norma))
+    character.norma_=(character.norma.getNext)
     assertEquals(character.norma.getInt, (new NormaLevel3).getInt)
-    character.norma_=(normaList.next(character.norma))
+    character.norma_=(character.norma.getNext)
     assertEquals(character.norma.getInt, (new NormaLevel4).getInt)
-    character.norma_=(normaList.next(character.norma))
+    character.norma_=(character.norma.getNext)
     assertEquals(character.norma.getInt, (new NormaLevel5).getInt)
   }
 

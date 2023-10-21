@@ -27,6 +27,7 @@ class HomePanelTest extends munit.FunSuite{
     assertEquals(homePanel1.characters, ArrayBuffer[PlayerCharacter]())
     assertEquals(homePanel1.nextPanels, ArrayBuffer[Panel]())
     assertEquals(homePanel1.position, p1)
+    assertEquals(homePanel1.owner, testPlayer1)
   }
 
   test("any kind of panel should be able to have one or more players in it") {
