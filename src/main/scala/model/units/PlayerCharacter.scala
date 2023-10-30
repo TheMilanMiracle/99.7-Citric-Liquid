@@ -24,11 +24,11 @@ import scala.util.Random
   * an instance of the `Random` class but can be replaced if different random
   * generation behaviors are desired.
   *
-  * @param _name The name of the player. This is an identifier and should be unique.
-  * @param _maxHP The maximum health points a player can have. It represents the player's endurance.
-  * @param _attack The player's capability to deal damage to opponents.
-  * @param _defense The player's capability to resist or mitigate damage from opponents.
-  * @param _evasion The player's skill to completely avoid certain attacks.
+  * @param name The name of the player. This is an identifier and should be unique.
+  * @param maxHP The maximum health points a player can have. It represents the player's endurance.
+  * @param attack The player's capability to deal damage to opponents.
+  * @param defense The player's capability to resist or mitigate damage from opponents.
+  * @param evasion The player's skill to completely avoid certain attacks.
   * @param homePos The player's home panel position on the board
   *
   *
@@ -38,21 +38,12 @@ import scala.util.Random
   * @author [[https://github.com/Seivier/ Vicente González B.]]
   * @author [[https://github.com/TheMilanMiracle/ Luciano Márquez C.]]
   */
-class PlayerCharacter(val _name: String,
-                      val _maxHP: Int,
-                      val _attack: Int,
-                      val _defense: Int,
-                      val _evasion: Int,
-                      homePos: Int) extends abstractGameUnit {
-  /** Current hp of the unit
-   *
-   * Units health can vary when a combat with another Unit is initiated
-   * its value is initiated with the maxHp declared at the constructor of
-   * the class
-   *
-   */
-  var _currentHP: Int = _maxHP
-
+class PlayerCharacter(name: String,
+                      maxHP: Int,
+                      attack: Int,
+                      defense: Int,
+                      evasion: Int,
+                      homePos: Int) extends abstractGameUnit(maxHP, attack, defense, evasion, name) {
   /** The position of the home panel that this player owns
    *
    * In the context of the game, each player has a home panel of his own

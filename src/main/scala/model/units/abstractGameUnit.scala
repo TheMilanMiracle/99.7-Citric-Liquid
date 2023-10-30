@@ -10,16 +10,22 @@ import scala.util.Random
  * - a game unit can get and set their current HP, maintaining the value between 0 and maxHP
  * - a game unit can get and set their current number of stars
  *
+ * @param unit_maxHP maximum health point the unit can have
+ * @param unit_attack attack that the unit has
+ * @param unit_defense defense that the unit has
+ * @param unit_evasion evasion that the unit has
+ * @param unit_name name of the unit
+ *
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
-abstract class abstractGameUnit extends GameUnit {
+abstract class abstractGameUnit(unit_maxHP: Int, unit_attack: Int, unit_defense: Int, unit_evasion: Int, unit_name: String) extends GameUnit {
   /** Maximum health the unit can have
    *
    * In the context of the game, units can be healed, this attributes is useful
    * to not surpass it when healing the unit
    *
    */
-  protected val _maxHP: Int
+  private val _maxHP: Int = unit_maxHP
 
   /** Current hp of the unit
    *
@@ -28,28 +34,28 @@ abstract class abstractGameUnit extends GameUnit {
    * the class
    *
    */
-  protected var _currentHP: Int
+  private var _currentHP: Int = unit_maxHP
 
   /** Base attack of the unit
    *
    * It defines the damage dealing capacities of a unit
    *
    */
-  protected val _attack: Int
+  private val _attack: Int = unit_attack
 
   /** Base defense of the unit
    *
    * It defines damage mitigation capacities of a unit
    *
    */
-  protected val _defense: Int
+  private val _defense: Int = unit_defense
 
   /** Base evasion of the unit
    *
    * It defines the capacity of the unit of completely avoid certain attacks
    *
    */
-  protected val _evasion: Int
+  private val _evasion: Int = unit_evasion
 
   /** The name of the unit
    *
@@ -58,7 +64,7 @@ abstract class abstractGameUnit extends GameUnit {
    * available in the game
    *
    */
-  protected val _name: String
+  private val _name: String = unit_name
 
   /** Stars that the Unit has
    *
@@ -67,7 +73,7 @@ abstract class abstractGameUnit extends GameUnit {
    * Any kind of unit starts with 0 stars
    *
    */
-  private[this] var _stars: Int = 0
+  private var _stars: Int = 0
 
   /** Returns the maxHP of the unit
    *

@@ -7,6 +7,6 @@ package model.units
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
 
-trait WildUnit extends abstractGameUnit{
+trait WildUnit extends GameUnit{
 
 }

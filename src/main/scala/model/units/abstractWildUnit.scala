@@ -6,11 +6,20 @@ package model.units
  * the common behaviour that it implements is:
  * - a wild unit should be able to increase the victories of a player by 1
  *
+ * @param unit_maxHP maximum health point the unit can have
+ * @param unit_attack attack that the unit has
+ * @param unit_defense defense that the unit has
+ * @param unit_evasion evasion that the unit has
+ * @param unit_name name of the unit
  *
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
 
-abstract class abstractWildUnit extends WildUnit{
+abstract class abstractWildUnit(unit_maxHP: Int,
+                                unit_attack: Int,
+                                unit_defense: Int,
+                                unit_evasion: Int,
+                                unit_name: String) extends abstractGameUnit(unit_maxHP, unit_attack, unit_defense, unit_evasion, unit_name) with WildUnit {
   /** Method that allows a unit to increase the victories of another one
    *
    * in the context of a game this method is meant to be used after a combat is finished,
