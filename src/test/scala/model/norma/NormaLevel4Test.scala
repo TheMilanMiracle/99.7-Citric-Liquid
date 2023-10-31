@@ -25,12 +25,12 @@ class NormaLevel4Test extends munit.FunSuite {
     testPlayer2.increaseVictoriesTo(testPlayer)
     testPlayer2.increaseVictoriesTo(testPlayer)
     (new Chicken).increaseVictoriesTo(testPlayer)
-    assertEquals(norma.normaCheck(testPlayer.stars, "stars"),false)
-    assertEquals(norma.normaCheck(testPlayer.victories, "victories"), false)
+    assertEquals(norma.normaCheckStars(testPlayer.stars),false)
+    assertEquals(norma.normaCheckVictories(testPlayer.victories), false)
     testPlayer.stars = (testPlayer.stars + 1)
     (new Chicken).increaseVictoriesTo(testPlayer)
-    assertEquals(norma.normaCheck(testPlayer.stars, "stars"), true)
-    assertEquals(norma.normaCheck(testPlayer.victories, "victories"), true)
+    assertEquals(norma.normaCheckStars(testPlayer.stars), true)
+    assertEquals(norma.normaCheckVictories(testPlayer.victories), true)
   }
 
   test("Every level of norma should be able to return the norma next to the current level") {

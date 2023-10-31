@@ -2,6 +2,7 @@ package cl.uchile.dcc.citric
 package model.units
 
 import cl.uchile.dcc.citric.model.norma.{Norma, NormaLevel1}
+import cl.uchile.dcc.citric.model.objectives.Objective
 
 import scala.util.Random
 
@@ -18,6 +19,7 @@ import scala.util.Random
   * - return an change their own objective
   * - a PlayerCharacter can increase the victories of another PlayerCharacter
   * - a PlayerCharacter can drop stars to a PlayerCharacter
+  * - perform a norma check
   *
   * Furthermore, the `Player` class has a utility for generating random numbers,
   * which is primarily used for simulating dice rolls. By default, this utility is
@@ -75,10 +77,8 @@ class PlayerCharacter(name: String,
    * these are chosen when a player levels up an cannot be changed until
    * the next level up
    *
-   * this value is initialized with a meaningless value because the objective is
-   * chosen for the first time at norma level 2
    */
-   private var _objective: String = "init"
+   private var _objective: Option[Objective] = None
 
   /** Return the position of the home panel of the player
    *
@@ -138,13 +138,19 @@ class PlayerCharacter(name: String,
    *
    * @return the current objective of the player
    */
-  def objective:String = this._objective
+  def objective: Option[Objective] = this._objective
 
   /** Setter for the objective attribute
    *
    * @param obj objective that will be set
    */
-  def objective_=(obj: String): Unit = {
-    this._objective = obj
+  def objective_=(obj: Objective): Unit = {
+    this._objective = Some(obj)
+  }
+
+  /** Method that checks if the requirements for leveling up are met
+   */
+  def normaCheck(): Unit = {
+    if(this._objective.isDefined && this._objective.get.normaCheck(this)) this.norma = this.norma.getNext
   }
 }

@@ -5,7 +5,8 @@ package model.norma
  * and set some private attributes that the normas have
  *
  * it implements:
- * - norma check method
+ * - norma check method for stars
+ * - norma check method for victories
  * - getNext method
  *
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
@@ -20,17 +21,6 @@ abstract class abstractNorma(stars: Int, victories: Int, next: Norma) extends No
   /** The norma level next to this one */
   private val _next = next
 
-  /** Method that checks if the requirements for leveling up are met
-   *
-   * @param current   the current quantity of stars/victories for checking
-   * @param objective the objective of the player, it could be "stars"/"victories"
-   * @return a boolean, whether or not the requirements are met for leveling up
-   */
-  def normaCheck(current: Int, objective: String): Boolean = {
-    if (objective == "stars") current >= this.stars_required
-    else current >= this.victories_required
-  }
-
   /** Method that return the norma level new to the current one
    *
    * the last level just returns itself
@@ -39,4 +29,21 @@ abstract class abstractNorma(stars: Int, victories: Int, next: Norma) extends No
     this._next
   }
 
+  /** Method that checks if the requirements for leveling up are met
+   *
+   * @param current the current quantity of stars for checking
+   * @return a boolean, whether or not the requirements are met for leveling up
+   */
+  def normaCheckStars(current: Int): Boolean = {
+    this.stars_required <= current
+  }
+
+  /** Method that checks if the requirements for leveling up are met
+   *
+   * @param current the current quantity of victories for checking
+   * @return a boolean, whether or not the requirements are met for leveling up
+   */
+  def normaCheckVictories(current: Int): Boolean = {
+    this.victories_required <= current
+  }
 }

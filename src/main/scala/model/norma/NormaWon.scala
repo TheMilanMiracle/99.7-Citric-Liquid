@@ -15,11 +15,17 @@ class NormaWon extends Norma{
 
   /** Method that checks if the requirements for leveling up are met
    *
-   * @param current   the current quantity of stars/victories for checking
-   * @param objective the objective of the player, it could be "stars"/"victories"
+   * @param current   the current quantity of stars for checking
    * @return a boolean, whether or not the requirements are met for leveling up
    */
-  def normaCheck(current: Int, objective: String): Boolean = false
+  def normaCheckStars(current: Int): Boolean = false
+
+  /** Method that checks if the requirements for leveling up are met
+   *
+   * @param current   the current quantity of victories for checking
+   * @return a boolean, whether or not the requirements are met for leveling up
+   */
+  def normaCheckVictories(current: Int): Boolean = false
 
   /** Method that return the norma level new to the current one
    *

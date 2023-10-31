@@ -44,16 +44,7 @@ class HomePanel(pos: Int, panel_owner: PlayerCharacter) extends abstractPanel(po
 
     lastplayer.currentHP = ( lastplayer.currentHP + 1)
 
-    if(lastplayer.objective == "stars"){
-      if(norma.normaCheck(lastplayer.stars, lastplayer.objective)){
-        lastplayer.norma =(norma.getNext)
-      }
-    }
-    else{
-      if(norma.normaCheck(lastplayer.victories, lastplayer.objective)){
-        lastplayer.norma =(norma.getNext)
-      }
-    }
+    lastplayer.normaCheck()
   }
 
 }

@@ -2,11 +2,12 @@ package cl.uchile.dcc.citric
 package model.units
 
 import cl.uchile.dcc.citric.model.norma.{NormaLevel1, NormaLevel2, NormaLevel3, NormaLevel4, NormaLevel5}
+import cl.uchile.dcc.citric.model.objectives.{StarsObjective, VictoriesObjective}
 
 import scala.util.Random
 
 class PlayerCharacterTest extends munit.FunSuite {
-  private val name = "testPlayer"
+  private val name = "character"
   private val maxHp = 10
   private val attack = 1
   private val defense = 2
@@ -14,7 +15,7 @@ class PlayerCharacterTest extends munit.FunSuite {
   private val homePos = 4
 
   private var norma = new NormaLevel1
-  private var objective = "init"
+  private var objective = None
 
   private var character: PlayerCharacter = new PlayerCharacter(name, maxHp, attack, defense, evasion, homePos)
 
@@ -116,20 +117,20 @@ class PlayerCharacterTest extends munit.FunSuite {
   }
 
   test("A player character should be able to correctly drop half of his stars to another player") {
-    val testPlayer = new PlayerCharacter("test char1", 1, 1, 1, 1, 1)
-    character.dropStarsTo(testPlayer)
-    assertEquals(testPlayer.stars, 0)
+    val testPlayer1 = new PlayerCharacter("test char1", 1, 1, 1, 1, 1)
+    character.dropStarsTo(testPlayer1)
+    assertEquals(testPlayer1.stars, 0)
     character.stars = 20
-    character.dropStarsTo(testPlayer)
-    assertEquals(testPlayer.stars, 10)
+    character.dropStarsTo(testPlayer1)
+    assertEquals(testPlayer1.stars, 10)
   }
 
   test("A player character should be able to increase another player's victories by 2") {
-    val testPlayer = new PlayerCharacter("test char1", 1, 1, 1, 1, 1)
-    character.increaseVictoriesTo(testPlayer)
-    assertEquals(testPlayer.victories, 2)
-    character.increaseVictoriesTo(testPlayer)
-    assertEquals(testPlayer.victories, 4)
+    val testPlayer1 = new PlayerCharacter("test char1", 1, 1, 1, 1, 1)
+    character.increaseVictoriesTo(testPlayer1)
+    assertEquals(testPlayer1.victories, 2)
+    character.increaseVictoriesTo(testPlayer1)
+    assertEquals(testPlayer1.victories, 4)
   }
 
   test("A player should be able to return and change their own norma") {
@@ -145,11 +146,35 @@ class PlayerCharacterTest extends munit.FunSuite {
   }
 
   test("A player should be able to return and change his current objective"){
-    assertEquals(character.objective, "init")
-    character.objective_=("victories")
-    assertEquals(character.objective, "victories")
-    character.objective_=("stars")
-    assertEquals(character.objective, "stars")
+    assertEquals(character.objective, None)
+    val vo = new VictoriesObjective
+    character.objective = vo
+    assertEquals(character.objective.get, vo)
 
+    val so = new StarsObjective
+    character.objective = so
+    assertEquals(character.objective.get, so)
+
+  }
+
+  test("a player should be able to correctly perform a norma check") {
+    character.normaCheck()
+    assertEquals(character.norma.getInt, 1)
+
+    character.objective = new VictoriesObjective
+    character.norma
+    assertEquals(character.norma.getInt, 1)
+    character.objective = new StarsObjective
+    character.norma
+    assertEquals(character.norma.getInt, 1)
+
+    character.stars = 10
+    character.normaCheck()
+    assertEquals(character.norma.getInt, 2)
+
+    character.objective = new VictoriesObjective
+    character.victories = 3
+    character.normaCheck()
+    assertEquals(character.norma.getInt, 3)
   }
 }

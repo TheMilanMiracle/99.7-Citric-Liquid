@@ -3,6 +3,8 @@ package model.panels
 
 import model.units.PlayerCharacter
 
+import cl.uchile.dcc.citric.model.objectives.{StarsObjective, VictoriesObjective}
+
 import scala.collection.mutable.ArrayBuffer
 
 class HomePanelTest extends munit.FunSuite{
@@ -65,13 +67,13 @@ class HomePanelTest extends munit.FunSuite{
 
   test("a home panel can upgrade a player's norma level if the requirements are met"){
     testPlayer1.stars = (12)
-    testPlayer1.objective_=("stars")
+    testPlayer1.objective_=(new StarsObjective)
     homePanel1.addCharacter(testPlayer1)
     homePanel1.apply()
     assertEquals(testPlayer1.norma.getInt, 2)
     homePanel1.apply()
     assertEquals(testPlayer1.norma.getInt, 2)
-    testPlayer1.objective_=("victories")
+    testPlayer1.objective_=(new VictoriesObjective)
     testPlayer2.increaseVictoriesTo(testPlayer1)
     testPlayer2.increaseVictoriesTo(testPlayer1)
     homePanel1.apply()
