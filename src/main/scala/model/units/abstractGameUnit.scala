@@ -1,6 +1,8 @@
 package cl.uchile.dcc.citric
 package model.units
 
+import cl.uchile.dcc.citric.model.stance.CombatStance
+
 import scala.util.Random
 
 /** An abstract class that implements common behaviour between Game Units
@@ -9,6 +11,7 @@ import scala.util.Random
  * - a game unit can get their basics stats HP, attack, defense, evasion and its name
  * - a game unit can get and set their current HP, maintaining the value between 0 and maxHP
  * - a game unit can get and set their current number of stars
+ * - a game unit is able to attack another one
  *
  * @param unit_maxHP maximum health point the unit can have
  * @param unit_attack attack that the unit has
@@ -75,6 +78,14 @@ abstract class abstractGameUnit(unit_maxHP: Int, unit_attack: Int, unit_defense:
    */
   private var _stars: Int = 0
 
+  /** Combat stance of the Unit
+   *
+   * In the context of the game, the combat stance is relevant
+   * whe a unit is receiving an attack, the combat stance will define
+   * how the unit reacts to the attack
+   */
+  private var _stance: Option[CombatStance] = None
+
   /** Returns the maxHP of the unit
    *
    * @return an integer representing the maximum HP the unit can have */
@@ -133,45 +144,23 @@ abstract class abstractGameUnit(unit_maxHP: Int, unit_attack: Int, unit_defense:
    */
   def name: String = {this._name}
 
+  /** Returns the combat stance of the Unit */
+  def stance: Option[CombatStance] = {this._stance}
+
+  /** Changes the current combat stance of the Unit */
+  def stance_=(s: CombatStance): Unit = {this._stance = Some(s)}
+
   /** Rolls a dice and returns a value between 1 to 6 representing the faces of a dice
    *
    * @return an int between 1-6 (including 1 and 6)
    */
   def rollDice(): Int = {Random.between(1,7)}
 
-  /** Method that allows a game Unit to attack another one
+  /** Method that allows a unit to attack another one
    *
-   * the damage depends on a dice roll and the unit attack stat
-   *
-   * @return an integer representing how much raw damage the unit will make
+   * @param receiver the unit that will receive an attack
    */
-  def attack(gu: GameUnit): Int = {
-    val roll_attack = this.rollDice()
-
-    this.attack + roll_attack
-  }
-
-  /** Method that allows a game Unit to defend itself from an attack
-   *
-   * the damage absorbed depends on a dice roll and the unit defense stat
-   *
-   * @return an integer representing how much damage the unit will not receive from the attack
-   */
-  def defend(gu: GameUnit): Int = {
-    val roll_defense = this.rollDice()
-
-    this.defense + roll_defense
-  }
-
-  /** Method that allows a game Unit to evade an attack from another one
-   *
-   * the capability of evading an attack depends on a dice roll an the unit evasion stat
-   *
-   * @return an integer representing how much capability of evading the attack the unit has
-   */
-  def evade(gu: GameUnit): Int = {
-    val roll_evasion = this.rollDice()
-
-    this.evasion + roll_evasion
+  def attackUnit(receiver: GameUnit): Unit = {
+    receiver.stance.get.reactToAttackFrom(this, receiver)
   }
 }

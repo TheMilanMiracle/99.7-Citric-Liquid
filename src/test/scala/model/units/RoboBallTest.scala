@@ -1,6 +1,8 @@
 package cl.uchile.dcc.citric
 package model.units
 
+import model.stance.{DefendingStance, EvadingStance}
+
 class RoboBallTest extends munit.FunSuite {
   val roboBallMaxHp: Int = 3
   val roboBallCurrentHp: Int = roboBallMaxHp
@@ -71,26 +73,6 @@ class RoboBallTest extends munit.FunSuite {
     }
   }
 
-  test("A game unit should be able to attack another one") {
-    val combatTest: GameUnit = new PlayerCharacter("combat test", 10, 3, 3, 3, 1)
-
-    val ret: Int = roboBall.attack(combatTest)
-    assert(ret >= roboBall.attack + 1 && ret <= roboBall.attack + 6)
-  }
-  test("A game unit should be able to defend itself from another one") {
-    val combatTest: GameUnit = new PlayerCharacter("combat test", 10, 3, 3, 3, 1)
-
-    val ret: Int = roboBall.defend(combatTest)
-    assert(ret >= roboBall.defense + 1 && ret <= roboBall.defense + 6)
-  }
-
-  test("A game unit should be able to try to avoid an attack from another one") {
-    val combatTest: GameUnit = new PlayerCharacter("combat test", 10, 3, 3, 3, 1)
-
-    val ret: Int = roboBall.evade(combatTest)
-    assert(ret >= roboBall.evasion + 1 && ret <= roboBall.evasion + 6)
-  }
-
   test("A game unit should be able to drop stars to a player correctly") {
     roboBall.dropStarsTo(testPlayer)
     assertEquals(testPlayer.stars, roboBall.stars + 2)
@@ -104,5 +86,31 @@ class RoboBallTest extends munit.FunSuite {
     assertEquals(testPlayer.victories, 1)
     roboBall.increaseVictoriesTo(testPlayer)
     assertEquals(testPlayer.victories, 2)
+  }
+
+  test("A game unit should be able to attack another game unit") {
+    val testUnit = new PlayerCharacter("test", 20, 1, 3, 3, 1)
+    testUnit.stance = new DefendingStance
+
+    var i = 0
+    while (i < 5) {
+      roboBall.attackUnit(testUnit)
+
+      assert(testUnit.currentHP == testUnit.maxHP - 1 || testUnit.currentHP >= testUnit.maxHP - (6 + roboBall.attack - (6 + testUnit.defense)))
+
+      testUnit.currentHP = testUnit.currentHP + testUnit.maxHP
+      i += 1
+    }
+
+    testUnit.stance = new EvadingStance
+    i = 0
+    while (i < 5) {
+      roboBall.attackUnit(testUnit)
+
+      assert(testUnit.currentHP == testUnit.maxHP || testUnit.currentHP >= testUnit.maxHP - (6 + roboBall.attack))
+
+      testUnit.currentHP = testUnit.currentHP + testUnit.maxHP
+      i += 1
+    }
   }
 }

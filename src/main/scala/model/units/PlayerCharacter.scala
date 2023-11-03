@@ -21,6 +21,7 @@ import scala.util.Random
   * - a PlayerCharacter can drop stars to a PlayerCharacter
   * - perform a norma check
   *
+  *
   * Furthermore, the `Player` class has a utility for generating random numbers,
   * which is primarily used for simulating dice rolls. By default, this utility is
   * an instance of the `Random` class but can be replaced if different random

@@ -1,6 +1,8 @@
 package cl.uchile.dcc.citric
 package model.units
 
+import model.stance.{DefendingStance, EvadingStance}
+
 class SeagullTest extends munit.FunSuite{
   val seagullMaxHp: Int = 3
   val seagullCurrentHp: Int = seagullMaxHp
@@ -71,27 +73,6 @@ class SeagullTest extends munit.FunSuite{
     }
   }
 
-  test("A game unit should be able to attack another one") {
-    val combatTest: GameUnit = new PlayerCharacter("combat test", 10, 3, 3, 3, 1)
-
-    val ret: Int = seagull.attack(combatTest)
-    assert(ret >= seagull.attack + 1 && ret <= seagull.attack + 6)
-  }
-
-  test("A game unit should be able to defend itself from another one") {
-    val combatTest: GameUnit = new PlayerCharacter("combat test", 10, 3, 3, 3, 1)
-
-    val ret: Int = seagull.defend(combatTest)
-    assert(ret >= seagull.defense + 1 && ret <= seagull.defense + 6)
-  }
-
-  test("A game unit should be able to try to avoid an attack from another one") {
-    val combatTest: GameUnit = new PlayerCharacter("combat test", 10, 3, 3, 3, 1)
-
-    val ret: Int = seagull.evade(combatTest)
-    assert(ret >= seagull.evasion + 1 && ret <= seagull.evasion + 6)
-  }
-
   test("A game unit should be able to drop stars to a player correctly") {
     seagull.dropStarsTo(testPlayer)
     assertEquals(testPlayer.stars, seagull.stars + 2)
@@ -105,6 +86,32 @@ class SeagullTest extends munit.FunSuite{
     assertEquals(testPlayer.victories, 1)
     seagull.increaseVictoriesTo(testPlayer)
     assertEquals(testPlayer.victories, 2)
+  }
+
+  test("A game unit should be able to attack another game unit") {
+    val testUnit = new PlayerCharacter("test", 20, 1, 3, 3, 1)
+    testUnit.stance = new DefendingStance
+
+    var i = 0
+    while (i < 5) {
+      seagull.attackUnit(testUnit)
+
+      assert(testUnit.currentHP == testUnit.maxHP - 1 || testUnit.currentHP >= testUnit.maxHP - (6 + seagull.attack - (6 + testUnit.defense)))
+
+      testUnit.currentHP = testUnit.currentHP + testUnit.maxHP
+      i += 1
+    }
+
+    testUnit.stance = new EvadingStance
+    i = 0
+    while (i < 5) {
+      seagull.attackUnit(testUnit)
+
+      assert(testUnit.currentHP == testUnit.maxHP || testUnit.currentHP >= testUnit.maxHP - (6 + seagull.attack))
+
+      testUnit.currentHP = testUnit.currentHP + testUnit.maxHP
+      i += 1
+    }
   }
 }
 

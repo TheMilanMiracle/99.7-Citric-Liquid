@@ -3,16 +3,18 @@ package model.units
 
 import cl.uchile.dcc.citric.model.norma.{NormaLevel1, NormaLevel2, NormaLevel3, NormaLevel4, NormaLevel5}
 import cl.uchile.dcc.citric.model.objectives.{StarsObjective, VictoriesObjective}
+import cl.uchile.dcc.citric.model.stance.{DefendingStance, EvadingStance}
 
 import scala.util.Random
 
 class PlayerCharacterTest extends munit.FunSuite {
   private val name = "character"
   private val maxHp = 10
-  private val attack = 1
+  private val attack = 4
   private val defense = 2
   private val evasion = 3
   private val homePos = 4
+  private val stance = None
 
   private var norma = new NormaLevel1
   private var objective = None
@@ -43,6 +45,7 @@ class PlayerCharacterTest extends munit.FunSuite {
     assertEquals(character.victories, 0)
     assertEquals(character.norma.getInt, norma.getInt)
     assertEquals(character.objective, objective)
+    assertEquals(character.stance, stance)
   }
 
   test("a game unit should be able to get their basics stats HP, attack, defense, evasion and its name"){
@@ -72,6 +75,17 @@ class PlayerCharacterTest extends munit.FunSuite {
     assertEquals(character.stars, 10)
   }
 
+  test("Any type of game unit should be able to return and change their own combat stance"){
+    val defending = new EvadingStance
+    val evading = new EvadingStance
+
+    assertEquals(character.stance, stance)
+    character.stance = defending
+    assertEquals(character.stance.get, defending)
+    character.stance = evading
+    assertEquals(character.stance.get, evading)
+  }
+
   test("A game unit should be able to roll a dice") {
     var i = 0
     while (i < 5) {
@@ -80,25 +94,30 @@ class PlayerCharacterTest extends munit.FunSuite {
     }
   }
 
-  test("A game unit should be able to attack another one") {
-    val combatTest: GameUnit = new PlayerCharacter("combat test", 10, 3, 3, 3, 1)
+  test("A game unit should be able to attack another game unit"){
+    val testUnit = new PlayerCharacter("test", 20, 1, 3, 3, 1)
+    testUnit.stance = new DefendingStance
 
-    val ret: Int = character.attack(combatTest)
-    assert(ret >= character.attack + 1 && ret <= character.attack + 6)
-  }
+    var i = 0
+    while(i < 5){
+      character.attackUnit(testUnit)
 
-  test("A game unit should be able to defend itself from another one") {
-    val combatTest: GameUnit = new PlayerCharacter("combat test", 10, 3, 3, 3, 1)
+      assert(testUnit.currentHP == testUnit.maxHP - 1 || testUnit.currentHP >= testUnit.maxHP - (6 + character.attack - (6 + testUnit.defense)))
 
-    val ret: Int = character.defend(combatTest)
-    assert(ret >= character.defense + 1 && ret <= character.defense + 6)
-  }
+      testUnit.currentHP = testUnit.currentHP + testUnit.maxHP
+      i += 1
+    }
 
-  test("A game unit should be able to try to avoid an attack from another one") {
-    val combatTest: GameUnit = new PlayerCharacter("combat test", 10, 3, 3, 3, 1)
+    testUnit.stance = new EvadingStance
+    i = 0
+    while(i < 5){
+      character.attackUnit(testUnit)
 
-    val ret: Int = character.evade(combatTest)
-    assert(ret >= character.evasion + 1 && ret <= character.evasion + 6)
+      assert(testUnit.currentHP == testUnit.maxHP || testUnit.currentHP >= testUnit.maxHP - (6 + character.attack))
+
+      testUnit.currentHP = testUnit.currentHP + testUnit.maxHP
+      i += 1
+    }
   }
 
   /**Player Character Tests*/

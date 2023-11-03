@@ -1,6 +1,8 @@
 package cl.uchile.dcc.citric
 package model.units
 
+import model.stance.CombatStance
+
 /** The GameUnit interface represent the entity that will participate
  * in the game, whether as a player character, controller by an user, or as a
  * wild unit, not controllable by an user. All game units have an unique name,
@@ -14,7 +16,7 @@ package model.units
  * - get and set their current number of stars
  * - increase the victories of a PlayerCharacter
  * - drop stars to a PlayerCharacter
- *
+ * - attack another game unit
  *
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
@@ -73,35 +75,17 @@ trait GameUnit {
    */
   def name: String
 
+  /** Returns the combat stance of the Unit */
+  def stance: Option[CombatStance]
+
+  /** Changes the current combat stance of the Unit */
+  def stance_=(s: CombatStance): Unit
+
   /** Rolls a dice and returns a value between 1 to 6 representing the faces of a dice
    *
    * @return an int between 1-6 (including 1 and 6)
    */
   def rollDice(): Int
-
-  /** Method that allows a game Unit to attack another one
-   *
-   * the damage depends on a dice roll and the unit attack stat
-   *
-   * @return an integer representing how much raw damage the unit will make
-   */
-  def attack(gu: GameUnit): Int
-
-  /** Method that allows a game Unit to defend itself from an attack
-   *
-   * the damage absorbed depends on a dice roll and the unit defense stat
-   *
-   * @return an integer representing how much damage the unit will not receive from the attack
-   */
-  def defend(gu: GameUnit): Int
-
-  /** Method that allows a game Unit to evade an attack from another one
-   *
-   * the capability of evading an attack depends on a dice roll an the unit evasion stat
-   *
-   * @return an integer representing how much capability of evading the attack the unit has
-   */
-  def evade(gu: GameUnit): Int
 
   /** Method that allows a unit to increase the victories of another one
    *
@@ -118,4 +102,10 @@ trait GameUnit {
    * @param player the player character that will gain the stars dropped
    */
   def dropStarsTo(player: PlayerCharacter): Unit
+
+  /** Method that allows a unit to attack another one
+   *
+   * @param receiver the unit that will receive an attack
+   */
+  def attackUnit(receiver: GameUnit): Unit
 }

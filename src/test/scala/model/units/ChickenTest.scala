@@ -1,6 +1,8 @@
 package cl.uchile.dcc.citric
 package model.units
 
+import model.stance.{DefendingStance, EvadingStance}
+
 class ChickenTest extends munit.FunSuite{
   val chickenMaxHp: Int = 3
   val chickenCurrentHp: Int = chickenMaxHp
@@ -71,27 +73,6 @@ class ChickenTest extends munit.FunSuite{
     }
   }
 
-  test("A game unit should be able to attack another one") {
-    val combatTest: GameUnit = new PlayerCharacter("combat test", 10, 3, 3, 3, 1)
-
-    val ret: Int = chicken.attack(combatTest)
-    assert(ret >= chicken.attack + 1 && ret <= chicken.attack + 6)
-  }
-
-  test("A game unit should be able to defend itself from another one") {
-    val combatTest: GameUnit = new PlayerCharacter("combat test", 10, 3, 3, 3, 1)
-
-    val ret: Int = chicken.defend(combatTest)
-    assert(ret >= chicken.defense + 1 && ret <= chicken.defense + 6)
-  }
-
-  test("A game unit should be able to try to avoid an attack from another one") {
-    val combatTest: GameUnit = new PlayerCharacter("combat test", 10, 3, 3, 3, 1)
-
-    val ret: Int = chicken.evade(combatTest)
-    assert(ret >= chicken.evasion + 1 && ret <= chicken.evasion + 6)
-  }
-
   test("A game unit should be able to drop stars to a player correctly"){
     chicken.dropStarsTo(testPlayer)
     assertEquals(testPlayer.stars, 3)
@@ -105,6 +86,32 @@ class ChickenTest extends munit.FunSuite{
     assertEquals(testPlayer.victories, 1)
     chicken.increaseVictoriesTo(testPlayer)
     assertEquals(testPlayer.victories, 2)
+  }
+
+  test("A game unit should be able to attack another game unit") {
+    val testUnit = new PlayerCharacter("test", 20, 1, 3, 3, 1)
+    testUnit.stance = new DefendingStance
+
+    var i = 0
+    while (i < 5) {
+      chicken.attackUnit(testUnit)
+
+      assert(testUnit.currentHP == testUnit.maxHP - 1 || testUnit.currentHP >= testUnit.maxHP - (6 + chicken.attack - (6 + testUnit.defense)))
+
+      testUnit.currentHP = testUnit.currentHP + testUnit.maxHP
+      i += 1
+    }
+
+    testUnit.stance = new EvadingStance
+    i = 0
+    while (i < 5) {
+      chicken.attackUnit(testUnit)
+
+      assert(testUnit.currentHP == testUnit.maxHP || testUnit.currentHP >= testUnit.maxHP - (6 + chicken.attack))
+
+      testUnit.currentHP = testUnit.currentHP + testUnit.maxHP
+      i += 1
+    }
   }
 
 }
