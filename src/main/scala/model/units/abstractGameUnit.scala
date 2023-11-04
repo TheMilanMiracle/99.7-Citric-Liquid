@@ -161,6 +161,7 @@ abstract class abstractGameUnit(unit_maxHP: Int, unit_attack: Int, unit_defense:
    * @param receiver the unit that will receive an attack
    */
   def attackUnit(receiver: GameUnit): Unit = {
+    if(this._currentHP == 0 || receiver.currentHP == 0){return}
     receiver.stance.get.reactToAttackFrom(this, receiver)
   }
 }

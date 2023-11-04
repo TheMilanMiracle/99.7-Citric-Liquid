@@ -7,10 +7,16 @@ package model.norma
  *
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
-class NormaLevel2 extends abstractNorma(30, 3, new NormaLevel3){
+class NormaLevel2 extends abstractNorma(30, 3, Some(new NormaLevel3)){
   /** Method that returns an int of the norma level that is represented by the instance
    *
    * @return 2
    */
   def getInt: Int = 2
+
+  /** Method that makes a copy of the game entity
+   *
+   * @return a new instance of a norma level 2
+   */
+  def cloneEntity: Norma = new NormaLevel2
 }

@@ -113,13 +113,13 @@ class PlayerCharacter(name: String,
 
   /** Method that allow a unit to drop their stars to a PlayerCharacter
    *
-   * when a player drop their stars to another he will drop half of the current stars
-   * to the other player
+   * when a player drop their stars to a unit he will drop half of the current stars
+   * to the other
    *
-   * @param player the player character that will gain the stars dropped
+   * @param unit the unit that will gain the stars dropped
    */
-  def dropStarsTo(player: PlayerCharacter): Unit = {
-    player.stars = player.stars + (this.stars/2)
+  def dropStarsTo(unit: GameUnit): Unit = {
+    unit.stars = unit.stars + (this.stars/2)
     this.stars /= 2
   }
 

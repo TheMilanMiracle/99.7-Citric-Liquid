@@ -99,9 +99,9 @@ trait GameUnit {
    * in the context of the game, the kinds of game unit have uniques ways to
    * drop their stars
    *
-   * @param player the player character that will gain the stars dropped
+   * @param unit the unit that will gain the stars dropped
    */
-  def dropStarsTo(player: PlayerCharacter): Unit
+  def dropStarsTo(unit: GameUnit): Unit
 
   /** Method that allows a unit to attack another one
    *

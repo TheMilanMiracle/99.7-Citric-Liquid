@@ -12,10 +12,11 @@ class Chicken extends abstractWildUnit(3, -1, -1, 1, "Chicken") {
   /** Method that allow a unit to drop their stars to a PlayerCharacter
    *
    * when a chicken drops its stars, it will give all of its stars + 3 to a PlayerCharacter
+   * (this method will never be called to drop stars to another wild unit)
    *
-   * @param player the player character that will gain the stars dropped
+   * @param unit the unit that will gain the stars dropped
    */
-  def dropStarsTo(player: PlayerCharacter): Unit  = {
-    player.stars = player.stars + (this.stars + 3)
+  def dropStarsTo(unit: GameUnit): Unit  = {
+    unit.stars = unit.stars + (this.stars + 3)
   }
 }
