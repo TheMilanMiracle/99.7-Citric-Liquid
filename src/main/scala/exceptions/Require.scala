@@ -6,19 +6,11 @@ package exceptions
  * This object includes the `Stat` class, designed to validate a statistic's value against
  * constraints like a specified range or a minimum threshold.
  *
- * ### Adding New Requirements:
- *
- * 1. Within the `Require` object, create a case class representing the requirement.
- *    While the `final case` modifier is optional, it's recommended for better control over class
- *    hierarchy.
- * 2. Implement a validation method in the new case class. This method should either return the
- *    valid value or raise an exception for invalid cases.
- *
  * @author [[https://github.com/danielRamirezL/ Daniel Ramírez L.]]
  * @author [[https://github.com/joelriquelme/ Joel Riquelme P.]]
  * @author [[https://github.com/r8vnhill/ Ignacio Slater M.]]
  * @author [[https://github.com/Seivier/ Vicente González B.]]
- * @author [[https://github.com/~Your github account~/ ~Your Name~]]
+ * @author [[https://github.com/TheMilanMiracle/ Luciano Márquez C.]]
  */
 object Require {
 
@@ -28,8 +20,6 @@ object Require {
    * This class facilitates the validation of a statistic's value against specified constraints.
    * An [[InvalidStatException]] is thrown if the validation fails.
    *
-   * Note:
-   * The class is marked final and cannot be extended.
    *
    * @param value The numeric value of the statistic.
    * @param name The identifier or label for the statistic, primarily used in error messages.
@@ -79,5 +69,97 @@ object Require {
     def atLeast(lo: Int): Int =
       if (value >= lo) value
       else throw new InvalidStatException(s"$name should be at least $lo but was $value")
+  }
+
+  /** Represents and validates a game unit name
+   *
+   * This class facilitates the validation of a game unit name against specified constraints.
+   * An [[InvalidUnitNameException]] is thrown if the validation fails.
+   *
+   *
+   * @param name the name that needs to be validated
+   */
+  final case class GameUnitName(name: String){
+    /**
+     * Validates if the unit name length is larger or equals than the minimum admitted
+     *
+     * @example
+     * {{{
+     *   val name = Require.GameUnitName("name") minLen 1
+     *   // => name: "name"
+     * }}}
+     * @example
+     * {{{
+     *   val name = Require.GameUnitName("") minLen 1
+     *   // => throws InvalidUnitNameException
+     * }}}
+     * @param min The minimum accepted value for the length of a unit name
+     * @return The name, if its length is longer or equal to the max
+     * @throws InvalidUnitNameException for values below the threshold.
+     */
+    def minLen(min: Int): String = {
+      if (name.length >= min) name
+      else throw new InvalidUnitNameException(s"Unit's name cannot be too shorter that $min")
+    }
+
+    /**
+     * Validates if the unit name has any character that is not a letter
+     *
+     * @example
+     * {{{
+     *   val name = Require.GameUnitName("name") noSpecialChars
+     *   // => name = "name"
+     * }}}
+     * @example
+     * {{{
+     *   val name = Require.GameUnitName("name_") noSpecialChars
+     *   // => throws InvalidUnitNameException
+     * }}}
+     *
+     * @return the name if it doesn't contains special characters
+     * @throws InvalidUnitNameException when the name has any special character
+     */
+    def noSpecialChars: String = {
+        var i = 0
+        while(i < name.length){
+          var c = name.charAt(i)
+          if(!c.isLetter && c != ' '){throw new InvalidUnitNameException(s"Unit's name cannot contain special characters, only letters")}
+          i+=1
+        }
+      name
+    }
+  }
+
+  /** Represents and validates a board position
+   *
+   * This class facilitates the validation of a board position against specified constraints.
+   * An [[InvalidBoardPositionException]] is thrown if the validation fails.
+   *
+   *
+   * @param pos the position that needs to be validated
+   */
+  final case class BoardPosition(pos: Int){
+    /**
+     * Validates if the position is an existing one
+     *
+     * @example
+     * {{{
+     *   val position = Require.BoardPosition(1) existingPos 20
+     *   // => position = 1
+     * }}}
+     * @example
+     * {{{
+     *   val position = Require.BoardPosition("50") existingPos 20
+     *   // => throws InvalidBoardPositionException
+     * }}}
+     * @return the board position if it exist within the board
+     * @throws InvalidBoardPositionException when the name has any special character
+     */
+    def existingPos(boardSize: Int): Int = {
+      if(pos < 0){throw new InvalidBoardPositionException("There are not negatives positions in the board")}
+      if(pos > boardSize){throw new InvalidBoardPositionException(s"Position out of bounds, the last position in the board is $boardSize")}
+      pos
+    }
+
   }
 }

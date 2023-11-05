@@ -54,7 +54,7 @@ check if a player meets the requirements to level up their normaLevel depending 
 The effect of a Home Panel now works with every entity being responsible for itself.
 
 Finally, I added a new little interface, clonableEntity, meant to be used in those game entities whose attributes would be directly accessible via the getter. And then I 
-worked in testing and adding some exceptions, like ...
+worked in testing and adding some exceptions for names of units and board position.
 
 
 
