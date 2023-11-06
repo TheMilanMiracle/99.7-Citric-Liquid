@@ -73,6 +73,14 @@ class RoboBallTest extends munit.FunSuite {
     }
   }
 
+  test("a game unit should be able to win stars from other game units (a wild unit will never win stars from another wild unit)") {
+    val testPlayer = new PlayerCharacter("test name", 1, 1, 1, 1, 1)
+
+    testPlayer.stars = 20
+    roboBall.winStars(testPlayer)
+    assertEquals(roboBall.stars, 10)
+  }
+
   test("A game unit should be able to drop stars to a player correctly") {
     roboBall.dropStarsTo(testPlayer)
     assertEquals(testPlayer.stars, roboBall.stars + 2)

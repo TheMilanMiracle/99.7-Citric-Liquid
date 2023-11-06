@@ -17,6 +17,7 @@ import scala.util.Random
   * - return and change its own norma level
   * - return and increase their victories
   * - return an change their own objective
+  * - a player character should be able to win victories
   * - a PlayerCharacter can increase the victories of another PlayerCharacter
   * - a PlayerCharacter can drop stars to a PlayerCharacter
   * - perform a norma check
@@ -100,12 +101,25 @@ class PlayerCharacter(name: String,
    */
   def victories_=(v: Int): Unit = this._victories = v
 
+  /** Method tha allows a player to win victories
+   *
+   * in the context of the game a players wins victories when defeating
+   * another unit and the amount depends on the defeated unit
+   *
+   * @param unit the defeated unit
+   */
+  def winVictories(unit: GameUnit): Unit = {
+    unit.increaseVictoriesTo(this)
+  }
+
   /** Method that allows a unit to increase the victories of another one
    *
    * in the context of a game this method is meant to be used after a combat is finished,
    * and this is the only ways this variable from player characters is increased/changed
    *
    * when a player increases the victories of another player, this value is incremented by 2
+   *
+   * @param p the player that will gain the victories
    */
   def increaseVictoriesTo(p: PlayerCharacter):Unit = {
     p.victories = (p.victories + 2)

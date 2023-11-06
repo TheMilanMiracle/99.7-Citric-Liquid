@@ -73,6 +73,14 @@ class SeagullTest extends munit.FunSuite{
     }
   }
 
+  test("a game unit should be able to win stars from other game units (a wild unit will never win stars from another wild unit)") {
+    val testPlayer = new PlayerCharacter("test name", 1, 1, 1, 1, 1)
+
+    testPlayer.stars = 20
+    seagull.winStars(testPlayer)
+    assertEquals(seagull.stars, 10)
+  }
+
   test("A game unit should be able to drop stars to a player correctly") {
     seagull.dropStarsTo(testPlayer)
     assertEquals(testPlayer.stars, seagull.stars + 2)

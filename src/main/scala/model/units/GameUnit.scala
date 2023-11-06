@@ -15,7 +15,8 @@ import model.stance.CombatStance
  * - get and set their current HP, maintaining the value between 0 and maxHP
  * - get and set their current number of stars
  * - increase the victories of a PlayerCharacter
- * - drop stars to a PlayerCharacter
+ * - win stars from another unit
+ * - drop stars to a game unit
  * - attack another game unit
  *
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
@@ -91,8 +92,19 @@ trait GameUnit {
    *
    * in the context of a game this method is meant to be used after a combat is finished,
    * and this is the only ways this variable from player characters is increased/changed
+   *
+   * @param p the player that will gain the victories
    */
   def increaseVictoriesTo(p: PlayerCharacter): Unit
+
+  /** Method that allows a game unit to win stars
+   *
+   * in the context of the game a unit will win stars from another
+   * when winning a combat against them
+   *
+   * @param unit the unit that was defeated and will drop stars
+   */
+  def winStars(unit: GameUnit): Unit
 
   /** Method that allow a unit to drop their stars to a PlayerCharacter
    *

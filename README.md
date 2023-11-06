@@ -44,9 +44,10 @@ Next up, it was time to implement some combat methods, so the game units can att
 Combat Stance (this way the code is made more extensible, adding a new response to an attack should be easy), this would be a new attribute for the game units and the one in charge of deciding what a unit should do when receiving an attack, making use of multiple  
 dispatch. Units are now able to defend an attack or try to avoid it.
 
-Then, I worked in the drops of the units, implemented the drop of victories to a player and thanks to the hierarchy of classes the PlayerCharacter unit would 
-give 2 victories and any kind of Wild Unit would give just 1. Following a similar idea, I made the players able to drop half of their stars to another game unit 
-and for each wild unit, they have a unique amount of stars to drop depending on how many they are holding and the type of wild unit they are.
+Then, I worked in the drops of the units, for the victories I created new methods for the units that gives a different number of victories depending on what type of 
+game unit is giving victories (PlayerCharacter or WildUnit) to then use these methods with double dispatch in a new one for the players that allows them to win victories. 
+I went for a similar approach for the stars, just that this time every class (player, chicken, robo ball and seagull) has a unique form of dropping stars, and then used these 
+methods for a new method for the units, that using double dispatch, allows units to get stars.
 
 The last big part of this assigment was to implement the most complex effect between the panels, HomePanel's normaCheck, for this I decided to create a new entity 
 the objectives, this would be similar to a CombatStance, they are a new attribute of a player and the responsible for calling the right method of a norma level to 

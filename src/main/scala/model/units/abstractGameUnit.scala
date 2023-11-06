@@ -10,6 +10,7 @@ import scala.util.Random
  *  it implements the next common behaviours:
  * - a game unit can get their basics stats HP, attack, defense, evasion and its name
  * - a game unit can get and set their current HP, maintaining the value between 0 and maxHP
+ * - a game unit can get stars from other one
  * - a game unit can get and set their current number of stars
  * - a game unit is able to attack another one
  *
@@ -155,6 +156,17 @@ abstract class abstractGameUnit(unit_maxHP: Int, unit_attack: Int, unit_defense:
    * @return an int between 1-6 (including 1 and 6)
    */
   def rollDice(): Int = {Random.between(1,7)}
+
+  /** Method that allows a game unit to win stars
+   *
+   * in the context of the game a unit will win stars from another
+   * when winning a combat against them
+   *
+   * @param unit the unit that was defeated and will drop stars
+   */
+  def winStars(unit: GameUnit): Unit = {
+    unit.dropStarsTo(this)
+  }
 
   /** Method that allows a unit to attack another one
    *

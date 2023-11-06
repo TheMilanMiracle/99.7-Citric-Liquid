@@ -94,6 +94,29 @@ class PlayerCharacterTest extends munit.FunSuite {
     }
   }
 
+  test("a game unit should be able to win stars from other game units"){
+    val testPlayer = new PlayerCharacter("test name",1,1,1,1,1)
+    val testChicken = new Chicken
+    val testRoboBall = new RoboBall
+    val testSeagull = new Seagull
+
+    testPlayer.stars = 20
+    character.winStars(testPlayer)
+    assertEquals(character.stars, 10)
+
+    testChicken.stars = 7
+    character.winStars(testChicken)
+    assertEquals(character.stars, expected = 20)
+
+    testRoboBall.stars = 8
+    character.winStars(testRoboBall)
+    assertEquals(character.stars, 30)
+
+    testSeagull.stars = 8
+    character.winStars(testSeagull)
+    assertEquals(character.stars, 40)
+  }
+
   test("A game unit should be able to attack another game unit"){
     val testUnit = new PlayerCharacter("test", 20, 1, 3, 3, 1)
     testUnit.stance = new DefendingStance
@@ -125,7 +148,7 @@ class PlayerCharacterTest extends munit.FunSuite {
     assertEquals(character.homePanel, homePos)
   }
 
-  test("A player character should be able to get and set their own victories"){
+  test("A player character should be able to get and set their own victories") {
     var v = character.victories
 
     assertEquals(character.victories, v)
@@ -135,7 +158,7 @@ class PlayerCharacterTest extends munit.FunSuite {
     assertEquals(character.victories, v + 3)
   }
 
-  test("A player character should be able to correctly drop half of his stars to another player") {
+  test("A player character should be able to correctly drop half of his stars to another game unit") {
     val testPlayer1 = new PlayerCharacter("test char1", 1, 1, 1, 1, 1)
     character.dropStarsTo(testPlayer1)
     assertEquals(testPlayer1.stars, 0)
@@ -144,6 +167,13 @@ class PlayerCharacterTest extends munit.FunSuite {
     assertEquals(testPlayer1.stars, 10)
   }
 
+  test("a player should be able to correctly win victories"){
+    val testPlayer = new PlayerCharacter("test name",1,1,1,1,1)
+    character.winVictories(new Chicken)
+    assertEquals(character.victories, 1)
+    character.winVictories(testPlayer)
+    assertEquals(character.victories, 3)
+  }
   test("A player character should be able to increase another player's victories by 2") {
     val testPlayer1 = new PlayerCharacter("test char1", 1, 1, 1, 1, 1)
     character.increaseVictoriesTo(testPlayer1)
