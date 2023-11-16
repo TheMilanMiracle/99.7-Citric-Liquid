@@ -33,7 +33,7 @@ and the classes of the norma levels themselves. Finally, I created a last test f
 first one being the starting level and the last one the winning one, and
 be able to return any normaLevel next level and check if a level is the last one in the list, so I made a tests for this as well to implement it later.
 
-##Tarea 2
+## Tarea 2
 For this assignment, the first thing to do was to create new getters and setter for the attributes of the basic entities, for this, first I updated the tests for the Game Units
 to then implement this new getters and setters(for vars) to then go and update the last assignment with this new features. Thanks to this new feature it was now possible to 
 update the privacy of the attributes of all entities, making them private to not permit direct access to them. Finally, for this, it was necessary a big 
@@ -57,7 +57,10 @@ The effect of a Home Panel now works with every entity being responsible for its
 Finally, I added a new little interface, clonableEntity, meant to be used in those game entities whose attributes would be directly accessible via the getter. And then I 
 worked in testing and adding some exceptions for names of units and board position.
 
+## Tarea 3
 
+### State Diagram:
+![Diagrama de estados](/docs/state_diagram.PNG)
 
 <div style="text-align:center;">
     <img src="https://i.creativecommons.org/l/by/4.0/88x31.png" alt="Creative Commons License">
