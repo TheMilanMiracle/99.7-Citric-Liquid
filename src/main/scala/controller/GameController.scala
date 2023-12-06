@@ -51,7 +51,7 @@ class GameController private extends Observer[PlayerCharacter]{
   private var winner: Option[PlayerCharacter] = None
 
   /** Variable that stores the attacker, useful when there is combat */
-  private var attacker: Option[GameUnit] = None
+  private var attacker: Option[PlayerCharacter] = None
 
   /** Variable that stores the receiver of an attack, useful when there is combat */
   private var receiver: Option[GameUnit] = None
@@ -199,17 +199,10 @@ class GameController private extends Observer[PlayerCharacter]{
   def decideAttack(): Unit = {
     if(combat_turn == 0) _gameState.combatEnds(this)
 
-    else if(combat_turn == 1){
-      if(receiver.get.currentHP == 0) _gameState.combatEnds(this)
-      else{
-        val aux = attacker
-        attacker = receiver
-        receiver = aux
-
-        this.unitAttacks()
-      }
+    else if(combat_turn == 1) {
+      if (receiver.get.currentHP == 0) _gameState.combatEnds(this)
+      else this.unitAttacks()
     }
-
     else this.unitAttacks()
   }
 
@@ -287,11 +280,21 @@ class GameController private extends Observer[PlayerCharacter]{
     _gameState.unitAttacks(this)
   }
 
+  /** method that arrange the stars and victories share */
+  private def combatTurnResult(): Unit = {
+    if (receiver.get.currentHP == 0) {
+      attacker.get.winStars(receiver.get)
+      attacker.get.winVictories(receiver.get)
+    }
+  }
+
   /** transitions the game state from the response state to the attack state */
   def unitEvades(): Unit = {
     _gameState.unitEvades(this)
 
     combat_turn -= 1
+
+    combatTurnResult()
   }
 
   /** transitions the game state from the response state to the attack state */
@@ -299,6 +302,8 @@ class GameController private extends Observer[PlayerCharacter]{
     _gameState.unitDefends(this)
 
     combat_turn -= 1
+
+    combatTurnResult()
   }
 
   /** method that updates info from the observer entity

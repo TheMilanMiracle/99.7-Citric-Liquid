@@ -90,13 +90,27 @@ class GameControllerTest extends munit.FunSuite {
   }
 
   test("the game controller should be able to transition from the response state to the attack state in two ways"){
-    controller.gameState = new ResponseState
-    controller.unitEvades()
+    controller.gameState = new PanelEffectState
+
+    controller.getPlayer(0).currentPosition = 3
+    board.getPanel(controller.getPlayer(0).currentPosition).addCharacter(controller.getPlayer(0))
+    board.getPanel(controller.getPlayer(0).currentPosition).addCharacter(controller.getPlayer(1))
+    controller.getPlayer(0).stance = new DefendingStance
+    controller.getPlayer(1).stance = new DefendingStance
+
+    controller.combatPvP()
+    controller.decideAttack()
+    controller.unitDefends()
+
     assertEquals(controller.gameState.getClass.getName, (new AttackState).getClass.getName)
 
-    controller.gameState = new ResponseState
-    controller.unitDefends()
-    assertEquals(controller.gameState.getClass.getName, (new AttackState).getClass.getName)
+    controller.unitAttacks()
+
+    controller.getPlayer(0).currentHP = 0
+    controller.getPlayer(1).currentHP = 0
+
+    controller.unitEvades()
+
   }
 
   test("the controller should be able to decide to play a turn if the currentPlayer is not KO"){
