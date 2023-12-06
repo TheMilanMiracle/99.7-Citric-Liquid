@@ -13,8 +13,10 @@ import controller.GameController
  * StarsAndDice state depending on the current player HP
  *
  * this class overrides the next transitions:
- * -chapterEnds (TurnLoopState -> NewChapterState)
- * -recovery (TurnLoopState -> RecoveryState)
+ * -chapterEnds (turn loop state to new chapter state)
+ * -playerKO (turn loop state to recovery state)
+ * -playerNotKO (turn loop state to stars and dice state)
+ * -playerWinds (turn loop state to game ends state)
  *
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
@@ -50,6 +52,9 @@ class TurnLoopState extends AbstractGameState {
     c.gameState = new GameEndsState
   }
 
-  /** Method that defines how a Game Unit prints itself */
+  /** Method that defines how a Game Unit prints itself
+   *
+   * @return a string representing the class
+   */
   override def toString: String = "Turn Loop State"
 }

@@ -12,6 +12,9 @@ import model.norma.{Norma, NormaLevel4}
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
 object Norma4Factory extends NormaFactory {
-  /** Method that creates a new norma level 4 */
+  /** Method that creates a new norma level 4
+   *
+   * @return a norma level 4
+   */
   def apply(): Norma = new NormaLevel4
 }

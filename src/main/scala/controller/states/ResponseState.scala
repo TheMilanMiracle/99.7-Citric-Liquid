@@ -10,9 +10,8 @@ import controller.GameController
  * try to evade an attack, then the controller transitions to the
  * attackState again
  * this calls overrides the next transitions:
- * -
- * -
- * -
+ * - unitEvades (response state to attack state)
+ * - unitDefends (response state to attack state)
  *
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
@@ -33,6 +32,9 @@ class ResponseState extends AbstractGameState {
     c.gameState = new AttackState
   }
 
-  /** Method that defines how a Game Unit prints itself */
+  /** Method that defines how a Game Unit prints itself
+   *
+   * @return a string representing the class
+   */
   override def toString: String = "Response State"
 }

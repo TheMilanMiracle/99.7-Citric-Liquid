@@ -23,7 +23,10 @@ abstract class AbstractNorma(stars: Int, victories: Int, next: Option[NormaFacto
   /** The factory of the norma level next to this one */
   private val _next: Option[NormaFactory] = next
 
-  /** Method that return the factory of the norma level next to the current one */
+  /** Method that return the factory of the norma level next to the current one
+   *
+   * @return the norma factory corresponding to the next norma level
+   */
   def getNext: NormaFactory = {
     _next.getOrElse(NullNormaFactory)
   }

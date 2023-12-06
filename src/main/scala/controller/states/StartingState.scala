@@ -1,9 +1,7 @@
 package cl.uchile.dcc.citric
 package controller.states
 
-import exceptions.WrongStateTransitionException
-
-import cl.uchile.dcc.citric.controller.GameController
+import controller.GameController
 
 /** class that represents the starting state of the game
  *
@@ -11,7 +9,7 @@ import cl.uchile.dcc.citric.controller.GameController
  * necessary for a game, then transition to the 'NewChapterState' state
  *
  * this class overrides the next transition:
- * -resetController (StartingState -> NewChapterState)
+ * -startGame (starting state to new chapter state)
  *
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
@@ -23,7 +21,10 @@ class StartingState extends AbstractGameState {
     c.gameState = new NewChapterState
   }
 
-  /** Method that defines how a Game Unit prints itself */
+  /** Method that defines how a Game Unit prints itself
+   *
+   * @return a string representing the class
+   */
   override def toString: String = "Starting State"
 
 }

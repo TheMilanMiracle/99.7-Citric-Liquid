@@ -11,7 +11,8 @@ import controller.GameController
  * or go back to the turn loop state
  *
  * this class overrides the next transitions:
- * - noCombat (PanelEffectState -> TurnLoopState)
+ * - noCombat (panel effect state to turn loop state)
+ * - combat (panel effect state to attack state)
  *
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
@@ -32,7 +33,10 @@ class PanelEffectState extends AbstractGameState {
     c.gameState = new AttackState
   }
 
-  /** Method that defines how a Game Unit prints itself */
+  /** Method that defines how a Game Unit prints itself
+   *
+   * @return a string representing the class
+   */
   override def toString: String = "Panel Effect State"
 
 }

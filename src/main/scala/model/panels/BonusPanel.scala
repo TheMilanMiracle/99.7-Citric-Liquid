@@ -35,7 +35,7 @@ class BonusPanel(pos: Int) extends AbstractPanel(pos) {
     val min = (roll * lastplayer.norma.getInt).min(roll * 3)
     lastplayer.stars_=(lastplayer.stars + min)
 
-    //for simplicity, if there is another player in the panel it triggers combat with the last one in
+    //for simplicity, if there is another player in the panel it triggers combat with the last one in (not self)
     if(characters.length > 1) c.combatPvP()
     else c.noCombat()
   }
