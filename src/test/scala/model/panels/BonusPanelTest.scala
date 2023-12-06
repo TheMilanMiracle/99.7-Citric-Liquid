@@ -4,6 +4,7 @@ package model.panels
 import cl.uchile.dcc.citric.controller.GameController
 import cl.uchile.dcc.citric.controller.states.PanelEffectState
 import cl.uchile.dcc.citric.model.norma.NormaLevel3
+import cl.uchile.dcc.citric.model.norma.factory.Norma3Factory
 import cl.uchile.dcc.citric.model.units.player.PlayerCharacter
 
 import scala.collection.mutable.ArrayBuffer
@@ -80,7 +81,7 @@ class BonusPanelTest extends munit.FunSuite{
     assert(testPlayer1.stars <= ((6 * testPlayer1.norma.getInt) + ref) || testPlayer1.stars <= ((6 * 3) + ref))
 
     ref = testPlayer1.stars
-    testPlayer1.norma_=(new NormaLevel3)
+    testPlayer1.changeNormaWith(Norma3Factory)
     bonusPanel.apply(context)
     context.gameState = new PanelEffectState
 

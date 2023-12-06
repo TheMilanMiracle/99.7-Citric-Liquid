@@ -1,11 +1,13 @@
 package cl.uchile.dcc.citric
 package model.units.player
 
-import model.norma.{Norma, NormaLevel1}
+import model.norma.Norma
+import model.norma.factory.NormaFactory
 import model.objectives.Objective
-import model.units.{GameUnit, AbstractGameUnit}
+import model.units.{AbstractGameUnit, GameUnit}
+import controller.Observer
 
-import cl.uchile.dcc.citric.controller.{GameController, Observer}
+import cl.uchile.dcc.citric.model.norma.factory.Norma1Factory
 
 import scala.collection.mutable.ArrayBuffer
 
@@ -75,7 +77,10 @@ class PlayerCharacter(name: String,
    *
    *  It starts at level 1
    */
-  private var _norma: Norma = new NormaLevel1
+  private var _norma: Option[Norma] = None
+
+  /** Norma factory used by the player to update its norma level */
+  private var _normaFactory: NormaFactory = Norma1Factory
 
   /** Current Objective of the player
    *
@@ -157,13 +162,24 @@ class PlayerCharacter(name: String,
    *
    * @return the current norma of the player
    */
-  def norma: Norma = this._norma
+  def norma: Norma = {
+    if(this._norma.isEmpty) updateNorma()
+    _norma.get
+  }
 
-  /** Changes the current norma level of the player
+  /** Changes the current stored norma factory and updates the norma accordingly
    *
-   * @param norma the new norma level of the player
+   * @param normaFactory the new norma factory
    */
-  def norma_=(norma: Norma): Unit = this._norma = norma
+  def changeNormaWith(normaFactory: NormaFactory): Unit = {
+    _normaFactory = normaFactory
+    updateNorma()
+  }
+
+  /** Method that updates the current norma level of the player
+   * depending of the current stored factory
+   */
+  private def updateNorma(): Unit = this._norma = Some(_normaFactory.apply())
 
   /** return the current objective of the player
    *
@@ -179,10 +195,9 @@ class PlayerCharacter(name: String,
     this._objective = Some(obj)
   }
 
-  /** Method that checks if the requirements for leveling up are met
-   */
+  /** Method that checks if the requirements for leveling up are met and uses the factory to update the norma if so */
   def normaCheck(): Unit = {
-    if(this._objective.isDefined && this._objective.get.normaCheck(this)) this.norma = this.norma.getNext
+    if(this._objective.isDefined && this._objective.get.normaCheck(this)) this.changeNormaWith(this.norma.getNext)
   }
 
 

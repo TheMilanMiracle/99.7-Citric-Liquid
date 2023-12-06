@@ -1,14 +1,15 @@
 package cl.uchile.dcc.citric
 package model.norma
 
-import cl.uchile.dcc.citric.model.units.player.PlayerCharacter
+import model.norma.factory.NullNormaFactory
+import model.units.player.PlayerCharacter
 
-class NormaLevel6Test extends munit.FunSuite {
-  var norma = new NormaLevel6
+class NullNormaTest extends munit.FunSuite {
+  var norma = new NullNorma
   var testPlayer = new PlayerCharacter("test player",1,1,1,1,1)
 
   override def beforeEach(context: BeforeEach): Unit = {
-    norma = new NormaLevel6
+    norma = new NullNorma
     testPlayer = new PlayerCharacter("test player",1,1,1,1,1)
   }
 
@@ -22,10 +23,6 @@ class NormaLevel6Test extends munit.FunSuite {
   }
 
   test("Every level of norma should be able to return the norma next to the current level") {
-    assertEquals(norma.getNext.getInt, norma.getInt)
-  }
-
-  test("Every clonable entity should be able to return a copy of itself") {
-    assertEquals(norma.getInt, norma.cloneEntity.getInt)
+    assertEquals(norma.getNext, NullNormaFactory)
   }
 }

@@ -3,7 +3,8 @@ package controller
 
 import controller.states.{AttackState, GameEndsState, MovingPlayerState, NewChapterState, PanelEffectState, RecoveryState, ResponseState, StarsAndDiceState, StartingState, TurnLoopState}
 
-import cl.uchile.dcc.citric.model.norma.NormaLevel6
+import cl.uchile.dcc.citric.model.norma.NullNorma
+import cl.uchile.dcc.citric.model.norma.factory.NullNormaFactory
 import cl.uchile.dcc.citric.model.panels.EncounterPanel
 import cl.uchile.dcc.citric.model.stance.DefendingStance
 import cl.uchile.dcc.citric.model.units.player.PlayerCharacter
@@ -117,7 +118,7 @@ class GameControllerTest extends munit.FunSuite {
   test("the controller should be able to decide to go to the ending state if the game has to end"){
     controller.gameState = new TurnLoopState
 
-    controller.getPlayer(0).norma = (new NormaLevel6)
+    controller.getPlayer(0).changeNormaWith(NullNormaFactory)
     controller.decideTurnLoop()
     assertEquals(controller.gameState.getClass.getName, (new GameEndsState).getClass.getName)
   }
@@ -229,7 +230,7 @@ class GameControllerTest extends munit.FunSuite {
   test("the controller should correctly tell when the game is finished"){
     assertEquals(controller.isDone, false)
 
-    controller.getPlayer(0).norma = new NormaLevel6
+    controller.getPlayer(0).changeNormaWith(NullNormaFactory)
     controller.getPlayer(0).notifyObservers()
 
     assertEquals(controller.isDone, true)

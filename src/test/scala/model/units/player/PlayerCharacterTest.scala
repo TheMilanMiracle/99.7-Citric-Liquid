@@ -7,6 +7,7 @@ import model.stance.{DefendingStance, EvadingStance}
 import model.units.{Chicken, RoboBall, Seagull}
 
 import cl.uchile.dcc.citric.controller.GameController
+import cl.uchile.dcc.citric.model.norma.factory.NullNormaFactory
 
 class PlayerCharacterTest extends munit.FunSuite {
   private val name = "character"
@@ -202,13 +203,13 @@ class PlayerCharacterTest extends munit.FunSuite {
 
   test("A player should be able to return and change their own norma") {
     assertEquals(character.norma.getInt, (new NormaLevel1).getInt)
-    character.norma_=(character.norma.getNext)
+    character.changeNormaWith(character.norma.getNext)
     assertEquals(character.norma.getInt, (new NormaLevel2).getInt)
-    character.norma_=(character.norma.getNext)
+    character.changeNormaWith(character.norma.getNext)
     assertEquals(character.norma.getInt, (new NormaLevel3).getInt)
-    character.norma_=(character.norma.getNext)
+    character.changeNormaWith(character.norma.getNext)
     assertEquals(character.norma.getInt, (new NormaLevel4).getInt)
-    character.norma_=(character.norma.getNext)
+    character.changeNormaWith(character.norma.getNext)
     assertEquals(character.norma.getInt, (new NormaLevel5).getInt)
   }
 
@@ -249,7 +250,7 @@ class PlayerCharacterTest extends munit.FunSuite {
     val observer = GameController.getInstance
 
     character.addObserver(observer)
-    character.norma = new NormaLevel6
+    character.changeNormaWith(NullNormaFactory)
     character.notifyObservers()
 
     assertEquals(observer.isDone, true)

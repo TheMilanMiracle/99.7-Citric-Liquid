@@ -1,7 +1,7 @@
 package cl.uchile.dcc.citric
 package model.norma
 
-import model.utilities.clonableEntity
+import model.norma.factory.{NormaFactory, NullNormaFactory}
 
 /** An abstract class that that implements common behaviour between normas
  * and set some private attributes that the normas have
@@ -13,23 +13,19 @@ import model.utilities.clonableEntity
  *
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
-abstract class AbstractNorma(stars: Int, victories: Int, next: Option[Norma]) extends Norma with clonableEntity[Norma]{
+abstract class AbstractNorma(stars: Int, victories: Int, next: Option[NormaFactory]) extends Norma {
   /** The amount of stars that the current level requires to level up */
   private val stars_required: Int = stars
 
   /** The amount of victories that the current level requires to level up */
   private val victories_required: Int = victories
 
-  /** The norma level next to this one */
-  private val _next: Option[Norma] = next
+  /** The factory of the norma level next to this one */
+  private val _next: Option[NormaFactory] = next
 
-  /** Method that return the norma level new to the current one
-   *
-   * the last level just returns itself
-   */
-  def getNext: Norma = {
-    if(_next.isDefined) {this._next.get}
-    else new NormaLevel6
+  /** Method that return the factory of the norma level next to the current one */
+  def getNext: NormaFactory = {
+    _next.getOrElse(NullNormaFactory)
   }
 
   /** Method that checks if the requirements for leveling up are met

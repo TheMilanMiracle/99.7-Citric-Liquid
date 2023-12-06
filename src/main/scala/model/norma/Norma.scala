@@ -1,6 +1,8 @@
 package cl.uchile.dcc.citric
 package model.norma
 
+import model.norma.factory.NormaFactory
+
 /** An interface that represents the level of "Norma"'s that a player can have
  *
  * -A player character will win the game when his level of norma reaches 6
@@ -11,7 +13,7 @@ package model.norma
  * -return an int representing its level
  * -check if the requirements for leveling up are met according to the stars
  * -check if the requirements for leveling up are met according to the victories
- * -return which normaLevel is next the current one
+ * -return which normaLevel factory is next the current one
  *
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
@@ -35,8 +37,8 @@ trait Norma {
    */
   def normaCheckVictories(current: Int): Boolean
 
-  /** Method that return the norma level new to the current one */
-  def getNext: Norma
+  /** Method that return the factory of the norma level new to the current one */
+  def getNext: NormaFactory
 }
 
 

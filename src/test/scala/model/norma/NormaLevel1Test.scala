@@ -2,6 +2,8 @@ package cl.uchile.dcc.citric
 package model.norma
 
 import model.units.{Chicken, WildUnit}
+
+import cl.uchile.dcc.citric.model.norma.factory.Norma2Factory
 import cl.uchile.dcc.citric.model.units.player.PlayerCharacter
 
 class NormaLevel1Test extends munit.FunSuite {
@@ -27,12 +29,8 @@ class NormaLevel1Test extends munit.FunSuite {
     assertEquals(norma.normaCheckVictories(testPlayer.victories), true)
   }
 
-  test("Every level of norma should be able to return the norma next to the current level"){
-    assertEquals(norma.getNext.getInt, (new NormaLevel2).getInt)
-  }
-
-  test("Every clonable entity should be able to return a copy of itself"){
-    assertEquals(norma.getInt, norma.cloneEntity.getInt)
+  test("Every level of norma should be able to return the norma factory of the next one to the current level"){
+    assertEquals(norma.getNext, Norma2Factory)
   }
 }
 
