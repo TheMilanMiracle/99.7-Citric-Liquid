@@ -19,7 +19,7 @@ import controller.GameController
  *
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
-class RecoveryState extends abstractGameState {
+class RecoveryState extends AbstractGameState {
   /** transition the game state from the recovery state to the turn loop state
    *
    * @param c controller context of the state
@@ -35,4 +35,7 @@ class RecoveryState extends abstractGameState {
   override def diceHit(c: GameController): Unit = {
     c.gameState = new StarsAndDiceState
   }
+
+  /** Method that defines how a Game Unit prints itself */
+  override def toString: String = "Recovery State"
 }

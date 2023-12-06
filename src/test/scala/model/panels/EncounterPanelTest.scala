@@ -1,7 +1,10 @@
 package cl.uchile.dcc.citric
 package model.panels
 
-import model.units.PlayerCharacter
+import cl.uchile.dcc.citric.controller.GameController
+import cl.uchile.dcc.citric.controller.states.{AttackState, PanelEffectState}
+import cl.uchile.dcc.citric.model.units.WildUnit
+import cl.uchile.dcc.citric.model.units.player.PlayerCharacter
 
 import scala.collection.mutable.ArrayBuffer
 
@@ -20,7 +23,7 @@ class EncounterPanelTest extends munit.FunSuite {
 
   test("any kind of panel has to have its attributes well defined and their getters work correctly") {
     assertEquals(encounterPanel.characters, ArrayBuffer[PlayerCharacter]())
-    assertEquals(encounterPanel.nextPanels, ArrayBuffer[Panel]())
+    assertEquals(encounterPanel.nextPanels, ArrayBuffer[GamePanel]())
     assertEquals(encounterPanel.position, p)
   }
 
@@ -50,35 +53,32 @@ class EncounterPanelTest extends munit.FunSuite {
     val panel2 = new EncounterPanel(3)
 
     encounterPanel.addPanel(panel1)
-    assertEquals(encounterPanel.nextPanels, ArrayBuffer[Panel](panel1))
+    assertEquals(encounterPanel.nextPanels, ArrayBuffer[GamePanel](panel1))
     encounterPanel.removePanel(panel1)
-    assertEquals(encounterPanel.nextPanels, ArrayBuffer[Panel]())
+    assertEquals(encounterPanel.nextPanels, ArrayBuffer[GamePanel]())
     encounterPanel.addPanel(panel1)
     encounterPanel.addPanel(panel2)
-    assertEquals(encounterPanel.nextPanels, ArrayBuffer[Panel](panel1, panel2))
-  }
-
-  test("an encounter panel should be able to initially spawn (and eventually respawn) a new wild unit randomly"){
-    assert(encounterPanel.wildUnit.name == "Chicken" ||
-      encounterPanel.wildUnit.name == "Robo Ball" ||
-      encounterPanel.wildUnit.name == "Seagull"
-    )
-
-    var i = 0
-    while(i < 5){
-      encounterPanel.spawnWildUnit()
-      assert(encounterPanel.wildUnit.name == "Chicken" ||
-        encounterPanel.wildUnit.name == "Robo Ball" ||
-        encounterPanel.wildUnit.name == "Seagull"
-      )
-      i+=1
-    }
+    assertEquals(encounterPanel.nextPanels, ArrayBuffer[GamePanel](panel1, panel2))
   }
 
   test("when landing this panel, the player will engage combat with the wild unit on it"){
-    /**
-     * combat is not yet implemented :s
-     */
-    encounterPanel.apply()
+    val context: GameController = GameController.getInstance
+    context.gameState = new PanelEffectState
+
+    encounterPanel.apply(context)
+
+    assertEquals(context.gameState.getClass.getName, (new AttackState).getClass.getName)
+  }
+
+  test("the encounter panel should be able to generate wild units, returns them and deleting them"){
+    var i = 0
+    while(i < 10){
+      val wd: WildUnit = encounterPanel.wildUnit
+      assert(wd.name == "Chicken" || wd.name == "Robo Ball" || wd.name == "Seagull")
+
+      encounterPanel.wildUnitDefeated()
+
+      i+=1
+    }
   }
 }

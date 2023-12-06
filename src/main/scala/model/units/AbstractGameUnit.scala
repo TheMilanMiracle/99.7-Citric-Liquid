@@ -1,9 +1,10 @@
 package cl.uchile.dcc.citric
 package model.units
 
+import cl.uchile.dcc.citric.controller.GameController
 import cl.uchile.dcc.citric.model.stance.CombatStance
 
-import scala.util.Random
+import scala.util.Random.nextInt
 
 /** An abstract class that implements common behaviour between Game Units
  *
@@ -22,7 +23,7 @@ import scala.util.Random
  *
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
-abstract class abstractGameUnit(unit_maxHP: Int, unit_attack: Int, unit_defense: Int, unit_evasion: Int, unit_name: String) extends GameUnit {
+abstract class AbstractGameUnit(unit_maxHP: Int, unit_attack: Int, unit_defense: Int, unit_evasion: Int, unit_name: String) extends GameUnit {
   /** Maximum health the unit can have
    *
    * In the context of the game, units can be healed, this attributes is useful
@@ -153,9 +154,9 @@ abstract class abstractGameUnit(unit_maxHP: Int, unit_attack: Int, unit_defense:
 
   /** Rolls a dice and returns a value between 1 to 6 representing the faces of a dice
    *
-   * @return an int between 1-6 (including 1 and 6)
+   * @return an int in [1-6]
    */
-  def rollDice(): Int = {Random.between(1,7)}
+  def rollDice(): Int = {nextInt(6) + 1}
 
   /** Method that allows a game unit to win stars
    *
@@ -176,4 +177,7 @@ abstract class abstractGameUnit(unit_maxHP: Int, unit_attack: Int, unit_defense:
     if(this._currentHP == 0 || receiver.currentHP == 0){return}
     receiver.stance.get.reactToAttackFrom(this, receiver)
   }
+
+  /** Method that defines how a Game Unit prints itself */
+  override def toString: String = {f"${this.name} | (atk:${this.attack}, def:${this.defense}, eva:${this.evasion}) | stars = ${this.stars}"}
 }

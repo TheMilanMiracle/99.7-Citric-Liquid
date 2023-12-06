@@ -8,7 +8,7 @@ package model.units
  *
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
-class Seagull extends abstractWildUnit(3, 1, -1, -1, "Seagull") {
+class Seagull extends AbstractWildUnit(3, 1, -1, -1, "Seagull") {
   /** Method that allow a unit to drop their stars to a PlayerCharacter
    *
    * when a seagull drops its stars, it will give all of its stars + 2 to a PlayerCharacter

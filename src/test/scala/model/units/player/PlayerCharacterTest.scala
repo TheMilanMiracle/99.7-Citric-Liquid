@@ -1,11 +1,12 @@
 package cl.uchile.dcc.citric
-package model.units
+package model.units.player
 
-import cl.uchile.dcc.citric.model.norma.{NormaLevel1, NormaLevel2, NormaLevel3, NormaLevel4, NormaLevel5}
-import cl.uchile.dcc.citric.model.objectives.{StarsObjective, VictoriesObjective}
-import cl.uchile.dcc.citric.model.stance.{DefendingStance, EvadingStance}
+import model.norma._
+import model.objectives.{StarsObjective, VictoriesObjective}
+import model.stance.{DefendingStance, EvadingStance}
+import model.units.{Chicken, RoboBall, Seagull}
 
-import scala.util.Random
+import cl.uchile.dcc.citric.controller.GameController
 
 class PlayerCharacterTest extends munit.FunSuite {
   private val name = "character"
@@ -40,7 +41,7 @@ class PlayerCharacterTest extends munit.FunSuite {
     assertEquals(character.attack, attack)
     assertEquals(character.defense, defense)
     assertEquals(character.evasion, evasion)
-    assertEquals(character.homePanel, homePos)
+    assertEquals(character.homePanelPosition, homePos)
     assertEquals(character.stars, 0)
     assertEquals(character.victories, 0)
     assertEquals(character.norma.getInt, norma.getInt)
@@ -88,7 +89,7 @@ class PlayerCharacterTest extends munit.FunSuite {
 
   test("A game unit should be able to roll a dice") {
     var i = 0
-    while (i < 5) {
+    while (i < 500) {
       assert(character.rollDice >= 1 && character.rollDice <= 6)
       i += 1
     }
@@ -117,15 +118,16 @@ class PlayerCharacterTest extends munit.FunSuite {
     assertEquals(character.stars, 40)
   }
 
+
   test("A game unit should be able to attack another game unit"){
     val testUnit = new PlayerCharacter("test", 20, 1, 3, 3, 1)
     testUnit.stance = new DefendingStance
 
     var i = 0
-    while(i < 5){
+    while(i < 10){
       character.attackUnit(testUnit)
 
-      assert(testUnit.currentHP == testUnit.maxHP - 1 || testUnit.currentHP >= testUnit.maxHP - (6 + character.attack - (6 + testUnit.defense)))
+      assert(testUnit.currentHP == testUnit.maxHP - 1 || testUnit.currentHP >= testUnit.maxHP - (6 + character.attack - (1 + testUnit.defense)))
 
       testUnit.currentHP = testUnit.currentHP + testUnit.maxHP
       i += 1
@@ -133,7 +135,7 @@ class PlayerCharacterTest extends munit.FunSuite {
 
     testUnit.stance = new EvadingStance
     i = 0
-    while(i < 5){
+    while(i < 10){
       character.attackUnit(testUnit)
 
       assert(testUnit.currentHP == testUnit.maxHP || testUnit.currentHP >= testUnit.maxHP - (6 + character.attack))
@@ -143,9 +145,25 @@ class PlayerCharacterTest extends munit.FunSuite {
     }
   }
 
+  test("A Game Unit should be able to return a string representation of itself properly"){
+    assertEquals(character.toString, "character | (atk:4, def:2, eva:3) | stars = 0")
+
+    character.stars = 15
+
+    assertEquals(character.toString, "character | (atk:4, def:2, eva:3) | stars = 15")
+  }
+
   /**Player Character Tests*/
   test("A player character should be able to return his home panel position"){
-    assertEquals(character.homePanel, homePos)
+    assertEquals(character.homePanelPosition, homePos)
+  }
+
+  test("A player character should be able to get and set his current position"){
+    assertEquals(character.currentPosition, -0)
+
+    character.currentPosition = 1
+
+    assertEquals(character.currentPosition, 1)
   }
 
   test("A player character should be able to get and set their own victories") {
@@ -225,5 +243,15 @@ class PlayerCharacterTest extends munit.FunSuite {
     character.victories = 3
     character.normaCheck()
     assertEquals(character.norma.getInt, 3)
+  }
+
+  test("a subject player should be able to notify its observer (a game controller)"){
+    val observer = GameController.getInstance
+
+    character.addObserver(observer)
+    character.norma = new NormaLevel6
+    character.notifyObservers()
+
+    assertEquals(observer.isDone, true)
   }
 }

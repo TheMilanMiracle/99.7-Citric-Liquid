@@ -1,7 +1,9 @@
 package cl.uchile.dcc.citric
 package model.panels
 
-import cl.uchile.dcc.citric.model.units.PlayerCharacter
+import cl.uchile.dcc.citric.controller.GameController
+import cl.uchile.dcc.citric.model.units.player.PlayerCharacter
+
 import scala.collection.mutable.ArrayBuffer
 
 /** Represents a single cell on a board, known as a Panel.
@@ -21,12 +23,12 @@ import scala.collection.mutable.ArrayBuffer
   * @author [[https://github.com/r8vnhill Ignacio Slater M.]]
   * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
   */
-trait Panel {
+trait GamePanel {
   /** returns the panels next to this one (not modifiable)
    *
    * @return an array buffer of panels, this are the ones positioned next to this one
    */
-  def nextPanels: ArrayBuffer[Panel]
+  def nextPanels: ArrayBuffer[GamePanel]
 
   /** returns the position of the panel
    *
@@ -60,18 +62,19 @@ trait Panel {
    *
    * @param panel The panel that will be added to this panel next list.
    */
-  def addPanel(panel: Panel): Unit
+  def addPanel(panel: GamePanel): Unit
 
     /** Removes a Panel from the list of panels currently next to this panel.
    *
    * @param panel The panel that will be removed from this panel next list.
    */
-  def removePanel(panel: Panel): Unit
+  def removePanel(panel: GamePanel): Unit
 
   /** Triggers the effect of the panel
    *
    *  This method will trigger a different effect depending on the type of the panel
    *
+   * @param c context of the panel
    */
-  def apply (): Unit
+  def apply(c: GameController): Unit
 }

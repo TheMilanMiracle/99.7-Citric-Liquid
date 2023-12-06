@@ -1,7 +1,8 @@
 package cl.uchile.dcc.citric
 package model.norma
 
-import model.units.{Chicken, PlayerCharacter, WildUnit}
+import model.units.{Chicken, WildUnit}
+import cl.uchile.dcc.citric.model.units.player.PlayerCharacter
 
 class NormaLevel1Test extends munit.FunSuite {
   var norma = new NormaLevel1

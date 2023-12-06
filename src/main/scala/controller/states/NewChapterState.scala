@@ -13,11 +13,14 @@ import controller.GameController
  *
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
-class NewChapterState extends abstractGameState {
+class NewChapterState extends AbstractGameState {
   /** transitions the game state from the new chapter state to the turn loop state
    *
    * @param c controller context of the state */
   override def newChapter(c: GameController): Unit = {
     c.gameState = new TurnLoopState
   }
+
+  /** Method that defines how a Game Unit prints itself */
+  override def toString: String = "New Chapter State"
 }

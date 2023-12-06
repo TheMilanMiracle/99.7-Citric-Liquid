@@ -1,6 +1,8 @@
 package cl.uchile.dcc.citric
 package model.units
 
+import model.units.player.PlayerCharacter
+
 /** The abstractWildUnit class implements the common behaviour between wild units
  *
  * the common behaviour that it implements is:
@@ -11,15 +13,14 @@ package model.units
  * @param unit_defense defense that the unit has
  * @param unit_evasion evasion that the unit has
  * @param unit_name name of the unit
- *
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
 
-abstract class abstractWildUnit(unit_maxHP: Int,
+abstract class AbstractWildUnit(unit_maxHP: Int,
                                 unit_attack: Int,
                                 unit_defense: Int,
                                 unit_evasion: Int,
-                                unit_name: String) extends abstractGameUnit(unit_maxHP, unit_attack, unit_defense, unit_evasion, unit_name) with WildUnit {
+                                unit_name: String) extends AbstractGameUnit(unit_maxHP, unit_attack, unit_defense, unit_evasion, unit_name) with WildUnit {
   /** Method that allows a unit to increase the victories of another one
    *
    * in the context of a game this method is meant to be used after a combat is finished,

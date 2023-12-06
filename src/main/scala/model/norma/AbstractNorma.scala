@@ -13,7 +13,7 @@ import model.utilities.clonableEntity
  *
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
-abstract class abstractNorma(stars: Int, victories: Int, next: Option[Norma]) extends Norma with clonableEntity[Norma]{
+abstract class AbstractNorma(stars: Int, victories: Int, next: Option[Norma]) extends Norma with clonableEntity[Norma]{
   /** The amount of stars that the current level requires to level up */
   private val stars_required: Int = stars
 

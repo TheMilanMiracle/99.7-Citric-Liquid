@@ -14,13 +14,7 @@ import controller.GameController
  * states
  *
  * for instance, an game state can:
- * - call resetController (StartingState -> NewChapterState)
- * - call newChapter (NewChapterState -> TurnLoopState)
- * - call chapterEnds (TurnLoopState -> NewChapterState)
- * - call playerKO (TurnLoopState -> RecoveryState)
- * - call diceMiss (RecoveryState -> TurnLoopState)
- * - call diceHit (RecoveryState -> StarsAndDiceState)
- * - call playerNotKO (TurnLoopState -> StarsAndDiceState)
+ * - call ALL of the possible transitions between states
  *
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
@@ -28,7 +22,7 @@ trait GameState {
   /** transitions the game state from the starting one to the new chapter state
    *
    * @param c controller context of the state*/
-  def resetController(c: GameController): Unit
+  def startGame(c: GameController): Unit
 
   /** transitions the game state from the new chapter state to the turn loop state
    *
@@ -135,6 +129,4 @@ trait GameState {
    * @param c controller context of the state
    */
   def receiverNotKO(c: GameController): Unit
-
-
 }

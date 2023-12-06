@@ -1,9 +1,10 @@
 package cl.uchile.dcc.citric
 package model.panels
 
-import model.units.PlayerCharacter
-
+import cl.uchile.dcc.citric.controller.GameController
+import cl.uchile.dcc.citric.controller.states.PanelEffectState
 import cl.uchile.dcc.citric.model.norma.NormaLevel3
+import cl.uchile.dcc.citric.model.units.player.PlayerCharacter
 
 import scala.collection.mutable.ArrayBuffer
 
@@ -22,7 +23,7 @@ class BonusPanelTest extends munit.FunSuite{
 
   test("any kind of panel has to have its attributes well defined and their getters work correctly") {
     assertEquals(bonusPanel.characters, ArrayBuffer[PlayerCharacter]())
-    assertEquals(bonusPanel.nextPanels, ArrayBuffer[Panel]())
+    assertEquals(bonusPanel.nextPanels, ArrayBuffer[GamePanel]())
     assertEquals(bonusPanel.position, p)
   }
 
@@ -51,30 +52,37 @@ class BonusPanelTest extends munit.FunSuite{
     val panel2 = new BonusPanel(3)
 
     bonusPanel.addPanel(panel1)
-    assertEquals(bonusPanel.nextPanels, ArrayBuffer[Panel](panel1))
+    assertEquals(bonusPanel.nextPanels, ArrayBuffer[GamePanel](panel1))
     bonusPanel.removePanel(panel1)
-    assertEquals(bonusPanel.nextPanels, ArrayBuffer[Panel]())
+    assertEquals(bonusPanel.nextPanels, ArrayBuffer[GamePanel]())
     bonusPanel.addPanel(panel1)
     bonusPanel.addPanel(panel2)
-    assertEquals(bonusPanel.nextPanels, ArrayBuffer[Panel](panel1,panel2))
+    assertEquals(bonusPanel.nextPanels, ArrayBuffer[GamePanel](panel1,panel2))
   }
 
   test("the bonus panel will give to a player a quantity of stars depending on his norma and roll of the dice"){
+    val context: GameController = GameController.getInstance
+    context.gameState = new PanelEffectState
+
+
     bonusPanel.addCharacter(testPlayer1)
-    bonusPanel.apply()
+    bonusPanel.apply(context)
+    context.gameState = new PanelEffectState
 
     assert(0 < testPlayer1.stars)
     assert(testPlayer1.stars <= 6 * testPlayer1.norma.getInt || testPlayer1.stars <= 6 * 3)
 
     var ref: Int = testPlayer1.stars
-    bonusPanel.apply()
+    bonusPanel.apply(context)
+    context.gameState = new PanelEffectState
 
     assert(ref < testPlayer1.stars)
     assert(testPlayer1.stars <= ((6 * testPlayer1.norma.getInt) + ref) || testPlayer1.stars <= ((6 * 3) + ref))
 
     ref = testPlayer1.stars
     testPlayer1.norma_=(new NormaLevel3)
-    bonusPanel.apply()
+    bonusPanel.apply(context)
+    context.gameState = new PanelEffectState
 
     assert(ref < testPlayer1.stars)
     assert(testPlayer1.stars <= ((6 * testPlayer1.norma.getInt) + ref) || testPlayer1.stars <= ((6 * 3) + ref))

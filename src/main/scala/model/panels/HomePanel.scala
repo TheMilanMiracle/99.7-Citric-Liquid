@@ -1,7 +1,8 @@
 package cl.uchile.dcc.citric
 package model.panels
 
-import cl.uchile.dcc.citric.model.units.PlayerCharacter
+import cl.uchile.dcc.citric.controller.GameController
+import cl.uchile.dcc.citric.model.units.player.PlayerCharacter
 
 import scala.collection.mutable.ArrayBuffer
 
@@ -20,7 +21,7 @@ import scala.collection.mutable.ArrayBuffer
  *
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
-class HomePanel(pos: Int, panel_owner: PlayerCharacter) extends abstractPanel(pos) {
+class HomePanel(pos: Int, panel_owner: PlayerCharacter) extends AbstractPanel(pos) {
   /** The PlayerCharacter that owns this panel
    *
    * In the context of the game, a Home Panel should be able to tell if a passing by PlayerCharacter
@@ -37,14 +38,19 @@ class HomePanel(pos: Int, panel_owner: PlayerCharacter) extends abstractPanel(po
    * and will do a norma check (check if the player matches the requirements to upgrade
    * his norma level)
    *
+   * @param c context of the panel
    */
-  def apply(): Unit = {
+  def apply(c: GameController): Unit = {
     val lastplayer: PlayerCharacter = this.characters(characters.size - 1)
     val norma = lastplayer.norma
 
     lastplayer.currentHP = ( lastplayer.currentHP + 1)
 
     lastplayer.normaCheck()
+
+    //for simplicity, if there is another player in the panel it triggers combat with the last one in
+    if (characters.length > 1) c.combatPvP()
+    else c.noCombat()
   }
 
 }

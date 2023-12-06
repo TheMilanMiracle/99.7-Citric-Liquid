@@ -1,8 +1,7 @@
 package cl.uchile.dcc.citric
 package model.panels
 
-import model.units.PlayerCharacter
-
+import cl.uchile.dcc.citric.model.units.player.PlayerCharacter
 import scala.collection.mutable.ArrayBuffer
 import scala.collection.mutable.ArrayBuffer
 
@@ -21,14 +20,14 @@ import scala.collection.mutable.ArrayBuffer
  *
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
-abstract class abstractPanel(pos: Int) extends Panel{
+abstract class AbstractPanel(pos: Int) extends GamePanel{
   /** An array of panels that are directly positioned next to this one
    *
    * In the context of the game, multiple routes or paths may exist, this could represent the
    * possible next steps a player might take after being on this panel.
    *
    */
-  private val _nextPanels: ArrayBuffer[Panel] = ArrayBuffer[Panel]()
+  private val _nextPanels: ArrayBuffer[GamePanel] = ArrayBuffer[GamePanel]()
 
   /** The position of the panel on the board
    *
@@ -51,7 +50,7 @@ abstract class abstractPanel(pos: Int) extends Panel{
    *
    * @return an array buffer of panels, this are the ones positioned next to this one
    */
-  def nextPanels: ArrayBuffer[Panel] = {
+  def nextPanels: ArrayBuffer[GamePanel] = {
     this._nextPanels.clone()
   }
 
@@ -93,7 +92,7 @@ abstract class abstractPanel(pos: Int) extends Panel{
    *
    * @param panel The panel that will be added to this panel next list.
    */
-  def addPanel(panel: Panel): Unit = {
+  def addPanel(panel: GamePanel): Unit = {
     this._nextPanels += panel
   }
 
@@ -101,7 +100,7 @@ abstract class abstractPanel(pos: Int) extends Panel{
    *
    * @param panel The panel that will be removed from this panel next list.
    */
-  def removePanel(panel: Panel): Unit = {
+  def removePanel(panel: GamePanel): Unit = {
     this._nextPanels -= panel
   }
 }

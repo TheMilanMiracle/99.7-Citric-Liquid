@@ -7,7 +7,7 @@ package model.norma
  *
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
-class NormaLevel4 extends abstractNorma(120, 10, Some(new NormaLevel5)){
+class NormaLevel4 extends AbstractNorma(120, 10, Some(new NormaLevel5)){
   /** Method that returns an int of the norma level that is represented by the instance
    *
    * @return 4

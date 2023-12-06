@@ -3,6 +3,8 @@ package model.units
 
 import model.stance.{DefendingStance, EvadingStance}
 
+import cl.uchile.dcc.citric.model.units.player.PlayerCharacter
+
 class ChickenTest extends munit.FunSuite{
   val chickenMaxHp: Int = 3
   val chickenCurrentHp: Int = chickenMaxHp
@@ -101,10 +103,10 @@ class ChickenTest extends munit.FunSuite{
     testUnit.stance = new DefendingStance
 
     var i = 0
-    while (i < 5) {
+    while (i < 10) {
       chicken.attackUnit(testUnit)
 
-      assert(testUnit.currentHP == testUnit.maxHP - 1 || testUnit.currentHP >= testUnit.maxHP - (6 + chicken.attack - (6 + testUnit.defense)))
+      assert(testUnit.currentHP == testUnit.maxHP - 1 || testUnit.currentHP >= testUnit.maxHP - (6 + chicken.attack - (1 + testUnit.defense)))
 
       testUnit.currentHP = testUnit.currentHP + testUnit.maxHP
       i += 1
@@ -112,7 +114,7 @@ class ChickenTest extends munit.FunSuite{
 
     testUnit.stance = new EvadingStance
     i = 0
-    while (i < 5) {
+    while (i < 10) {
       chicken.attackUnit(testUnit)
 
       assert(testUnit.currentHP == testUnit.maxHP || testUnit.currentHP >= testUnit.maxHP - (6 + chicken.attack))
@@ -120,6 +122,14 @@ class ChickenTest extends munit.FunSuite{
       testUnit.currentHP = testUnit.currentHP + testUnit.maxHP
       i += 1
     }
+  }
+
+  test("A Game Unit should be able to return a string representation of itself properly") {
+    assertEquals(chicken.toString, "Chicken | (atk:-1, def:-1, eva:1) | stars = 0")
+
+    chicken.stars = 15
+
+    assertEquals(chicken.toString, "Chicken | (atk:-1, def:-1, eva:1) | stars = 15")
   }
 
 }

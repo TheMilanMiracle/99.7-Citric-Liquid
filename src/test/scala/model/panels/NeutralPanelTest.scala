@@ -1,7 +1,9 @@
 package cl.uchile.dcc.citric
 package model.panels
 
-import model.units.PlayerCharacter
+import cl.uchile.dcc.citric.controller.GameController
+import cl.uchile.dcc.citric.controller.states.PanelEffectState
+import cl.uchile.dcc.citric.model.units.player.PlayerCharacter
 
 import scala.collection.mutable.ArrayBuffer
 
@@ -20,7 +22,7 @@ class NeutralPanelTest extends munit.FunSuite{
 
   test("any kind of panel has to have its attributes well defined and their getters work correctly"){
     assertEquals(neutralPanel.characters, ArrayBuffer[PlayerCharacter]())
-    assertEquals(neutralPanel.nextPanels, ArrayBuffer[Panel]())
+    assertEquals(neutralPanel.nextPanels, ArrayBuffer[GamePanel]())
     assertEquals(neutralPanel.position, p)
   }
 
@@ -50,22 +52,29 @@ class NeutralPanelTest extends munit.FunSuite{
     val panel2 = new NeutralPanel(3)
 
     neutralPanel.addPanel(panel1)
-    assertEquals(neutralPanel.nextPanels, ArrayBuffer[Panel](panel1))
+    assertEquals(neutralPanel.nextPanels, ArrayBuffer[GamePanel](panel1))
     neutralPanel.removePanel(panel1)
-    assertEquals(neutralPanel.nextPanels, ArrayBuffer[Panel]())
+    assertEquals(neutralPanel.nextPanels, ArrayBuffer[GamePanel]())
     neutralPanel.addPanel(panel1)
     neutralPanel.addPanel(panel2)
-    assertEquals(neutralPanel.nextPanels, ArrayBuffer[Panel](panel1, panel2))
+    assertEquals(neutralPanel.nextPanels, ArrayBuffer[GamePanel](panel1, panel2))
   }
 
   test("the neutral kind of panel shouldn't have any effect on the player landing on it"){
+    val context: GameController = GameController.getInstance
+    context.gameState = new PanelEffectState
+
     val starsBefore1 = testPlayer1.stars
     val starsBefore2 = testPlayer2.stars
 
     neutralPanel.addCharacter(testPlayer1)
-    neutralPanel.apply()
+    neutralPanel.apply(GameController.getInstance)
+    context.gameState = new PanelEffectState
+
     neutralPanel.addCharacter(testPlayer2)
-    neutralPanel.apply()
+    neutralPanel.apply(GameController.getInstance)
+    context.gameState = new PanelEffectState
+
     assertEquals(testPlayer1.stars, starsBefore1)
     assertEquals(testPlayer2.stars, starsBefore2)
   }

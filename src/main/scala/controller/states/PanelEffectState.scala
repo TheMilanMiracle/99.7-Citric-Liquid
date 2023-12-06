@@ -15,7 +15,7 @@ import controller.GameController
  *
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
-class PanelEffectState extends abstractGameState {
+class PanelEffectState extends AbstractGameState {
   /** transition the game state from the panel effect state to the turn loop state
    *
    * @param c controller context of the state
@@ -31,5 +31,8 @@ class PanelEffectState extends abstractGameState {
   override def combat(c: GameController): Unit = {
     c.gameState = new AttackState
   }
+
+  /** Method that defines how a Game Unit prints itself */
+  override def toString: String = "Panel Effect State"
 
 }

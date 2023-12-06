@@ -1,7 +1,8 @@
 package cl.uchile.dcc.citric
 package model.panels
 
-import cl.uchile.dcc.citric.model.units.PlayerCharacter
+import cl.uchile.dcc.citric.controller.GameController
+import cl.uchile.dcc.citric.model.units.player.PlayerCharacter
 
 import scala.collection.mutable.ArrayBuffer
 
@@ -17,18 +18,23 @@ import scala.collection.mutable.ArrayBuffer
  *
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
-class DropPanel(pos: Int) extends abstractPanel(pos){
+class DropPanel(pos: Int) extends AbstractPanel(pos){
   /** Triggers the effect of the panel
    *
    * This method will make the player that triggered the effect roll the dice
    * and make him lose a number of stars equals to roll * norma
    *
+   * @param c context of the panel
    */
-  def apply(): Unit = {
+  def apply(c: GameController): Unit = {
     val lastplayer: PlayerCharacter = this.characters(characters.size - 1)
     val roll: Int = lastplayer.rollDice()
 
     lastplayer.stars_=(lastplayer.stars - (roll * lastplayer.norma.getInt))
+
+    //for simplicity, if there is another player in the panel it triggers combat with the last one in
+    if (characters.length > 1) c.combatPvP()
+    else c.noCombat()
   }
 
 }

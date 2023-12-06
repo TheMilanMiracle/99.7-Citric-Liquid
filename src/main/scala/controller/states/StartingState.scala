@@ -15,12 +15,15 @@ import cl.uchile.dcc.citric.controller.GameController
  *
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
-class StartingState extends abstractGameState {
+class StartingState extends AbstractGameState {
   /** transitions the game state from the starting one to the new chapter state
    *
    * @param c controller context of the state */
-  override def resetController(c: GameController): Unit = {
+  override def startGame(c: GameController): Unit = {
     c.gameState = new NewChapterState
   }
+
+  /** Method that defines how a Game Unit prints itself */
+  override def toString: String = "Starting State"
 
 }

@@ -18,7 +18,7 @@ import controller.GameController
  *
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
-class TurnLoopState extends abstractGameState {
+class TurnLoopState extends AbstractGameState {
   /** transitions the game state from the turn loop state to the new chapter state to
    *
    * @param c controller context of the state */
@@ -49,4 +49,7 @@ class TurnLoopState extends abstractGameState {
   override def playerWins(c: GameController): Unit = {
     c.gameState = new GameEndsState
   }
+
+  /** Method that defines how a Game Unit prints itself */
+  override def toString: String = "Turn Loop State"
 }

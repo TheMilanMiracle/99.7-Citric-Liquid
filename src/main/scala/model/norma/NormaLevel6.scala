@@ -9,12 +9,12 @@ package model.norma
  *
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
-class NormaLevel6 extends abstractNorma(-1, -1, None){
+class NormaLevel6 extends AbstractNorma(-1, -1, None){
   /** Method that returns an int of the norma level that is represented by the instance
    *
-   * @return 6
+   * @return -1, this norma is not supposed to act like the others
    */
-  def getInt: Int = 6
+  def getInt: Int = -1
 
   /** Method that makes a copy of the game entity
    *

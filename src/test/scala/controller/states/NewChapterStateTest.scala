@@ -9,12 +9,12 @@ import org.junit.Assert.assertThrows
 
 class NewChapterStateTest extends munit.FunSuite {
   var state: GameState = new NewChapterState
-  var testController: GameController = new GameController
+  var testController: GameController = GameController.getInstance
 
 
   override def beforeEach(context: BeforeEach): Unit = {
     state = new NewChapterState
-    testController = new GameController
+    testController = GameController.getInstance
     testController.gameState = state
   }
 
@@ -24,23 +24,27 @@ class NewChapterStateTest extends munit.FunSuite {
   }
 
   test("the new chapter state throws a WrongStateTransitionException on invalid transitions") {
-    assertThrows(classOf[WrongStateTransitionException], () => testController.resetController())
-    assertThrows(classOf[WrongStateTransitionException], () => testController.chapterEnds())
-    assertThrows(classOf[WrongStateTransitionException], () => testController.playerKO())
-    assertThrows(classOf[WrongStateTransitionException], () => testController.diceMiss())
-    assertThrows(classOf[WrongStateTransitionException], () => testController.diceHit())
-    assertThrows(classOf[WrongStateTransitionException], () => testController.playerNotKO())
-    assertThrows(classOf[WrongStateTransitionException], () => testController.startMovement())
-    assertThrows(classOf[WrongStateTransitionException], () => testController.keepsMoving())
-    assertThrows(classOf[WrongStateTransitionException], () => testController.playerStops())
-    assertThrows(classOf[WrongStateTransitionException], () => testController.playerHomePanel())
-    assertThrows(classOf[WrongStateTransitionException], () => testController.noCombat())
-    assertThrows(classOf[WrongStateTransitionException], () => testController.playerWins())
-    assertThrows(classOf[WrongStateTransitionException], () => testController.combat())
-    assertThrows(classOf[WrongStateTransitionException], () => testController.unitAttacks())
-    assertThrows(classOf[WrongStateTransitionException], () => testController.unitEvades())
-    assertThrows(classOf[WrongStateTransitionException], () => testController.unitDefends())
-    assertThrows(classOf[WrongStateTransitionException], () => testController.combatEnds())
-    assertThrows(classOf[WrongStateTransitionException], () => testController.receiverNotKO())
+    assertThrows(classOf[WrongStateTransitionException], () => state.startGame(testController))
+    assertThrows(classOf[WrongStateTransitionException], () => state.chapterEnds(testController))
+    assertThrows(classOf[WrongStateTransitionException], () => state.playerKO(testController))
+    assertThrows(classOf[WrongStateTransitionException], () => state.diceMiss(testController))
+    assertThrows(classOf[WrongStateTransitionException], () => state.diceHit(testController))
+    assertThrows(classOf[WrongStateTransitionException], () => state.playerNotKO(testController))
+    assertThrows(classOf[WrongStateTransitionException], () => state.startMovement(testController))
+    assertThrows(classOf[WrongStateTransitionException], () => state.keepsMoving(testController))
+    assertThrows(classOf[WrongStateTransitionException], () => state.playerStops(testController))
+    assertThrows(classOf[WrongStateTransitionException], () => state.playerHomePanel(testController))
+    assertThrows(classOf[WrongStateTransitionException], () => state.noCombat(testController))
+    assertThrows(classOf[WrongStateTransitionException], () => state.playerWins(testController))
+    assertThrows(classOf[WrongStateTransitionException], () => state.combat(testController))
+    assertThrows(classOf[WrongStateTransitionException], () => state.unitAttacks(testController))
+    assertThrows(classOf[WrongStateTransitionException], () => state.unitEvades(testController))
+    assertThrows(classOf[WrongStateTransitionException], () => state.unitDefends(testController))
+    assertThrows(classOf[WrongStateTransitionException], () => state.combatEnds(testController))
+    assertThrows(classOf[WrongStateTransitionException], () => state.receiverNotKO(testController))
+  }
+
+  test("a state have the toString method redefined") {
+    assertEquals(state.toString, "New Chapter State")
   }
 }

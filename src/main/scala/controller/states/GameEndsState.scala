@@ -12,4 +12,7 @@ package controller.states
  *
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
-class GameEndsState extends abstractGameState {}
+class GameEndsState extends AbstractGameState {
+  /** Method that defines how a Game Unit prints itself */
+  override def toString: String = "Game Ends State"
+}

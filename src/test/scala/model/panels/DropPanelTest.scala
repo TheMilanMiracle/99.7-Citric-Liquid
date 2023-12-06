@@ -1,7 +1,9 @@
 package cl.uchile.dcc.citric
 package model.panels
 
-import model.units.PlayerCharacter
+import cl.uchile.dcc.citric.controller.GameController
+import cl.uchile.dcc.citric.controller.states.PanelEffectState
+import cl.uchile.dcc.citric.model.units.player.PlayerCharacter
 
 import scala.collection.mutable.ArrayBuffer
 
@@ -20,7 +22,7 @@ class DropPanelTest extends munit.FunSuite {
 
   test("any kind of panel has to have its attributes well defined and their getters work correctly") {
     assertEquals(dropPanel.characters, ArrayBuffer[PlayerCharacter]())
-    assertEquals(dropPanel.nextPanels, ArrayBuffer[Panel]())
+    assertEquals(dropPanel.nextPanels, ArrayBuffer[GamePanel]())
     assertEquals(dropPanel.position, p)
   }
 
@@ -49,24 +51,31 @@ class DropPanelTest extends munit.FunSuite {
     val panel2 = new DropPanel(3)
 
     dropPanel.addPanel(panel1)
-    assertEquals(dropPanel.nextPanels, ArrayBuffer[Panel](panel1))
+    assertEquals(dropPanel.nextPanels, ArrayBuffer[GamePanel](panel1))
     dropPanel.removePanel(panel1)
-    assertEquals(dropPanel.nextPanels, ArrayBuffer[Panel]())
+    assertEquals(dropPanel.nextPanels, ArrayBuffer[GamePanel]())
     dropPanel.addPanel(panel1)
     dropPanel.addPanel(panel2)
-    assertEquals(dropPanel.nextPanels, ArrayBuffer[Panel](panel1, panel2))
+    assertEquals(dropPanel.nextPanels, ArrayBuffer[GamePanel](panel1, panel2))
   }
 
   test("this panel will take stars from the player that trigger its effects depending of his norma and roll of the dice"){
+    val context: GameController = GameController.getInstance
+    context.gameState = new PanelEffectState
+
     testPlayer1.stars = (50)
     var ref: Int = testPlayer1.stars
     dropPanel.addCharacter(testPlayer1)
-    dropPanel.apply()
+    dropPanel.apply(context)
+    context.gameState = new PanelEffectState
+
     assert(testPlayer1.stars < ref)
     assert(testPlayer1.stars <= (ref - testPlayer1.norma.getInt))
 
     ref = testPlayer1.stars
-    dropPanel.apply()
+    dropPanel.apply(context)
+    context.gameState = new PanelEffectState
+
     assert(testPlayer1.stars < ref)
     assert(testPlayer1.stars <= (ref - testPlayer1.norma.getInt))
   }

@@ -14,7 +14,7 @@ import controller.GameController
  *
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
-class MovingPlayerState extends abstractGameState {
+class MovingPlayerState extends AbstractGameState {
   /** transition the game state from the moving player state to itself
    *
    * @param c controller context of the state
@@ -37,4 +37,6 @@ class MovingPlayerState extends abstractGameState {
     c.gameState = new PanelEffectState
   }
 
+  /** Method that defines how a Game Unit prints itself */
+  override def toString: String = "Moving Player State"
 }

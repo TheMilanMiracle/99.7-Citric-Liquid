@@ -1,7 +1,8 @@
 package cl.uchile.dcc.citric
 package model.panels
 
-import cl.uchile.dcc.citric.model.units.PlayerCharacter
+import cl.uchile.dcc.citric.controller.GameController
+import cl.uchile.dcc.citric.model.units.player.PlayerCharacter
 
 import scala.collection.mutable.ArrayBuffer
 
@@ -17,7 +18,7 @@ import scala.collection.mutable.ArrayBuffer
  *
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
-class BonusPanel(pos: Int) extends abstractPanel(pos) {
+class BonusPanel(pos: Int) extends AbstractPanel(pos) {
   /** Triggers the effect of the panel
    *
    * This method will make the player that triggered the effect roll the dice
@@ -25,13 +26,18 @@ class BonusPanel(pos: Int) extends abstractPanel(pos) {
    *
    * the player will win min(roll * norma, roll * 3) stars
    *
+   * @param c context of the panel
    */
-  def apply(): Unit = {
+  def apply(c: GameController): Unit = {
     val lastplayer: PlayerCharacter = this.characters(characters.size - 1)
     val roll: Int = lastplayer.rollDice()
 
     val min = (roll * lastplayer.norma.getInt).min(roll * 3)
     lastplayer.stars_=(lastplayer.stars + min)
+
+    //for simplicity, if there is another player in the panel it triggers combat with the last one in
+    if(characters.length > 1) c.combatPvP()
+    else c.noCombat()
   }
 
 }

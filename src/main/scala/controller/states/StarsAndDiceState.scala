@@ -14,7 +14,7 @@ import controller.GameController
  *
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
-class StarsAndDiceState extends abstractGameState {
+class StarsAndDiceState extends AbstractGameState {
   /** transition the game state from the stars and dice state to the moving player state
    *
    * @param c controller context of the state
@@ -23,4 +23,6 @@ class StarsAndDiceState extends abstractGameState {
     c.gameState = new MovingPlayerState
   }
 
+  /** Method that defines how a Game Unit prints itself */
+  override def toString: String = "Stars & Dice State"
 }

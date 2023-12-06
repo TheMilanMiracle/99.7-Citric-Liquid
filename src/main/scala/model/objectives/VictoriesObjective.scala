@@ -1,7 +1,7 @@
 package cl.uchile.dcc.citric
 package model.objectives
 
-import model.units.PlayerCharacter
+import cl.uchile.dcc.citric.model.units.player.PlayerCharacter
 
 /** A class that represent the objective of Victories
  *

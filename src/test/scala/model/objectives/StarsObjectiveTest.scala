@@ -1,9 +1,8 @@
 package cl.uchile.dcc.citric
 package model.objectives
 
-import model.units.PlayerCharacter
-
 import cl.uchile.dcc.citric.model.norma.{NormaLevel1, NormaLevel2}
+import cl.uchile.dcc.citric.model.units.player.PlayerCharacter
 
 class StarsObjectiveTest extends munit.FunSuite {
   var starsObjective = new StarsObjective

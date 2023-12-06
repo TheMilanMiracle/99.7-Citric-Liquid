@@ -1,7 +1,7 @@
 package cl.uchile.dcc.citric
 package model.norma
 
-import model.units.PlayerCharacter
+import cl.uchile.dcc.citric.model.units.player.PlayerCharacter
 
 class NormaLevel6Test extends munit.FunSuite {
   var norma = new NormaLevel6
@@ -13,7 +13,7 @@ class NormaLevel6Test extends munit.FunSuite {
   }
 
   test("Every level of norma should be able to return an int representing its level"){
-    assertEquals(norma.getInt, 6)
+    assertEquals(norma.getInt, -1)
   }
 
   test("Every level of norma should be able to return if a player meets the requirements to level up his norma"){

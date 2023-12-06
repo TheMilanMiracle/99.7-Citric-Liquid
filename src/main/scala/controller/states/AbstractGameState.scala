@@ -21,12 +21,12 @@ import cl.uchile.dcc.citric.exceptions.WrongStateTransitionException
  *
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
-class abstractGameState extends GameState {
+class AbstractGameState extends GameState {
   /** transitions the game state from the starting one to the new chapter state
    *
    * @param c controller context of the state
    * @throws WrongStateTransitionException exception for a tried wrong state transition*/
-  def resetController(c: GameController): Unit = {throw new WrongStateTransitionException}
+  def startGame(c: GameController): Unit = {throw new WrongStateTransitionException}
 
   /** transitions the game state from the new chapter state to the turn loop state
    *

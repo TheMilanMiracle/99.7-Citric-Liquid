@@ -1,7 +1,10 @@
 package cl.uchile.dcc.citric
 package model.stance
 
-import model.units.{GameUnit, PlayerCharacter}
+import model.units.GameUnit
+import cl.uchile.dcc.citric.model.units.player.PlayerCharacter
+
+import scala.math
 
 /** Class that represent the defending combat stance
  *
@@ -19,8 +22,8 @@ class DefendingStance extends CombatStance {
    * @param attacker the unit that is attacking the unit that has this stance
    * @param receiver the unit that is defending the attack and owner of this stance */
   def reactToAttackFrom(attacker: GameUnit, receiver: GameUnit): Unit = {
-    //receiver.currentHP = receiver.currentHP - (1.max(attacker.rollDice() + attacker.attack - (receiver.rollDice() + receiver.defense)))
-    receiver.currentHP = receiver.currentHP - 1
+    receiver.currentHP = receiver.currentHP - 1.max(attacker.rollDice() + attacker.attack - (receiver.rollDice() + receiver.defense))
   }
+
 
 }

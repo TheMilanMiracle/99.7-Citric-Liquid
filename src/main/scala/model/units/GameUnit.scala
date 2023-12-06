@@ -3,6 +3,9 @@ package model.units
 
 import model.stance.CombatStance
 
+import cl.uchile.dcc.citric.controller.GameController
+import cl.uchile.dcc.citric.model.units.player.PlayerCharacter
+
 /** The GameUnit interface represent the entity that will participate
  * in the game, whether as a player character, controller by an user, or as a
  * wild unit, not controllable by an user. All game units have an unique name,
@@ -18,6 +21,7 @@ import model.stance.CombatStance
  * - win stars from another unit
  * - drop stars to a game unit
  * - attack another game unit
+ * - print itself properly
  *
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */

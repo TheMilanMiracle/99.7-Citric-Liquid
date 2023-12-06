@@ -3,6 +3,8 @@ package model.units
 
 import model.stance.{DefendingStance, EvadingStance}
 
+import cl.uchile.dcc.citric.model.units.player.PlayerCharacter
+
 class SeagullTest extends munit.FunSuite{
   val seagullMaxHp: Int = 3
   val seagullCurrentHp: Int = seagullMaxHp
@@ -101,10 +103,10 @@ class SeagullTest extends munit.FunSuite{
     testUnit.stance = new DefendingStance
 
     var i = 0
-    while (i < 5) {
+    while (i < 10) {
       seagull.attackUnit(testUnit)
 
-      assert(testUnit.currentHP == testUnit.maxHP - 1 || testUnit.currentHP >= testUnit.maxHP - (6 + seagull.attack - (6 + testUnit.defense)))
+      assert(testUnit.currentHP == testUnit.maxHP - 1 || testUnit.currentHP >= testUnit.maxHP - (6 + seagull.attack - (1 + testUnit.defense)))
 
       testUnit.currentHP = testUnit.currentHP + testUnit.maxHP
       i += 1
@@ -120,6 +122,15 @@ class SeagullTest extends munit.FunSuite{
       testUnit.currentHP = testUnit.currentHP + testUnit.maxHP
       i += 1
     }
+  }
+
+
+  test("A Game Unit should be able to return a string representation of itself properly") {
+    assertEquals(seagull.toString, "Seagull | (atk:1, def:-1, eva:-1) | stars = 0")
+
+    seagull.stars = 15
+
+    assertEquals(seagull.toString, "Seagull | (atk:1, def:-1, eva:-1) | stars = 15")
   }
 }
 

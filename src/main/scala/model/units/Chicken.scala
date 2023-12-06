@@ -8,7 +8,7 @@ package model.units
  *
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
-class Chicken extends abstractWildUnit(3, -1, -1, 1, "Chicken") {
+class Chicken extends AbstractWildUnit(3, -1, -1, 1, "Chicken") {
   /** Method that allow a unit to drop their stars to a PlayerCharacter
    *
    * when a chicken drops its stars, it will give all of its stars + 3 to a PlayerCharacter

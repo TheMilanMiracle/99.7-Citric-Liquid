@@ -1,9 +1,8 @@
 package cl.uchile.dcc.citric
 package model.panels
 
-import cl.uchile.dcc.citric.model.units.{Chicken, GameUnit, WildUnit, PlayerCharacter, RoboBall, Seagull}
-
-import scala.collection.mutable.ArrayBuffer
+import controller.GameController
+import model.units.{Chicken, RoboBall, Seagull, WildUnit}
 import scala.util.Random
 
 /** This class represent the Encounter type of panel
@@ -17,25 +16,40 @@ import scala.util.Random
  *
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
-class EncounterPanel(pos: Int) extends abstractPanel(pos){
+class EncounterPanel(pos: Int) extends AbstractPanel(pos){
   /** The wild unit in the panel
    *
    * The panel has to have a wild unit, that will be generated randomly each time
-   * the initial wild unit will also be generated randomly
-   *
+   * when the the variable is empty it means there is no wild unit yet
    */
-  var wildUnit: WildUnit = spawnWildUnit()
+  private var _wildUnit: Option[WildUnit] = None
+
+  /** Getter for the wild unit of the encounter of the panel */
+  def wildUnit: WildUnit = {
+    if(_wildUnit.isEmpty) spawnWildUnit()
+    _wildUnit.get
+  }
+
+  /** Method that empties the wild unit variable
+   *
+   * calling this method means that the wild unit was defeated
+   * so the panel doesnt have one now
+   */
+  def wildUnitDefeated(): Unit = {
+    _wildUnit = None
+  }
 
   /** Triggers the effect of the panel
    *
    * this method will make the player that lands on it engage combat with
    * a random wild unit
    *
+   * @param c context of the panel
    */
-  def apply(): Unit = {
-    //val lastplayer: PlayerCharacter = this.characters(characters.size - 1)
+  def apply(c: GameController): Unit = {
+    if(_wildUnit.isEmpty) spawnWildUnit()
 
-    //startFight(lastplayer, wildUnit) //combat is not yet implemented
+    c.combatPvW(this)
   }
 
   /** Method that will spawn a random wild unit
@@ -45,12 +59,12 @@ class EncounterPanel(pos: Int) extends abstractPanel(pos){
    *
    * @return a random wild unit, it could be a chicken, robo ball or seagull
    */
-  def spawnWildUnit(): WildUnit = {
+  private def spawnWildUnit(): Unit = {
     val rand: Int = Random.between(1,4)
 
-    if(rand == 1) new Chicken()
-    if(rand == 2) new RoboBall()
-    else new Seagull()
+    if(rand == 1) _wildUnit = Some(new Chicken())
+    if(rand == 2) _wildUnit = Some(new RoboBall())
+    else _wildUnit = Some(new Seagull())
   }
 
 }

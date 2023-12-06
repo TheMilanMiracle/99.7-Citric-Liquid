@@ -17,7 +17,7 @@ import controller.GameController
  *
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
-class AttackState extends abstractGameState {
+class AttackState extends AbstractGameState {
   /** transitions the game state from the attack state to the response state
    *
    * @param c controller context of the state
@@ -39,4 +39,7 @@ class AttackState extends abstractGameState {
    * @param c controller context of the state
    */
   override def receiverNotKO(c: GameController): Unit = {}
+
+  /** Method that defines how a Game Unit prints itself */
+  override def toString: String = "Attack State"
 }

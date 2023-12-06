@@ -1,9 +1,10 @@
 package cl.uchile.dcc.citric
 package model.panels
 
-import model.units.PlayerCharacter
-
+import cl.uchile.dcc.citric.controller.GameController
+import cl.uchile.dcc.citric.controller.states.PanelEffectState
 import cl.uchile.dcc.citric.model.objectives.{StarsObjective, VictoriesObjective}
+import cl.uchile.dcc.citric.model.units.player.PlayerCharacter
 
 import scala.collection.mutable.ArrayBuffer
 
@@ -27,7 +28,7 @@ class HomePanelTest extends munit.FunSuite{
 
   test("any kind of panel has to have its attributes well defined and their getters work correctly") {
     assertEquals(homePanel1.characters, ArrayBuffer[PlayerCharacter]())
-    assertEquals(homePanel1.nextPanels, ArrayBuffer[Panel]())
+    assertEquals(homePanel1.nextPanels, ArrayBuffer[GamePanel]())
     assertEquals(homePanel1.position, p1)
     assertEquals(homePanel1.owner, testPlayer1)
   }
@@ -57,48 +58,76 @@ class HomePanelTest extends munit.FunSuite{
     val panel2 = new HomePanel(4, new PlayerCharacter("test4", 1, 1, 1 ,1, 4))
 
     homePanel1.addPanel(panel1)
-    assertEquals(homePanel1.nextPanels, ArrayBuffer[Panel](panel1))
+    assertEquals(homePanel1.nextPanels, ArrayBuffer[GamePanel](panel1))
     homePanel1.removePanel(panel1)
-    assertEquals(homePanel1.nextPanels, ArrayBuffer[Panel]())
+    assertEquals(homePanel1.nextPanels, ArrayBuffer[GamePanel]())
     homePanel1.addPanel(panel1)
     homePanel1.addPanel(panel2)
-    assertEquals(homePanel1.nextPanels, ArrayBuffer[Panel](panel1, panel2))
+    assertEquals(homePanel1.nextPanels, ArrayBuffer[GamePanel](panel1, panel2))
   }
 
   test("a home panel can upgrade a player's norma level if the requirements are met"){
+    val context: GameController = GameController.getInstance
+    context.gameState = new PanelEffectState
+
     testPlayer1.stars = (12)
     testPlayer1.objective_=(new StarsObjective)
     homePanel1.addCharacter(testPlayer1)
-    homePanel1.apply()
+    homePanel1.apply(context)
+    context.gameState = new PanelEffectState
+
     assertEquals(testPlayer1.norma.getInt, 2)
-    homePanel1.apply()
+    homePanel1.apply(context)
+    context.gameState = new PanelEffectState
+
     assertEquals(testPlayer1.norma.getInt, 2)
     testPlayer1.objective_=(new VictoriesObjective)
     testPlayer2.increaseVictoriesTo(testPlayer1)
     testPlayer2.increaseVictoriesTo(testPlayer1)
-    homePanel1.apply()
+    homePanel1.apply(context)
+    context.gameState = new PanelEffectState
+
     assertEquals(testPlayer1.norma.getInt, 3)
-    homePanel1.apply()
+    homePanel1.apply(context)
+    context.gameState = new PanelEffectState
+
     assertEquals(testPlayer1.norma.getInt, 3)
   }
 
   test("a home panel heals one hp to a character after triggering its effect"){
+    val context: GameController = GameController.getInstance
+    context.gameState = new PanelEffectState
+
     testPlayer1 = new PlayerCharacter("test player1", 10, 1, 1, 1, 1)
     homePanel1.addCharacter(testPlayer1)
-    homePanel1.apply()
+    homePanel1.apply(context)
+    context.gameState = new PanelEffectState
+
     assertEquals(testPlayer1.currentHP, 10)
     testPlayer1.currentHP = (testPlayer1.currentHP  -5)
-    homePanel1.apply()
+    homePanel1.apply(context)
+    context.gameState = new PanelEffectState
+
     assertEquals(testPlayer1.currentHP, 6)
-    homePanel1.apply()
+    homePanel1.apply(context)
+    context.gameState = new PanelEffectState
+
     assertEquals(testPlayer1.currentHP, 7)
-    homePanel1.apply()
+    homePanel1.apply(context)
+    context.gameState = new PanelEffectState
+
     assertEquals(testPlayer1.currentHP, 8)
-    homePanel1.apply()
+    homePanel1.apply(context)
+    context.gameState = new PanelEffectState
+
     assertEquals(testPlayer1.currentHP, 9)
-    homePanel1.apply()
+    homePanel1.apply(context)
+    context.gameState = new PanelEffectState
+
     assertEquals(testPlayer1.currentHP, 10)
-    homePanel1.apply()
+    homePanel1.apply(context)
+    context.gameState = new PanelEffectState
+
     assertEquals(testPlayer1.currentHP, 10)
   }
 }

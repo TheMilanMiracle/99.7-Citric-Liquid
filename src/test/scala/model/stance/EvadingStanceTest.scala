@@ -1,7 +1,7 @@
 package cl.uchile.dcc.citric
 package model.stance
 
-import model.units.PlayerCharacter
+import cl.uchile.dcc.citric.model.units.player.PlayerCharacter
 
 class EvadingStanceTest extends munit.FunSuite {
   var stance: CombatStance = new EvadingStance
@@ -23,7 +23,7 @@ class EvadingStanceTest extends munit.FunSuite {
 
       assert(evadingPlayer.currentHP == evadingPlayer.maxHP || evadingPlayer.currentHP >= evadingPlayer.maxHP - (6 + attackingPlayer.attack))
 
-      evadingPlayer.currentHP = evadingPlayer.currentHP + evadingPlayer.maxHP
+      evadingPlayer.currentHP = evadingPlayer.maxHP
       i += 1
     }
   }
