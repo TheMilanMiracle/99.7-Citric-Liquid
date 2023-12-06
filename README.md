@@ -59,8 +59,29 @@ worked in testing and adding some exceptions for names of units and board positi
 
 ## Tarea 3
 
+The general objective for this assignment was the implementation of a Controller for the game, so the first thing I did was to recognize and model which were the states necessary for the game
+to work and the possible transitions between them. The next diagram is the result of this first approach to the game controller:
+
 ### State Diagram:
 ![Diagrama de estados](/docs/state_diagram.PNG)
+
+After this, the first thing I did was to implement the basic behaviour of the transitions of the states, so I created a class Game Controller which stores the current state of the game, 
+states that are also new classes, there is a State for every state possible in the game. Then I made the controller, by delegating responsibilities to the state, able to transition between any pair of state,
+raising an exception for invalid transition for the ones that were not described in the diagram, this way the game flow can be simulated with the
+**State** design Pattern.
+
+For Further development of the Game Controller it was now necessary to create a basic board, it was here when I
+decided to use the **Singleton** design patter for the Game Controller and the Game Board, because for every game it is necessary to have a one an only instance of each of these classes and this way I can make sure of
+it. Having now the basic transitions and a board for the game, it was now possible to do the real implementation for every transition of the game controller, 
+for this many new variables were created in the GameController class to store useful information of the game, like the order of the players, the current chapter, the winner of the game, etc. All of this was possible using all the implementation 
+made for past assignments. In this phase of development
+many transitions that came from the same game state were 'refactored' into one, so this way the controller was able to choose a transition based on the information previously mentioned.
+
+Finally, I wanted to revisit and improve the implementation of some of the entities of the game, I changed the way a PlayerCharacter change its norma, the way this was done before the change was that the player received the new 
+norma level and directly change it, I replaced this using the **Factory** design patter, adding a new hierarchy of NormaFactories and changing the way a player sets its norma to now use this new way of creating normas. Also, I modified the way the game
+interprets a Norma Level 6, due to the fact that this is the last of the norma levels, a player having it makes them automatically the winner of the game, so logically this norma level will never be 'norma checked' or used for any calculation, 
+so I ended up making the norma level 6 the NullNorma (applying the **Null Object** design pattern), and with the **Observer** pattern, with the players as the subjects and the game controller their observer, it was now possible to recognize this 'null' 
+behaviour so any player could notify the game controller if it has won the game, giving the controller a way of deciding when to end a game.
 
 <div style="text-align:center;">
     <img src="https://i.creativecommons.org/l/by/4.0/88x31.png" alt="Creative Commons License">
