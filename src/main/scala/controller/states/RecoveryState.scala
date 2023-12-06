@@ -14,8 +14,8 @@ import controller.GameController
  * the TurnLoopState with the next player
  *
  * this class overrides the next transitions:
- * - diceMiss (RecoveryState -> TurnLoopState)
- * - diceHit (RecoveryState -> StarsAndDiceState)
+ * - diceMiss (recovery state to turn loop state)
+ * - diceHit (recovery state to stars and dice state)
  *
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
@@ -36,6 +36,9 @@ class RecoveryState extends AbstractGameState {
     c.gameState = new StarsAndDiceState
   }
 
-  /** Method that defines how a Game Unit prints itself */
+  /** Method that defines how a Game Unit prints itself
+   *
+   * @return a string representing the class
+   */
   override def toString: String = "Recovery State"
 }

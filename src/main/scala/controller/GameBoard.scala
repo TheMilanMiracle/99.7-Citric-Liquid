@@ -13,6 +13,7 @@ import scala.collection.mutable.ArrayBuffer
  *
  * for instance, this class should be able to:
  * - build itself
+ * - return any panel by its position
  *
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
@@ -67,6 +68,7 @@ class GameBoard private {
   /** method that returns a panel in the board by its position
    *
    * @param pos an integer representing the position of the panel
+   * @return the panel at the given position
    */
   def getPanel(pos: Int): GamePanel = {
     _panels(pos)
@@ -89,7 +91,10 @@ object GameBoard {
   /** only instance of the class GameController */
   private var _intance: Option[GameBoard] = None
 
-  /** gets the GameController instance, creating it if is not created yet */
+  /** gets the GameController instance, creating it if is not created yet
+   *
+   * @return the one an only instance of the game board
+   */
   def getInstance: GameBoard = {
     if (_intance.isEmpty) {
       _intance = Some(new GameBoard)

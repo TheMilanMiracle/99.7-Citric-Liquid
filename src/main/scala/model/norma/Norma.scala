@@ -37,7 +37,10 @@ trait Norma {
    */
   def normaCheckVictories(current: Int): Boolean
 
-  /** Method that return the factory of the norma level new to the current one */
+  /** Method that return the factory of the norma level next to the current one
+   *
+   * @return the norma factory corresponding to the next norma level
+   */
   def getNext: NormaFactory
 }
 

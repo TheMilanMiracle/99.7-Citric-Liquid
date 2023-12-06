@@ -13,6 +13,9 @@ import model.norma.Norma
  *
  */
 trait NormaFactory {
-  /** Method that creates a new norma */
+  /** Method that creates a new norma
+   *
+   * @return the specific norma level of this factory
+   */
   def apply(): Norma
 }

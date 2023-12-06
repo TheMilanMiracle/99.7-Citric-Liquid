@@ -12,6 +12,9 @@ import model.norma.{Norma, NullNorma}
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
 object NullNormaFactory extends NormaFactory {
-  /** Method that creates a new null norma */
+  /** Method that creates a new null norma
+   *
+   * @return a null norma
+   */
   def apply(): Norma = new NullNorma
 }

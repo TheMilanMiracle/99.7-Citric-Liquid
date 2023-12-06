@@ -5,7 +5,7 @@ import controller.states.{GameState, StartingState}
 import model.units.player.{PlayerCharacter, Subject}
 import model.panels.{EncounterPanel, GamePanel}
 
-import cl.uchile.dcc.citric.model.units.GameUnit
+import model.units.GameUnit
 
 import scala.collection.mutable.ArrayBuffer
 
@@ -16,6 +16,7 @@ import scala.collection.mutable.ArrayBuffer
  * accordingly
  *
  * the game controller can:
+ * - set up / reset its variables
  * - get and set its game state
  * - add and get a player from the order list
  * - update with notification from player
@@ -85,7 +86,10 @@ class GameController private extends Observer[PlayerCharacter]{
     addPlayer(p4)
   }
 
-  /** Getter for the game state attribute */
+  /** Getter for the game state attribute
+   *
+   * @return the current game state of the game
+   */
   def gameState:GameState = _gameState
 
   /** Setter for the game state attribute */
@@ -98,13 +102,14 @@ class GameController private extends Observer[PlayerCharacter]{
    *
    * @param p the player that will be added to the list
    */
-  private def addPlayer(p:PlayerCharacter):Unit = {
+  private def addPlayer(p:PlayerCharacter): Unit = {
     if(player_order.length < 4) player_order += p
   }
 
   /** Method that allows to get a player from the list by their order
    *
-   * @param i order of the player
+   * @param i order of the player (0 -> 3)
+   * @return the player that goes in the given order
    */
   def getPlayer(i: Int): PlayerCharacter = {
     player_order(i)
@@ -322,7 +327,10 @@ object GameController {
   /** only instance of the class GameController */
   private var _intance: Option[GameController] = None
 
-  /** gets the GameController instance, creating it if is not created yet */
+  /** gets the GameController instance, creating it if is not created yet
+   *
+   * @return the one and only instance of the game controller
+   */
   def getInstance: GameController = {
     if(_intance.isEmpty){_intance =
       Some(new GameController)

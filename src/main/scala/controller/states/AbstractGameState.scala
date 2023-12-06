@@ -3,7 +3,7 @@ package controller.states
 
 import controller.GameController
 
-import cl.uchile.dcc.citric.exceptions.WrongStateTransitionException
+import exceptions.WrongStateTransitionException
 
 /** abstract class that implements all the transitions between states
  *
@@ -11,13 +11,8 @@ import cl.uchile.dcc.citric.exceptions.WrongStateTransitionException
  * this behaviour will be common between all states, the actual
  * transitions are meant to be defined at the state classes itself
  *
- * for instance, the transitions that are defined are:
- * -resetController
- * -newChapter
- * -chapterEnds
- * -playerKO
- * -diceMiss
- * -diceHit
+ * for instance this abstract class defines all of the transitions to a default
+ * exception for wrong transition
  *
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */

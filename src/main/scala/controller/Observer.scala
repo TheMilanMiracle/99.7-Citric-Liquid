@@ -1,7 +1,7 @@
 package cl.uchile.dcc.citric
 package controller
 
-import cl.uchile.dcc.citric.model.units.player.Subject
+import model.units.player.Subject
 
 /** trait that represent an Observer entity
  *
@@ -18,7 +18,7 @@ import cl.uchile.dcc.citric.model.units.player.Subject
  */
 
 trait Observer[T] {
-  /** method that updates info from the observer entity
+  /** method that updates information from the observer entity
    *
    * @param s subject that the observer is observing
    * @param p extra information about the update

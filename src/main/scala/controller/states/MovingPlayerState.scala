@@ -11,6 +11,9 @@ import controller.GameController
  * or it will transition to the panel effect state if the movement ends
  *
  * this class overrides the next transitions:
+ * - keepsMoving (remains in the moving player state)
+ * - playerStops (moving player state to panel effect state)
+ * - playerHomePanel (moving player state to panel effect state)
  *
  * @author [[https://github.com/TheMilanMiracle Luciano Márquez C.]]
  */
@@ -37,6 +40,9 @@ class MovingPlayerState extends AbstractGameState {
     c.gameState = new PanelEffectState
   }
 
-  /** Method that defines how a Game Unit prints itself */
+  /** Method that defines how a Game Unit prints itself
+   *
+   * @return a string representing the class
+   */
   override def toString: String = "Moving Player State"
 }
